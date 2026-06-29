@@ -1076,78 +1076,32 @@ document.addEventListener('DOMContentLoaded',init);
 
 <script>
 (function(){
-  console.log('[Config Inject] Starting...');
   var c = (typeof CONFIG !== 'undefined') ? CONFIG : {};
-  
   if(c.company) {
     document.querySelectorAll('.logo-text strong').forEach(function(el){ if(c.company.name) el.textContent = c.company.name; });
     document.querySelectorAll('.logo-text span').forEach(function(el){ if(c.company.slogan) el.textContent = c.company.slogan.toUpperCase(); });
     document.querySelectorAll("a[href^='mailto:']").forEach(function(el){ if(c.company.email) { el.href = 'mailto:' + c.company.email; el.textContent = c.company.email; } });
   }
-  
   if(c.services && c.services.length) {
     var sg = document.querySelector('.services-grid');
-    if(sg) {
-      sg.innerHTML = c.services.map(function(s) {
-        return '<div class="service-card" onclick="openDetail(\'' + (s.detailId || s.id) + '\')">' +
-          '<div class="service-icon">' + (s.icon || '') + '</div>' +
-          '<h3>' + (s.title || '') + '</h3>' +
-          '<div class="service-sub">' + (s.sub || '') + '</div>' +
-          '<p>' + (s.desc || '') + '</p>' +
-          '</div>';
-      }).join('');
-    }
+    if(sg) sg.innerHTML = c.services.map(function(s){ return '<div class="service-card" onclick="openDetail(\''+(s.detailId||s.id)+'\')"><div class="service-icon">'+(s.icon||'')+'</div><h3>'+(s.title||'')+'</h3><div class="service-sub">'+(s.sub||'')+'</div><p>'+(s.desc||'')+'</p></div>'; }).join('');
   }
-  
   if(c.stats && c.stats.length) {
     var sb = document.querySelector('.stats-row');
-    if(sb) {
-      sb.innerHTML = c.stats.map(function(st) {
-        return '<div class="stat-item"><div class="stat-num">' + (st.num || '') + '</div><div class="stat-label">' + (st.label || '') + '</div></div>';
-      }).join('');
-    }
+    if(sb) sb.innerHTML = c.stats.map(function(st){ return '<div class="stat-item"><div class="stat-num">'+(st.num||'')+'</div><div class="stat-label">'+(st.label||'')+'</div></div>'; }).join('');
   }
-  
   if(c.policies && c.policies.length) {
     var pg = document.querySelector('.policy-grid');
-    if(pg) {
-      pg.innerHTML = c.policies.map(function(p, i) {
-        var detailIds = ['policy-research', 'policy-network', 'policy-park', 'policy-finance'];
-        return '<div class="policy-card" onclick="openDetail(\'' + detailIds[i] + '\')">' +
-          '<div class="pn">' + (p.num || '') + '</div>' +
-          '<div><h3>' + (p.title || '') + '</h3><p>' + (p.desc || '') + '</p></div>' +
-          '</div>';
-      }).join('');
-    }
+    if(pg) pg.innerHTML = c.policies.map(function(p,i){ var ids=['policy-research','policy-network','policy-park','policy-finance']; return '<div class="policy-card" onclick="openDetail(\''+ids[i]+'\')"><div class="pn">'+(p.num||'')+'</div><div><h3>'+(p.title||'')+'</h3><p>'+(p.desc||'')+'</p></div></div>'; }).join('');
   }
-  
   if(c.testimonials && c.testimonials.length) {
     var tg = document.querySelector('.testimonials-grid');
-    if(tg) {
-      tg.innerHTML = c.testimonials.map(function(t) {
-        return '<div class="testimonial-card">' +
-          '<div class="quote">' + (t.text || '') + '</div>' +
-          '<div class="author"><div class="avatar">' + (t.avatar || '') + '</div><div><strong>' + (t.name || '') + '</strong><span>' + (t.role || '') + '</span></div></div>' +
-          '</div>';
-      }).join('');
-    }
+    if(tg) tg.innerHTML = c.testimonials.map(function(t){ return '<div class="testimonial-card"><div class="quote">'+(t.text||'')+'</div><div class="author"><div class="avatar">'+(t.avatar||'')+'</div><div><strong>'+(t.name||'')+'</strong><span>'+(t.role||'')+'</span></div></div></div>'; }).join('');
   }
-  
   if(c.process && c.process.length) {
     var pr = document.querySelector('.process-steps');
-    if(pr) {
-      pr.innerHTML = c.process.map(function(p, i) {
-        var detailIds = ['process-step1', 'process-step2', 'process-step3', 'process-step4'];
-        return '<div class="pstep" onclick="openDetail(\'' + detailIds[i] + '\')">' +
-          '<div class="ring"><div class="n">' + (p.num || '') + '</div></div>' +
-          '<h4>' + (p.title || '') + '</h4>' +
-          '<p>' + (p.desc || '') + '</p>' +
-          '</div>';
-      }).join('');
-    }
+    if(pr) pr.innerHTML = c.process.map(function(p,i){ var ids=['process-step1','process-step2','process-step3','process-step4']; return '<div class="pstep" onclick="openDetail(\''+ids[i]+'\')"><div class="ring"><div class="n">'+(p.num||'')+'</div></div><h4>'+(p.title||'')+'</h4><p>'+(p.desc||'')+'</p></div>'; }).join('');
   }
-  
-  console.log('[Config Inject] Applied CONFIG to DOM');
 })();
 </script></body>
 </html>
