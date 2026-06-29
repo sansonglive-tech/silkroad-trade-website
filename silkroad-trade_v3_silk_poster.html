@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丝路山海通 — 一带一路企业出海一站式服务</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#C44536;--red-dark:#8B2D1E;--red-soft:rgba(196,69,54,0.06);
+  --gold:#C8923E;--gold-bright:#F0D68A;--gold-soft:rgba(200,146,62,0.08);
+  --ink:#1A1512;--ink-soft:#302824;
+  --paper:#F5F0EA;--paper-warm:#EFE7DB;--cream:#FFFCF8;--cream-soft:#FFF9F2;
+  --gray:#6B625C;--gray-light:#A89E96;--gray-soft:#C8C0B8;
+  --border:rgba(26,21,18,0.04);
+  --radius:8px;--radius-lg:12px;
+  --shadow:0 4px 16px rgba(26,21,18,0.03);
+  --shadow-md:0 8px 32px rgba(26,21,18,0.05);
+  --shadow-lg:0 16px 48px rgba(26,21,18,0.07);
+  --shadow-xl:0 24px 72px rgba(26,21,18,0.09);
+  --ease:cubic-bezier(0.22,1,0.36,1)
+}
+html{scroll-behavior:smooth}
+
+/* ========== 全局背景 - 丝绸之路环形卷轴 ========== */
+body{
+  position:relative;
+  font-family:'Inter',-apple-system,sans-serif;
+  color:var(--ink);
+  overflow-x:hidden;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  /* 浅灰底色与卷轴图融合 */
+  background:#f0f0f0;
+}
+
+/* 丝绸之路主视觉图 - 随页面滚动，完整展示不裁剪 */
+.scroll-bg{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:-1;
+  pointer-events:none;
+  line-height:0;
+}
+.scroll-bg img{
+  width:100%;
+  height:auto;
+  display:block;
+  opacity:0.88;
+  filter:contrast(1.08) saturate(1.15);
+}
+
+/* 顶部渐变遮罩 - 让导航区域更清晰 */
+body::after{
+  content:'';
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:200px;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(180deg,
+    rgba(240,240,240,0.95) 0%,
+    rgba(240,240,240,0.7) 40%,
+    transparent 100%
+  );
+}
+
+/* PRELOADER */
+#preloader{position:fixed;inset:0;z-index:9999;background:#f0f0f0;display:flex;align-items:center;justify-content:center;transition:opacity .4s,visibility .4s}
+#preloader.hide{opacity:0;visibility:hidden}
+.pd{display:flex;gap:.3rem}.pd span{display:block;width:6px;height:6px;background:var(--red);border-radius:50%;animation:pd .8s ease-in-out infinite}
+.pd span:nth-child(2){animation-delay:.15s}.pd span:nth-child(3){animation-delay:.3s}
+@keyframes pd{0%,100%{transform:translateY(0);opacity:.3}50%{transform:translateY(-8px);opacity:1}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s;background:linear-gradient(180deg,rgba(240,240,240,0.95) 0%,rgba(240,240,240,0.7) 100%);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(200,146,62,0.12)}
+nav::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold-bright) 50%,var(--gold) 70%,transparent);opacity:.4}
+nav.scrolled{background:rgba(240,240,240,0.92);padding:.5rem 3rem}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:var(--ink)}
+.logo-svg{width:38px;height:38px;flex-shrink:0}
+.logo-text{display:flex;flex-direction:column}
+.logo-text strong{font-family:'Noto Serif SC',serif;font-size:1.05rem;font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:.02em}
+.logo-text span{font-size:.48rem;letter-spacing:.3em;color:var(--gray-light);text-transform:uppercase}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:.78rem;font-weight:500;transition:color .3s;position:relative;letter-spacing:.02em}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--red);transition:width .4s var(--ease)}
+.nav-links a:hover{color:var(--red)}.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--red)!important;color:#fff!important;padding:.4rem 1.3rem;border-radius:4px;font-weight:600!important;font-size:.75rem!important}
+.nav-cta::after{display:none!important}.nav-cta:hover{background:var(--red-dark)!important;transform:translateY(-1px);box-shadow:0 4px 12px rgba(196,69,54,0.2)!important}
+.mobile-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.mobile-toggle span{display:block;width:20px;height:1.5px;background:var(--ink);margin:5px 0;border-radius:1px;transition:.3s}
+
+/* ========== HERO - 首屏与卷轴融合 ========== */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  z-index:2;
+}
+
+/* Hero 内容区遮罩 - 左侧清晰，右侧展示卷轴 */
+.hero-bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:linear-gradient(105deg,
+    rgba(240,240,240,0.92) 0%,
+    rgba(240,240,240,0.85) 35%,
+    rgba(240,240,240,0.65) 50%,
+    rgba(240,240,240,0.35) 65%,
+    transparent 80%
+  );
+}
+
+/* 底部过渡渐变 */
+.hero-bg::after{
+  content:'';
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:180px;
+  background:linear-gradient(180deg, transparent 0%, rgba(240,240,240,0.9) 100%);
+}
+
+.hero-carousel{position:relative;width:100%;z-index:1;padding:6rem 0 1.5rem}
+.hero-viewport{max-width:1400px;margin:0 auto;overflow:hidden}
+.hero-track{display:flex;transition:transform .8s var(--ease);will-change:transform}
+.hero-slide{min-width:100%;cursor:pointer;display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;padding:2rem 3rem}
+.hero-text .ht-label{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1rem}
+.hero-text .ht-label .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.3}
+.hero-text .ht-label span{font-size:.6rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold)}
+.hero-text h1,.hero-text h2{font-family:'Noto Serif SC',serif;font-size:clamp(2rem,3.8vw,3rem);font-weight:900;line-height:1.25;margin-bottom:.8rem;color:var(--ink)}
+.hero-text h1 .gold,.hero-text h2 .gold{color:var(--gold)}
+.hero-text h1 .red,.hero-text h2 .red{color:var(--red);font-family:'Ma Shan Zheng',cursive;font-weight:400}
+.hero-text p{color:var(--gray);font-size:.9rem;line-height:2;margin-bottom:1.5rem;max-width:480px}
+.hero-link{display:inline-flex;align-items:center;gap:.5rem;color:var(--red);font-size:.78rem;font-weight:600;text-decoration:none;padding-bottom:2px;border-bottom:1px solid rgba(196,69,54,0.15);transition:.3s;cursor:pointer}
+.hero-link:hover{gap:.8rem;border-color:var(--red);color:var(--red)}
+.hero-image-panel{position:relative;width:100%;height:380px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-xl);background:var(--ink-soft);pointer-events:none}
+.hero-image-panel img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);display:block}
+.hero-slide:hover .hero-image-panel img{transform:scale(1.03)}
+.hero-image-panel .hip-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(196,69,54,0.2) 0%,rgba(200,146,62,0.1) 50%,transparent 100%);pointer-events:none}
+.hero-image-panel .hip-frame{position:absolute;inset:12px;border:.5px solid rgba(255,255,255,0.1);border-radius:8px;pointer-events:none}
+.hero-image-panel .hip-tag{position:absolute;bottom:16px;left:16px;display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,0.85);backdrop-filter:blur(8px);padding:.4rem .8rem;border-radius:4px;font-size:.6rem;font-weight:600;color:var(--ink-soft);pointer-events:none}
+.hero-image-panel .hip-tag .dot{width:4px;height:4px;border-radius:50%;background:var(--red);opacity:.5}
+.hero-bottom{max-width:1400px;margin:0 auto;padding:1rem 3rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.hero-dots{display:flex;gap:8px}
+.hero-dot{width:32px;height:2.5px;border-radius:2px;background:var(--gray-soft);cursor:pointer;border:none;padding:0;transition:all .5s;position:relative;z-index:10}
+.hero-dot.active{background:var(--red);width:48px}
+.hero-arrows{display:flex;gap:.5rem}
+.hero-arrow{width:36px;height:36px;border-radius:50%;border:.5px solid var(--border);background:rgba(255,255,255,0.6);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--gray);transition:.3s;position:relative;z-index:10}
+.hero-arrow:hover{border-color:var(--red);color:var(--red);background:var(--red-soft)}
+.hero-counter{font-size:.72rem;color:var(--gray-light);font-variant-numeric:tabular-nums}
+.hero-counter strong{color:var(--ink);font-weight:600}
+
+/* SECTION */
+section{padding:5rem 3rem;position:relative;z-index:2}
+.label-tag{display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem}
+.label-tag .line{width:24px;height:1.5px;background:var(--red)}
+.label-tag .txt{font-size:.6rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--red)}
+.section-head{max-width:680px;margin-bottom:3rem}
+.section-head h2{font-family:'Noto Serif SC',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;line-height:1.3;margin-bottom:.6rem;color:var(--ink)}
+.section-head h2 .red{color:var(--red)}.section-head h2 .gold{color:var(--gold)}
+.section-head p{color:var(--gray);font-size:.88rem;line-height:2}
+
+/* ========== ABOUT - 与卷轴背景融合 ========== */
+.about{
+  position:relative;
+  background:linear-gradient(180deg,
+    rgba(240,240,240,0.88) 0%,
+    rgba(240,240,240,0.78) 50%,
+    rgba(240,240,240,0.88) 100%
+  );
+}
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:start}
+.about-text .slogan{font-family:'Ma Shan Zheng',cursive;font-size:1.2rem;color:var(--red);margin-bottom:.3rem;opacity:.8}
+.about-text h3{font-family:'Noto Serif SC',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:900;line-height:1.3;margin-bottom:1rem}
+.about-text h3 .red{color:var(--red)}
+.about-text>p{color:var(--gray);font-size:.9rem;line-height:2;margin-bottom:1.2rem}
+.about-box{background:#fff;border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:1.2rem 1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+.about-box p{font-family:'Noto Serif SC',serif;font-size:.95rem;font-weight:600;color:var(--ink-soft);line-height:1.9}
+.about-visual{display:flex;flex-direction:column;gap:1.5rem;align-items:center}
+.about-hero-img{width:100%;max-width:440px;height:320px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-xl);position:relative;display:block;text-decoration:none}
+.about-hero-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);display:block}
+.about-hero-img:hover img{transform:scale(1.03)}
+.about-hero-img .ahi-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(196,69,54,0.15) 0%,transparent 50%,rgba(200,146,62,0.08) 100%);pointer-events:none}
+.about-hero-img .ahi-frame{position:absolute;inset:10px;border:.5px solid rgba(255,255,255,0.12);border-radius:8px;pointer-events:none}
+.about-hero-img .ahi-seal{position:absolute;bottom:16px;left:16px;width:56px;height:56px;border:1px solid rgba(255,255,255,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-direction:column;backdrop-filter:blur(4px);background:rgba(0,0,0,0.15);transform:rotate(-3deg);pointer-events:none}
+.about-hero-img .ahi-seal span{font-family:'Ma Shan Zheng',cursive;font-size:1.2rem;color:var(--gold-bright);line-height:.9}
+.about-hero-img .ahi-seal small{font-size:.45rem;color:rgba(230,210,180,0.6);letter-spacing:.1em;pointer-events:none}
+.about-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;width:100%;max-width:440px}
+.about-mini-card{background:#fff;border:.5px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center;box-shadow:var(--shadow);transition:.3s;cursor:pointer}
+.about-mini-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.about-mini-card strong{display:block;font-family:'Noto Serif SC',serif;font-size:1.8rem;font-weight:900;color:var(--red);line-height:1}
+.about-mini-card span{font-size:.65rem;color:var(--gray);letter-spacing:.02em}
+
+/* ========== SERVICES - 与卷轴背景融合 ========== */
+.services{
+  position:relative;
+  background:linear-gradient(180deg,
+    rgba(240,240,240,0.9) 0%,
+    rgba(240,240,240,0.8) 50%,
+    rgba(240,240,240,0.9) 100%
+  );
+}
+.services-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem}
+.service-card{background:#fff;border:.5px solid var(--border);border-radius:var(--radius-lg);padding:1.8rem;transition:.4s;box-shadow:var(--shadow);cursor:pointer}
+.service-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px);border-color:rgba(196,69,54,0.08)}
+.service-card .sc-img{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1rem;position:relative;overflow:hidden}
+.service-card .sc-img .sc-img-bg{position:absolute;inset:0;z-index:0}
+.service-card .sc-img emoji,.service-card .sc-img span{position:relative;z-index:1}
+.service-card h3{font-family:'Noto Serif SC',serif;font-size:.95rem;font-weight:700;margin-bottom:.15rem}
+.service-card .sc-sub{font-size:.6rem;color:var(--gray-light);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.service-card p{color:var(--gray);font-size:.82rem;line-height:1.9}
+
+/* ========== POLICY - 与卷轴背景融合 ========== */
+.policy{
+  position:relative;
+  background:linear-gradient(180deg,
+    rgba(240,240,240,0.92) 0%,
+    rgba(245,240,234,0.85) 50%,
+    rgba(240,240,240,0.92) 100%
+  );
+  overflow:hidden;
+}
+.policy-bg{position:absolute;top:0;right:0;width:260px;height:260px;background:var(--red);opacity:.02;border-radius:50%;transform:translate(80px,-80px);pointer-events:none}
+.policy-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.policy-card{padding:1.8rem;background:#fff;border:.5px solid var(--border);border-radius:var(--radius-lg);display:flex;gap:1rem;transition:.4s;box-shadow:var(--shadow);cursor:pointer}
+.policy-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:rgba(200,146,62,0.04)}
+.policy-card .pn{font-family:'Noto Serif SC',serif;font-size:2rem;font-weight:900;color:rgba(200,146,62,0.06);line-height:1;flex-shrink:0;min-width:2rem}
+.policy-card h3{font-family:'Noto Serif SC',serif;font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+.policy-card p{color:var(--gray);font-size:.82rem;line-height:1.9}
+
+/* ========== COUNTRIES - 与卷轴背景融合 ========== */
+.countries{
+  position:relative;
+  background:linear-gradient(180deg,
+    rgba(240,240,240,0.88) 0%,
+    rgba(240,240,240,0.78) 50%,
+    rgba(240,240,240,0.88) 100%
+  );
+}
+.countries-grid{display:grid;grid-template-columns:repeat(4,280px);gap:1rem;max-width:1240px;margin:0 auto;justify-content:center;align-items:start}
+.region-card{display:flex;flex-direction:column;align-self:stretch}
+.region-countries{flex:1}
+.region-card{background:#fff;border:.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:.4s;box-shadow:var(--shadow);cursor:pointer}
+.region-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:rgba(196,69,54,0.06)}
+.region-head{padding:.8rem 1rem;display:flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,rgba(196,69,54,0.04) 0%,rgba(200,146,62,0.04) 100%);border-bottom:.5px solid var(--border)}
+.region-icon{width:42px;height:30px;border-radius:6px;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;letter-spacing:.05em;flex-shrink:0}
+.region-icon.gold{background:linear-gradient(135deg,var(--gold),#8B6914)}
+.region-icon.green{background:linear-gradient(135deg,#5A7D6B,#3D5A4B)}
+.region-title{flex:1;min-width:0}
+.region-title h3{font-family:'Noto Serif SC',serif;font-size:.9rem;font-weight:700;color:var(--ink);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.region-title .rsub{font-size:.5rem;color:var(--gray-light);text-transform:uppercase;letter-spacing:.1em;margin-top:.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.region-count{font-size:.6rem;color:var(--gray);background:var(--paper);padding:.15rem .4rem;border-radius:3px;flex-shrink:0}
+.region-countries{padding:.6rem .8rem;display:flex;flex-direction:column;gap:.25rem}
+.region-country{display:flex;align-items:center;gap:.4rem;padding:.35rem .4rem;border-radius:4px;transition:.3s;cursor:pointer;color:var(--ink);text-decoration:none}
+.region-country:hover{background:var(--red-soft)}
+.region-country .rc-flag{font-size:1.1rem;line-height:1;flex-shrink:0}
+.region-country .rc-info{flex:1;min-width:0}
+.region-country .rc-name{font-size:.75rem;font-weight:600;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.region-country .rc-cities{font-size:.55rem;color:var(--gray);margin-top:.05rem;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.region-country .rc-arrow{color:var(--gray-light);font-size:.6rem;transition:.3s;flex-shrink:0}
+.region-country:hover .rc-arrow{color:var(--red);transform:translateX(3px)}
+
+/* ========== PROCESS - 与卷轴背景融合 ========== */
+.process{
+  position:relative;
+  background:linear-gradient(180deg,
+    rgba(240,240,240,0.85) 0%,
+    rgba(240,240,240,0.75) 50%,
+    rgba(240,240,240,0.85) 100%
+  );
+}
+.process-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1.5rem}
+.pstep{text-align:center;position:relative;cursor:pointer}
+.pstep .ring{width:68px;height:68px;margin:0 auto 1rem;background:#fff;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;transition:.4s}
+.pstep:hover .ring{border-color:var(--red);box-shadow:0 0 0 4px var(--red-soft)}
+.pstep .ring .n{font-family:'Noto Serif SC',serif;font-weight:900;font-size:1.4rem;color:var(--red)}
+.pstep h3{font-family:'Noto Serif SC',serif;font-size:.9rem;font-weight:700;margin-bottom:.3rem}
+.pstep p{color:var(--gray);font-size:.78rem;line-height:1.8;max-width:200px;margin:0 auto}
+
+/* STATS */
+.stats-banner{background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);padding:4rem 3rem;position:relative;z-index:2}
+.stats-banner::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpolygon points='30 0 60 30 30 60 0 30'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");background-size:60px 60px;opacity:.3;pointer-events:none}
+.stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;position:relative;z-index:1}
+.stat-item{text-align:center;padding:1rem}
+.stat-item .num{font-family:'Noto Serif SC',serif;font-size:2.6rem;font-weight:900;color:var(--gold-bright);line-height:1;margin-bottom:.3rem}
+.stat-item .label{font-size:.78rem;color:rgba(255,255,255,0.7);letter-spacing:.05em;font-weight:500}
+
+/* ========== TESTIMONIALS - 与卷轴背景融合 ========== */
+.testimonials{
+  position:relative;
+  background:linear-gradient(180deg,
+    rgba(240,240,240,0.9) 0%,
+    rgba(240,240,240,0.85) 100%
+  );
+}
+.testimonials-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem}
+.t-card{background:#fff;border:.5px solid var(--border);border-radius:var(--radius-lg);padding:1.8rem;transition:.4s;box-shadow:var(--shadow);cursor:pointer}
+.t-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.t-card .tq{font-family:'Ma Shan Zheng',cursive;font-size:3rem;color:var(--gold);line-height:.6;opacity:.3;margin-bottom:.2rem}
+.t-card .t-text{color:var(--gray);font-size:.82rem;line-height:1.9;margin-bottom:1.2rem;font-style:italic}
+.t-card .t-author{display:flex;align-items:center;gap:.8rem}
+.t-card .t-av{width:40px;height:40px;border-radius:50%;background:var(--red-soft);display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--red);flex-shrink:0}
+.t-card .t-name{font-size:.82rem;font-weight:600;color:var(--ink)}
+.t-card .t-role{font-size:.68rem;color:var(--gray-light);margin-top:.1rem}
+
+/* ========== CTA - 与卷轴背景融合 ========== */
+.cta{
+  position:relative;
+  text-align:center;
+  overflow:hidden;
+  background:linear-gradient(180deg,
+    rgba(240,240,240,0.92) 0%,
+    rgba(240,240,240,0.88) 100%
+  );
+}
+.cta h2{font-family:'Noto Serif SC',serif;font-size:clamp(1.6rem,2.8vw,2.4rem);font-weight:900;color:var(--ink)}
+.cta h2 .gold{color:var(--gold)}
+.cta p{color:var(--gray);max-width:500px;margin:.8rem auto 2rem;font-size:.9rem;line-height:2}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--red);color:#fff;padding:.8rem 2rem;border-radius:4px;text-decoration:none;font-weight:600;font-size:.82rem;transition:.3s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(196,69,54,0.2)}
+.btn-outline{border:1px solid var(--border);background:transparent;color:var(--ink);padding:.8rem 2rem;border-radius:4px;text-decoration:none;font-weight:500;font-size:.82rem;transition:.3s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-outline:hover{border-color:var(--red);color:var(--red)}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,0.6);padding:4rem 3rem 2rem;position:relative;z-index:2}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem}
+.footer-about p{font-size:.8rem;line-height:2;margin-top:.8rem;max-width:320px}
+.footer-about .logo{color:#fff;margin-bottom:.5rem}
+.footer-about .logo svg *{fill:var(--gold-bright)!important}
+.footer-about .logo-text strong{color:#fff!important}
+.footer-about .logo-text span{color:rgba(255,255,255,0.3)!important}
+footer h4{font-size:.78rem;font-weight:600;color:#fff;margin-bottom:.8rem;letter-spacing:.05em}
+footer a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:.75rem;display:block;margin-bottom:.4rem;transition:color .3s;line-height:2}
+footer a:hover{color:var(--gold-bright)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:1.5rem;border-top:.5px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;font-size:.7rem;flex-wrap:wrap;gap:.5rem}
+
+/* DETAIL OVERLAY */
+.detail-overlay{position:fixed;inset:0;z-index:1000;background:rgba(26,21,18,0.6);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:.4s;display:flex;align-items:center;justify-content:center;padding:2rem}
+.detail-overlay.active{opacity:1;visibility:visible}
+.detail-modal{background:#fff;border-radius:var(--radius-lg);max-width:800px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-xl);transform:translateY(20px) scale(.97);transition:.4s var(--ease);position:relative}
+.detail-overlay.active .detail-modal{transform:translateY(0) scale(1)}
+.detail-header{position:sticky;top:0;background:#fff;z-index:10;padding:1.5rem 2rem;border-bottom:.5px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.detail-header h3{font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:700;color:var(--ink)}
+.detail-header .dh-sub{font-size:.6rem;color:var(--gray-light);text-transform:uppercase;letter-spacing:.1em}
+.detail-close{width:32px;height:32px;border-radius:50%;border:none;background:var(--red-soft);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--red);transition:.3s;flex-shrink:0}
+.detail-close:hover{background:var(--red);color:#fff}
+.detail-body{padding:2rem}
+.detail-body h4{font-family:'Noto Serif SC',serif;font-size:1rem;font-weight:700;margin:1.5rem 0 .5rem;color:var(--ink)}
+.detail-body h4:first-child{margin-top:0}
+.detail-body p{color:var(--gray);font-size:.85rem;line-height:2;margin-bottom:1rem}
+.detail-body ul{margin:1rem 0;padding-left:1.2rem}
+.detail-body li{color:var(--gray);font-size:.85rem;line-height:2;margin-bottom:.3rem}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+.detail-item{padding:1rem;background:#fff;border-radius:var(--radius);border:.5px solid var(--border)}
+.detail-item strong{display:block;font-size:.8rem;color:var(--ink);margin-bottom:.3rem}
+.detail-item span{font-size:.75rem;color:var(--gray)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero-slide{grid-template-columns:1fr;text-align:center}
+  .hero-text p{max-width:none}
+  .hero-image-panel{max-width:500px;margin:0 auto}
+  .about-grid{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .countries-grid{grid-template-columns:repeat(2,1fr);max-width:none}
+  .process-grid{grid-template-columns:1fr 1fr}
+  .testimonials-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .policy-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .mobile-toggle{display:block}
+  section{padding:4rem 1.5rem}
+  .hero-slide{padding:2rem 1.5rem}
+  .services-grid{grid-template-columns:1fr}
+  .countries-grid{grid-template-columns:1fr}
+  .process-grid{grid-template-columns:1fr 1fr}
+  .testimonials-grid{grid-template-columns:1fr}
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .detail-grid{grid-template-columns:1fr}
+}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.active{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader"><div class="pd"><span></span><span></span><span></span></div></div>
+
+<!-- 丝绸之路主视觉图 - 完整展示，随页面滚动 -->
+<div class="scroll-bg">
+  <img src="assets/silk-poster-main.png" alt="丝绸之路" />
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">
+    <svg class="logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/>
+      <path d="M12 20C12 15.5817 15.5817 12 20 12C24.4183 12 28 15.5817 28 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="20" cy="20" r="4" fill="currentColor"/>
+    </svg>
+    <div class="logo-text"><strong>丝路山海通</strong><span>SILK ROAD TRADE</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="#services">核心服务</a>
+    <a href="#countries">全球网络</a>
+    <a href="#process">服务流程</a>
+    <a href="#testimonials">客户案例</a>
+    <a href="#contact" class="nav-cta">预约演示</a>
+    <a href="#" class="nav-cta" style="background:var(--gold)!important" onclick="event.preventDefault();openWechat()">微信咨询</a>
+  </div>
+  <button class="mobile-toggle" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-carousel">
+    <div class="hero-viewport">
+      <div class="hero-track" id="heroTrack"></div>
+    </div>
+    <div class="hero-bottom">
+      <div class="hero-dots" id="heroDots"></div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <div class="hero-counter"><strong id="slideCurrent">01</strong> / <span id="slideTotal">05</span></div>
+        <div class="hero-arrows"><button class="hero-arrow" id="arrowPrev">&#8592;</button><button class="hero-arrow" id="arrowNext">&#8594;</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about reveal">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="label-tag"><div class="line"></div><div class="txt">关于丝路山海通</div></div>
+      <div class="slogan">丝路万里 · 山海相通</div>
+      <h3>让中国企业<span class="red">出海不难</span></h3>
+      <p>丝路山海通积极响应国家「一带一路」倡议，致力于成为中国企业出海的首选服务伙伴。深耕东南亚、中亚、中东、非洲等新兴市场，秉持「本地化服务、全球化视野」理念，帮助企业高效、合规、安全地落地海外。</p>
+      <div class="about-box"><p>「让企业出海不再难，促进中国与一带一路国家经贸交往，互利共赢。」</p></div>
+    </div>
+    <div class="about-visual">
+      <a href="#services" class="about-hero-img" onclick="event.preventDefault();openDetail('about')">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80&auto=format" alt="国际化商务合作">
+        <div class="ahi-overlay"></div><div class="ahi-frame"></div>
+        <div class="ahi-seal"><span>丝路</span><small>山海通</small></div>
+      </a>
+      <div class="about-mini-grid">
+        <div class="about-mini-card" onclick="openDetail('about')"><strong>400+</strong><span>本地团队</span></div>
+        <div class="about-mini-card" onclick="openDetail('about')"><strong>5+</strong><span>区域网络</span></div>
+        <div class="about-mini-card" onclick="openDetail('about')"><strong>14</strong><span>服务中心</span></div>
+        <div class="about-mini-card" onclick="openDetail('about')"><strong>7年</strong><span>深耕经验</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services reveal">
+  <div class="label-tag"><div class="line"></div><div class="txt">核心服务</div></div>
+  <div class="section-head"><h2>全链路出海落地<span class="red">一站式</span> 解决</h2><p>从公司注册到本地化运营，六维服务体系覆盖出海全流程。</p></div>
+  <div class="services-grid">
+    <div class="service-card" onclick="openDetail('company-reg')"><div class="sc-img"><div class="sc-img-bg" style="background:linear-gradient(135deg,#C44536,#8B2D1E)"></div><span>&#127963;</span></div><h3>公司注册与资质</h3><div class="sc-sub">incorporation & licensing</div><p>境内境外公司注册、营业执照激活、行业资质证照办理，最快7个工作日完成海外公司设立。</p></div>
+    <div class="service-card" onclick="openDetail('tax-legal')"><div class="sc-img"><div class="sc-img-bg" style="background:linear-gradient(135deg,#C8923E,#8B6914)"></div><span>&#128203;</span></div><h3>财税人事与法务</h3><div class="sc-sub">tax, hr & legal</div><p>财税筹划、代理记账、人事雇佣、法务咨询、合规审计，本地化运营全方位保障。</p></div>
+    <div class="service-card" onclick="openDetail('visa')"><div class="sc-img"><div class="sc-img-bg" style="background:linear-gradient(135deg,#5A7D6B,#3D5A4B)"></div><span>&#128706;</span></div><h3>签证与商务考察</h3><div class="sc-sub">visa & business trip</div><p>商务签证、工作签证、工厂考察、市场调研、政府对接，一站式行程安排。</p></div>
+    <div class="service-card" onclick="openDetail('certification')"><div class="sc-img"><div class="sc-img-bg" style="background:linear-gradient(135deg,#6B4A3E,#4A3028)"></div><span>&#128230;</span></div><h3>产品准入与认证</h3><div class="sc-sub">product certification</div><p>SNI认证、BPOM注册、清真认证、进出口许可证、海关备案等全套产品合规准入服务。</p></div>
+    <div class="service-card" onclick="openDetail('factory')"><div class="sc-img"><div class="sc-img-bg" style="background:linear-gradient(135deg,#3A5A78,#25405C)"></div><span>&#127959;</span></div><h3>建厂与工程服务</h3><div class="sc-sub">factory & construction</div><p>海外选址建厂、建筑工程许可、环境合规、能源矿产、IT通讯等基建配套服务。</p></div>
+    <div class="service-card" onclick="openDetail('local-ops')"><div class="sc-img"><div class="sc-img-bg" style="background:linear-gradient(135deg,#C44536,#C8923E)"></div><span>&#129309;</span></div><h3>本地化运营支持</h3><div class="sc-sub">local operation</div><p>行政办公、本地招聘、政府关系、行业资源对接、展会活动策划，真正扎根海外市场。</p></div>
+  </div>
+</section>
+
+<!-- POLICY -->
+<section id="policy" class="policy reveal">
+  <div class="policy-bg"></div>
+  <div class="label-tag"><div class="line"></div><div class="txt">一带一路政策</div></div>
+  <div class="section-head"><h2>紧跟国家战略<span class="red">借势出海</span></h2><p>响应一带一路倡议，为企业提供政策解读与落地支持。</p></div>
+  <div class="policy-grid">
+    <div class="policy-card" onclick="openDetail('policy-overview')"><div class="pn">01</div><div><h3>政策研究与解读</h3><p>专业团队追踪分析沿线国家最新外资政策、税收优惠、产业扶持措施，为企业出海提供精准政策导航。</p></div></div>
+    <div class="policy-card" onclick="openDetail('policy-overview')"><div class="pn">02</div><div><h3>政府与商会对接</h3><p>深度链接当地政府、中国驻外使领馆、华人商会，为企业建立高层级政商关系网络。</p></div></div>
+    <div class="policy-card" onclick="openDetail('policy-overview')"><div class="pn">03</div><div><h3>产业园区落地</h3><p>对接沿线产业园区、经济特区，协助企业享受税收减免、土地优惠等政策红利。</p></div></div>
+    <div class="policy-card" onclick="openDetail('policy-overview')"><div class="pn">04</div><div><h3>投融资对接</h3><p>对接丝路基金、亚投行、国开行等金融机构，协助企业获取出海项目资金支持。</p></div></div>
+  </div>
+</section>
+
+<!-- COUNTRIES -->
+<section id="countries" class="countries reveal">
+  <div class="label-tag"><div class="line"></div><div class="txt">全球网络</div></div>
+  <div class="section-head"><h2>丝路所至，<span class="red">服务所达</span></h2><p>深耕一带一路沿线核心市场，本地团队陪伴企业落地每一站。</p></div>
+  <div class="countries-grid">
+    <div class="region-card" onclick="openDetail('region-sea')">
+      <div class="region-head">
+        <div class="region-icon">SEA</div>
+        <div class="region-title"><h3>东南亚</h3><div class="rsub">Southeast Asia</div></div>
+        <span class="region-count">5 国</span>
+      </div>
+      <div class="region-countries">
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-id')"><span class="rc-flag">&#127470;&#127465;</span><div class="rc-info"><div class="rc-name">印度尼西亚</div><div class="rc-cities">雅加达 · 泗水 · 棉兰</div></div><span class="rc-arrow">&#8594;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-vn')"><span class="rc-flag">&#127483;&#127475;</span><div class="rc-info"><div class="rc-name">越南</div><div class="rc-cities">胡志明 · 河内</div></div><span class="rc-arrow">&#8594;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-ph')"><span class="rc-flag">&#127477;&#127469;</span><div class="rc-info"><div class="rc-name">菲律宾</div><div class="rc-cities">马尼拉</div></div><span class="rc-arrow">&#8594;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-th')"><span class="rc-flag">&#127481;&#127469;</span><div class="rc-info"><div class="rc-name">泰国</div><div class="rc-cities">曼谷</div></div><span class="rc-arrow">&#8594;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-sg')"><span class="rc-flag">&#127480;&#127468;</span><div class="rc-info"><div class="rc-name">新加坡</div><div class="rc-cities">东南亚总部</div></div><span class="rc-arrow">&#8594;</span></a>
+      </div>
+    </div>
+    <div class="region-card" onclick="openDetail('region-ru')">
+      <div class="region-head">
+        <div class="region-icon" style="background:linear-gradient(135deg,#25405C,#1A2A3E)">RU·CA</div>
+        <div class="region-title"><h3>俄语区 / 中亚</h3><div class="rsub">CIS / Central Asia</div></div>
+        <span class="region-count">3+5 国</span>
+      </div>
+      <div class="region-countries">
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-kz')"><span class="rc-flag">&#127472;&#127487;</span><div class="rc-info"><div class="rc-name">哈萨克斯坦</div><div class="rc-cities">阿拉木图 · 阿斯塔纳</div></div><span class="rc-arrow">&#8594;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-uz')"><span class="rc-flag">&#127482;&#127487;</span><div class="rc-info"><div class="rc-name">乌兹别克斯坦</div><div class="rc-cities">塔什干</div></div><span class="rc-arrow">&#8594;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-kg')"><span class="rc-flag">&#127472;&#127468;</span><div class="rc-info"><div class="rc-name">吉尔吉斯斯坦</div><div class="rc-cities">比什凯克</div></div><span class="rc-arrow">&#8594;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-tj')"><span class="rc-flag">&#127481;&#127471;</span><div class="rc-info"><div class="rc-name">塔吉克斯坦</div><div class="rc-cities">杜尚别</div></div><span class="rc-arrow">&#8594;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-ru')"><span class="rc-flag">&#127479;&#127482;</span><div class="rc-info"><div class="rc-name">俄罗斯</div><div class="rc-cities">莫斯科 · 圣彼得堡</div></div><span class="rc-arrow">&#8594;</span></a>
+      </div>
+    </div>
+    <div class="region-card" onclick="openDetail('region-me')">
+      <div class="region-head">
+        <div class="region-icon green">ME</div>
+        <div class="region-title"><h3>中东 / 非洲</h3><div class="rsub">Middle East / Africa</div></div>
+        <span class="region-count">5+ 国</span>
+      </div>
+      <div class="region-countries">
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-ae')"><span class="rc-flag">&#127462;&#127466;</span><div class="rc-info"><div class="rc-name">阿联酋</div><div class="rc-cities">迪拜 · 阿布扎比</div></div><span class="rc-arrow">&#8594;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-sa')"><span class="rc-flag">&#127480;&#127462;</span><div class="rc-info"><div class="rc-name">沙特阿拉伯</div><div class="rc-cities">利雅得 · 吉达</div></div><span class="rc-arrow">&#8594;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-eg')"><span class="rc-flag">&#127466;&#127468;</span><div class="rc-info"><div class="rc-name">埃及</div><div class="rc-cities">开罗</div></div><span class="rc-arrow">&#8594;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-ng')"><span class="rc-flag">&#127475;&#127468;</span><div class="rc-info"><div class="rc-name">尼日利亚</div><div class="rc-cities">拉各斯</div></div><span class="rc-arrow">&#8594;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-ke')"><span class="rc-flag">&#127472;&#127466;</span><div class="rc-info"><div class="rc-name">肯尼亚</div><div class="rc-cities">内罗毕</div></div><span class="rc-arrow">&#8594;</span></a>
+      </div>
+    </div>
+    <div class="region-card" onclick="openDetail('region-eu')">
+      <div class="region-head">
+        <div class="region-icon gold">EU</div>
+        <div class="region-title"><h3>欧洲</h3><div class="rsub">Europe</div></div>
+        <span class="region-count">拓展中</span>
+      </div>
+      <div class="region-countries">
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-de')"><span class="rc-flag">&#127465;&#127466;</span><div class="rc-info"><div class="rc-name">德国</div><div class="rc-cities">柏林 · 汉堡</div></div><span class="rc-arrow">&#8594;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-nl')"><span class="rc-flag">&#127475;&#127473;</span><div class="rc-info"><div class="rc-name">荷兰</div><div class="rc-cities">阿姆斯特丹</div></div><span class="rc-arrow">&#8594;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-pl')"><span class="rc-flag">&#127477;&#127473;</span><div class="rc-info"><div class="rc-name">波兰</div><div class="rc-cities">华沙</div></div><span class="rc-arrow">&#8594;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="process reveal">
+  <div class="label-tag"><div class="line"></div><div class="txt">服务流程</div></div>
+  <div class="section-head"><h2>四步走，<span class="red">轻松出海</span></h2><p>规范化流程，每一步都保障企业安全、高效落地海外市场。</p></div>
+  <div class="process-grid">
+    <div class="pstep" onclick="openDetail('service-process')"><div class="ring"><div class="n">01</div></div><h3>需求诊断</h3><p>深入了解企业出海目标与需求，定制化出海方案。</p></div>
+    <div class="pstep" onclick="openDetail('service-process')"><div class="ring"><div class="n">02</div></div><h3>尽职调研</h3><p>市场调研、法律评估、财税分析，规避风险前置。</p></div>
+    <div class="pstep" onclick="openDetail('service-process')"><div class="ring"><div class="n">03</div></div><h3>落地执行</h3><p>公司注册、资质办理、团队搭建，全程陪伴推进。</p></div>
+    <div class="pstep" onclick="openDetail('service-process')"><div class="ring"><div class="n">04</div></div><h3>持续运营</h3><p>财税代账、法务支持、政府维护，长期运营保障。</p></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-banner reveal">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="num">60+</div><div class="label">一带一路覆盖国家</div></div>
+    <div class="stat-item"><div class="num">1,600+</div><div class="label">服务出海企业</div></div>
+    <div class="stat-item"><div class="num">400+</div><div class="label">海外本地员工</div></div>
+    <div class="stat-item"><div class="num">5+</div><div class="label">区域服务网络</div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonials reveal">
+  <div class="label-tag"><div class="line"></div><div class="txt">客户心声</div></div>
+  <div class="section-head"><h2>出海企业 <span class="red">信赖之选</span></h2><p>听听他们如何借助丝路山海通成功落地海外市场。</p></div>
+  <div class="testimonials-grid">
+    <div class="t-card" onclick="openDetail('client-cases')"><div class="tq">&ldquo;</div><p class="t-text">帮我们在雅加达完成了公司注册和工厂选址，从考察到落地只用了2个月。当地团队专业靠谱，比我们自己跑效率高太多了。</p><div class="t-author"><div class="t-av">张</div><div><div class="t-name">张宏伟</div><div class="t-role">新能源汽车 · 印尼工厂负责人</div></div></div></div>
+    <div class="t-card" onclick="openDetail('client-cases')"><div class="tq">&ldquo;</div><p class="t-text">响应一带一路开拓中亚市场，丝路山海通从法律合规到政府关系一路护航，节省了大量试错成本，强烈推荐。</p><div class="t-author"><div class="t-av">李</div><div><div class="t-name">李雪峰</div><div class="t-role">工程机械 · 中亚事业部总经理</div></div></div></div>
+    <div class="t-card" onclick="openDetail('client-cases')"><div class="tq">&ldquo;</div><p class="t-text">印尼的SNI认证和清真认证一度让我们头疼，丝路山海通一站式包办，产品准入周期缩短了60%，效果超出预期。</p><div class="t-author"><div class="t-av">王</div><div><div class="t-name">王琳</div><div class="t-role">食品饮料 · 海外拓展总监</div></div></div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta reveal">
+  <h2>乘「一带一路」东风</h2>
+  <h2 style="margin-top:-0.2rem;">让您的企业 <span class="gold">出海无忧</span></h2>
+  <p>与丝路山海通携手，开启全球化新篇章。丝路万里，山海相通，通达全球。</p>
+  <div class="cta-btns">
+    <a href="#" class="btn-primary" onclick="event.preventDefault();openBook();">预约演示 &#8594;</a>
+    <a href="#" class="btn-outline" onclick="event.preventDefault();openWechat();">微信咨询</a>
+    <a href="#services" class="btn-outline" onclick="closeDetail()">了解服务</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-about">
+      <a href="#" class="logo" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">
+        <svg class="logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 20C12 15.5817 15.5817 12 20 12C24.4183 12 28 15.5817 28 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="20" cy="20" r="4" fill="currentColor"/>
+        </svg>
+        <div class="logo-text"><strong>丝路山海通</strong><span>SILK ROAD TRADE</span></div>
+      </a>
+      <p>专注一带一路企业出海服务，让中国企业在全球市场落地生根。从公司注册到本地化运营，一站式解决方案。</p>
+    </div>
+    <div>
+      <h4>核心服务</h4>
+      <a href="#services" onclick="openDetail('company-reg')">公司注册</a>
+      <a href="#services" onclick="openDetail('tax-legal')">财税法务</a>
+      <a href="#services" onclick="openDetail('certification')">产品认证</a>
+      <a href="#services" onclick="openDetail('local-ops')">本地运营</a>
+    </div>
+    <div>
+      <h4>全球网络</h4>
+      <a href="#countries" onclick="openDetail('region-sea')">东南亚</a>
+      <a href="#countries" onclick="openDetail('region-ru')">俄语区/中亚</a>
+      <a href="#countries" onclick="openDetail('region-me')">中东/非洲</a>
+      <a href="#countries" onclick="openDetail('region-eu')">欧洲</a>
+    </div>
+    <div>
+      <h4>联系我们</h4>
+      <a href="#" onclick="event.preventDefault();openBook()">预约演示</a>
+      <a href="#" onclick="event.preventDefault();openWechat()">微信咨询</a>
+      <a href="mailto:contact@silkroad-trade.com">contact@silkroad-trade.com</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2024 丝路山海通. All rights reserved.</span>
+    <span>粤ICP备XXXXXXXX号</span>
+  </div>
+</footer>
+
+<!-- DETAIL OVERLAY -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetailOnBackground(event)">
+  <div class="detail-modal">
+    <div class="detail-header">
+      <div>
+        <h3 id="detailTitle">服务详情</h3>
+        <div class="dh-sub" id="detailSubtitle">SILK ROAD TRADE</div>
+      </div>
+      <button class="detail-close" onclick="closeDetail()">&#10005;</button>
+    </div>
+    <div class="detail-body" id="detailBody">
+      <!-- Content injected by JS -->
+    </div>
+  </div>
+</div>
+
+<script>
+// SLIDE CONFIG
+const SLIDE_CONFIG=[
+  {title:'乘丝路长风<span class="gold">通达全球</span>',subtitle:'一带一路企业出海一站式服务',desc:'丝路山海通 — 响应国家一带一路倡议，为企业出海提供公司注册、财税支持、产品准入、本地化运营等一站式落地服务。',img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&auto=format',detailId:'company-advantage'},
+  {title:'公司注册<span class="gold">资质办理</span>',subtitle:'最快7个工作日完成海外公司设立',desc:'境内境外公司注册、营业执照激活、行业资质证照办理，让您的企业快速合法落地海外。',img:'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80&auto=format',detailId:'company-reg'},
+  {title:'财税人事<span class="gold">法务合规</span>',subtitle:'本地化运营全方位保障',desc:'财税筹划、代理记账、人事雇佣、法务咨询、合规审计，专业团队为您保驾护航。',img:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format',detailId:'tax-legal'},
+  {title:'产品准入<span class="gold">认证通关</span>',subtitle:'SNI/BPOM/清真认证一站式办理',desc:'SNI认证、BPOM注册、清真认证、进出口许可证、海关备案等全套产品合规准入服务。',img:'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80&auto=format',detailId:'certification'},
+  {title:'本地运营<span class="gold">长期陪伴</span>',subtitle:'真正扎根海外市场',desc:'行政办公、本地招聘、政府关系、行业资源对接、展会活动策划，让您出海无忧。',img:'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80&auto=format',detailId:'local-ops'},
+  {title:'签证考察<span class="gold">商务出行</span>',subtitle:'签证办理与商务考察一站式',desc:'商务签证、工作签证、工厂考察、市场调研、政府对接，一站式行程安排，助您轻松出海考察。',img:'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80&auto=format',detailId:'visa'},
+  {title:'建厂工程<span class="gold">落地投产</span>',subtitle:'海外建厂与基建全流程服务',desc:'海外选址建厂、建筑工程许可、环境合规、能源矿产、IT通讯等基建配套，让您的工厂快速落地。',img:'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80&auto=format',detailId:'factory'}
+];
+
+// DETAIL CONTENT
+const DETAIL_CONTENT={
+  'company-advantage':{title:'公司优势',subtitle:'为什么选择丝路山海通',content:'<h4>深耕一带一路</h4><p>专注一带一路沿线国家，深耕东南亚、中亚、中东、非洲等新兴市场，积累了丰富的本地化经验和政商资源。</p><h4>专业本地团队</h4><p>400+海外本地员工，熟悉当地法律、税务、文化，能够为企业提供真正接地气的落地服务。</p><h4>全链路服务</h4><p>从公司注册到本地化运营，六维服务体系覆盖出海全流程，让企业出海不再难。</p><h4>高效合规</h4><p>最快7个工作日完成海外公司设立，专业法务团队确保合规，规避出海风险。</p>'},
+  'company-reg':{title:'公司注册与资质',subtitle:'incorporation & licensing',content:'<h4>境内公司注册</h4><p>协助企业在目标国家完成公司注册，包括名称核准、章程制定、股东登记等全套流程。</p><h4>营业执照激活</h4><p>办理营业执照、税务登记、银行开户等激活手续，确保公司合法运营。</p><h4>行业资质办理</h4><p>根据行业特点，办理进出口权、特殊行业许可证等资质证照。</p><div class="detail-grid"><div class="detail-item"><strong>7个工作日</strong><span>最快完成公司设立</span></div><div class="detail-item"><strong>60+国家</strong><span>覆盖一带一路沿线</span></div></div>'},
+  'tax-legal':{title:'财税人事与法务',subtitle:'tax, hr & legal',content:'<h4>财税筹划</h4><p>根据当地税法，为企业制定最优财税方案，合理避税，降低成本。</p><h4>代理记账</h4><p>专业会计团队提供记账、报税、年审等全套财务服务。</p><h4>人事雇佣</h4><p>协助招聘本地员工，办理工作签证、社保、劳动合同等人事手续。</p><h4>法务咨询</h4><p>提供合同审核、纠纷处理、知识产权保护等法律支持。</p>'},
+  'certification':{title:'产品准入与认证',subtitle:'product certification',content:'<h4>SNI认证（印尼）</h4><p>印度尼西亚国家标准认证，是产品进入印尼市场的必备资质。</p><h4>BPOM注册（印尼）</h4><p>食品、药品、化妆品等产品的卫生部注册，确保产品安全合规。</p><h4>清真认证</h4><p>针对穆斯林市场的清真认证，开拓东南亚、中东市场的关键资质。</p><h4>进出口许可证</h4><p>办理进出口权、海关备案、产品检验等全套通关手续。</p>'},
+  'local-ops':{title:'本地化运营支持',subtitle:'local operation',content:'<h4>行政办公</h4><p>协助租赁办公室、办理办公手续、配置办公设备，让企业快速启动运营。</p><h4>本地招聘</h4><p>通过本地渠道招聘员工，协助制定薪酬体系、培训计划。</p><h4>政府关系</h4><p>对接当地政府、商会、行业协会，建立良好的政商关系。</p><h4>资源对接</h4><p>对接供应商、客户、物流等本地资源，帮助企业快速融入市场。</p>'},
+  'about':{title:'关于丝路山海通',subtitle:'silk road trade',content:'<h4>我们的使命</h4><p>让企业出海不再难，促进中国与一带一路国家经贸交往，互利共赢。</p><h4>我们的愿景</h4><p>成为中国企业出海的首选服务伙伴，陪伴更多中国企业走向世界。</p><h4>我们的价值观</h4><p>专业、诚信、高效、共赢。以客户需求为中心，以专业服务为支撑，助力企业出海成功。</p>'},
+  'service-process':{title:'服务流程',subtitle:'service process',content:'<h4>01 需求诊断</h4><p>深入了解企业出海目标、产品特点、预算规模，分析目标市场机会与风险。</p><h4>02 尽职调研</h4><p>进行市场调研、法律评估、财税分析，制定详细的出海方案。</p><h4>03 落地执行</h4><p>按计划推进公司注册、资质办理、团队搭建，全程陪伴推进。</p><h4>04 持续运营</h4><p>提供财税代账、法务支持、政府维护等长期运营保障服务。</p>'},
+  'client-cases':{title:'客户案例',subtitle:'client cases',content:'<h4>新能源汽车 - 印尼工厂</h4><p>协助某新能源汽车企业在印尼完成公司注册、工厂选址、资质办理，从考察到投产仅用6个月。</p><h4>工程机械 - 中亚市场</h4><p>为某工程机械企业提供哈萨克斯坦市场准入、本地代理对接、政府关系维护等全套服务。</p><h4>食品饮料 - 东南亚拓展</h4><p>帮助某食品饮料企业完成印尼、越南、菲律宾三国的产品认证和市场准入，快速打开东南亚市场。</p>'},
+  'policy-overview':{title:'一带一路政策',subtitle:'belt and road initiative',content:'<h4>政策红利</h4><p>一带一路倡议为中国企业出海提供了前所未有的政策支持和市场机遇。</p><h4>税收优惠</h4><p>沿线国家为吸引外资，提供了丰富的税收减免、土地优惠等政策。</p><h4>金融支持</h4><p>丝路基金、亚投行、国开行等金融机构为企业提供出海项目资金支持。</p>'},
+  'visa':{title:'签证与商务考察',subtitle:'visa & business trip',content:'<h4>商务签证</h4><p>为企业高管和商务人员办理目标国家商务签证，最快5个工作日出签，涵盖多次往返类型。</p><h4>工作签证</h4><p>协助外派员工办理工作许可和居留签证，包括本地劳工配额申请、劳动合同备案等全套手续。</p><h4>商务考察行程</h4><p>量身定制考察行程——工厂参观、市场调研、政府对接、园区考察，配备本地翻译和向导。</p><div class="detail-grid"><div class="detail-item"><strong>5个工作日</strong><span>最快商务签证出签</span></div><div class="detail-item"><strong>10+国家</strong><span>签证办理覆盖范围</span></div></div>'},
+  'factory':{title:'建厂与工程服务',subtitle:'factory & construction',content:'<h4>海外选址建厂</h4><p>协助企业在目标国家评估选址——工业园区考察、土地谈判、环保评估、建设规划许可一站式办理。</p><h4>建筑工程许可</h4><p>办理建筑施工许可、消防审批、环境影响评估等工程建设必需的全部行政许可。</p><h4>基础设施建设</h4><p>水电气配套、通讯网络、仓储物流、员工宿舍等基础设施的建设与对接服务。</p><h4>能源矿产与IT</h4><p>能源项目开发、矿产投资咨询、IT通讯系统搭建，为企业出海基建全面护航。</p>'},
+  'region-sea':{title:'东南亚区域',subtitle:'southeast asia',content:'<h4>印度尼西亚</h4><p>雅加达、泗水、棉兰三大服务中心，400+本地团队覆盖公司注册、SNI认证、建厂工程等全链条服务。</p><h4>越南</h4><p>胡志明市与河内双中心，深耕越南北部制造业走廊，提供公司注册、进出口资质、本地招聘等人事服务。</p><h4>菲律宾</h4><p>马尼拉服务中心，专注BPO外包、公司注册、税务合规、IT人才招聘等服务。</p><h4>泰国</h4><p>曼谷服务中心，覆盖汽车零配件、食品加工、电子制造等行业出海配套服务。</p><h4>新加坡</h4><p>东南亚区域总部，作为金融中心提供跨境财税筹划、投融资对接、国际贸易合规等高端服务。</p>'},
+  'region-ru':{title:'俄语区/中亚区域',subtitle:'cis & central asia',content:'<h4>哈萨克斯坦</h4><p>阿拉木图与阿斯塔纳双中心，中亚最大经济体。深耕矿产资源、工程机械、农业贸易领域，提供公司注册、海关清关、本地代理对接服务。</p><h4>乌兹别克斯坦</h4><p>塔什干服务中心，新兴市场蓝海。协助企业享受经济特区优惠，完成准入许可、税务登记、劳动配额办理。</p><h4>吉尔吉斯斯坦</h4><p>比什凯克服务中心，欧亚经济联盟成员国。提供公司注册、产品EAC认证、物流仓储等配套服务。</p><h4>塔吉克斯坦</h4><p>杜尚别服务中心，聚焦基础设施、矿产能源、农业合作三大领域。</p><h4>俄罗斯</h4><p>莫斯科与圣彼得堡双中心，EAC认证、公司注册、本地化运营、市场准入等全套服务。</p>'},
+  'region-me':{title:'中东/非洲区域',subtitle:'middle east & africa',content:'<h4>阿联酋</h4><p>迪拜与阿布扎比双中心，中东商贸枢纽。协助企业在自由区注册公司、办理营业执照、银行开户、税务登记，覆盖贸易、物流、金融服务。</p><h4>沙特阿拉伯</h4><p>利雅得与吉达双中心，2030愿景下市场全面开放。提供公司注册、本地代理、工业许可证、SABER/SASO产品认证服务。</p><h4>埃及</h4><p>开罗服务中心，一带一路北非重要节点。深耕基础设施、能源、制造业出海配套服务。</p><h4>尼日利亚</h4><p>拉各斯服务中心，非洲最大经济体。协助企业完成NCC注册、NAFDAC产品认证、公司注册、本地化运营。</p><h4>肯尼亚</h4><p>内罗毕服务中心，东非门户。提供公司注册、贸易合规、市场调研、政府关系对接等服务。</p>'},
+  'region-eu':{title:'欧洲区域',subtitle:'europe',content:'<h4>德国</h4><p>柏林与汉堡双中心，欧洲经济引擎。提供GmbH公司注册、VAT税务登记、CE认证、商标注册等全套服务。</p><h4>荷兰</h4><p>阿姆斯特丹服务中心，欧洲物流枢纽。协助企业设立BV公司，办理VAT、海关备案等欧洲市场准入手续。</p><h4>波兰</h4><p>华沙服务中心，中东欧投资热门地。深入制造业、IT外包、物流领域，提供公司注册、工作许可、税务筹划服务。</p>'},
+  'country-id':{title:'印度尼西亚',subtitle:'indonesia',content:'<h4>服务概览</h4><p>印尼是东南亚最大经济体，也是中国企业出海首选目的地之一。丝路山海通在雅加达、泗水、棉兰设有三大服务中心，400+本地团队。</p><h4>核心服务</h4><p>公司注册与营业执照激活 · SNI认证与BPOM注册 · 清真认证办理 · 财税代账与法务支持 · 建厂许可与环境合规 · 本地招聘与人事管理 · 签证办理与商务考察</p><h4>优势产业</h4><p>新能源汽车、矿产冶炼、食品加工、电子制造、电商物流、基础设施建设</p>'},
+  'country-vn':{title:'越南',subtitle:'vietnam',content:'<h4>服务概览</h4><p>越南凭借优越的地理位置和劳动力成本优势，已成为全球制造业转移的重要目的地。胡志明与河内双中心覆盖南北经济走廊。</p><h4>核心服务</h4><p>外商独资公司注册 · 进出口权办理 · 本地招聘与社保代缴 · 税务合规与代理记账 · 工厂选址与环境评估 · 投资许可证申请</p><h4>优势产业</h4><p>电子制造、纺织服装、家具出口、汽车零部件、食品加工</p>'},
+  'country-ph':{title:'菲律宾',subtitle:'philippines',content:'<h4>服务概览</h4><p>菲律宾英语普及率高、劳动力充足，是全球BPO中心和新兴制造业基地。马尼拉服务中心专注公司注册与IT人才招聘。</p><h4>核心服务</h4><p>公司注册与SEC备案 · BPO企业设立 · 税务合规与财务服务 · 本地招聘与人事外包 · BOI投资优惠申请</p><h4>优势产业</h4><p>IT外包、呼叫中心、游戏开发、房地产、零售贸易</p>'},
+  'country-th':{title:'泰国',subtitle:'thailand',content:'<h4>服务概览</h4><p>泰国是东盟第二大经济体，汽车制造和食品加工产业领先。曼谷服务中心提供全方位出海落地服务。</p><h4>核心服务</h4><p>BOI投资促进申请 · 外商经营许可证 · 公司注册与工厂许可 · 工作签证办理 · 本地招聘与 payroll 服务</p><h4>优势产业</h4><p>汽车及零部件、食品加工、电子制造、医疗旅游、橡胶制品</p>'},
+  'country-sg':{title:'新加坡',subtitle:'singapore',content:'<h4>服务概览</h4><p>新加坡是全球金融中心和东南亚区域总部首选地。作为丝路山海通东南亚总部，提供高端商务与跨境服务。</p><h4>核心服务</h4><p>私人有限公司注册 · 税务筹划与IRAS合规 · 银行开户与融资对接 · 国际贸易合规 · 知识产权保护</p><h4>优势产业</h4><p>金融科技、国际贸易、物流航运、生物医药、企业总部服务</p>'},
+  'country-kz':{title:'哈萨克斯坦',subtitle:'kazakhstan',content:'<h4>服务概览</h4><p>哈萨克斯坦是中亚最大经济体，一带一路首倡之地。阿拉木图与阿斯塔纳双中心，深耕资源与贸易领域。</p><h4>核心服务</h4><p>公司注册与营业执照 · 矿产资源投资许可 · 海关清关与贸易合规 · 工作许可与本地招聘 · 合资企业设立</p><h4>优势产业</h4><p>能源矿产、工程机械、农业贸易、基础设施、物流运输</p>'},
+  'country-uz':{title:'乌兹别克斯坦',subtitle:'uzbekistan',content:'<h4>服务概览</h4><p>乌兹别克斯坦近年改革开放力度大，市场潜力可观。塔什干服务中心协助企业享受经济特区优惠红利。</p><h4>核心服务</h4><p>公司注册与许可 · 经济特区入驻 · 税务登记与优惠申请 · 进出口权办理 · 本地代理和分销网络搭建</p><h4>优势产业</h4><p>纺织服装、农产品加工、矿产资源、化工、建材</p>'},
+  'country-kg':{title:'吉尔吉斯斯坦',subtitle:'kyrgyzstan',content:'<h4>服务概览</h4><p>吉尔吉斯斯坦是欧亚经济联盟成员国，可作为进入俄白哈市场的桥头堡。比什凯克服务中心覆盖注册与认证。</p><h4>核心服务</h4><p>公司注册与税务登记 · EAC认证办理 · 海关清关与物流 · 劳动配额与工作许可 · 农业合作与投资</p><h4>优势产业</h4><p>农业、采矿、纺织、电力、旅游业</p>'},
+  'country-tj':{title:'塔吉克斯坦',subtitle:'tajikistan',content:'<h4>服务概览</h4><p>塔吉克斯坦是中亚新兴市场，水电资源和矿产资源丰富。杜尚别服务中心专注基建和能源领域。</p><h4>核心服务</h4><p>公司注册与许可 · 矿产资源合作协议 · 基建工程竞标支持 · 签证与工作许可 · 本地法律与税务咨询</p><h4>优势产业</h4><p>水电能源、矿产开采、基础设施建设、农业</p>'},
+  'country-ru':{title:'俄罗斯',subtitle:'russia',content:'<h4>服务概览</h4><p>俄罗斯是横跨欧亚的超级市场，莫斯科与圣彼得堡双中心提供全面的市场准入和运营服务。</p><h4>核心服务</h4><p>公司注册（OOO/代表处） · EAC/CUTR认证 · VAT与税务合规 · 海关清关与物流 · 商标注册与知识产权保护 · 本地招聘与法务支持</p><h4>优势产业</h4><p>能源矿产、工程机械、消费品进口、农业食品、IT与科技</p>'},
+  'country-ae':{title:'阿联酋',subtitle:'united arab emirates',content:'<h4>服务概览</h4><p>阿联酋是中东商贸枢纽和金融中心，迪拜与阿布扎比为世界级商业城市。自由区政策为中国企业提供了极大便利。</p><h4>核心服务</h4><p>自由区公司注册（FZE/FZCO） · 离岸公司设立 · 营业执照与经营许可 · 银行开户与金融合规 · VAT税务登记 · 本地保人/代理服务</p><h4>优势产业</h4><p>国际贸易、物流仓储、金融服务、房地产、旅游会展</p>'},
+  'country-sa':{title:'沙特阿拉伯',subtitle:'saudi arabia',content:'<h4>服务概览</h4><p>沙特2030愿景推动经济全面开放和多元化转型，带来大量投资机遇。利雅得与吉达双中心深耕本地市场。</p><h4>核心服务</h4><p>公司注册（LLC/Branch） · 投资许可证（MISA） · SABER/SASO产品认证 · 本地代理/经销商协议 · 工作签证与居住许可 · 政府招标参与支持</p><h4>优势产业</h4><p>能源化工、基础设施建设、医疗健康、科技与数字化、旅游与娱乐</p>'},
+  'country-eg':{title:'埃及',subtitle:'egypt',content:'<h4>服务概览</h4><p>埃及是阿拉伯世界人口最多的国家，苏伊士运河经济带和一带一路交汇，战略位置极其重要。</p><h4>核心服务</h4><p>公司注册与投资许可 · 苏伊士特区入驻 · 税务登记与优惠 · 海关清关与贸易 · 本地劳工与社保办理</p><h4>优势产业</h4><p>基础设施建设、能源与可再生能源、纺织服装、汽车组装、农业食品</p>'},
+  'country-ng':{title:'尼日利亚',subtitle:'nigeria',content:'<h4>服务概览</h4><p>尼日利亚是非洲最大经济体和人口最多的国家，拉各斯是西非商业中心。市场潜力巨大但准入要求复杂。</p><h4>核心服务</h4><p>公司注册（CAC） · NAFDAC产品认证 · NCC通信设备认证 · 进口商许可证 · 工作签证与居留许可 · 本地法务与税务合规</p><h4>优势产业</h4><p>石油天然气、通信技术、快速消费品、建筑建材、农业加工</p>'},
+  'country-ke':{title:'肯尼亚',subtitle:'kenya',content:'<h4>服务概览</h4><p>肯尼亚是东非经济龙头，内罗毕是联合国非洲总部所在地。作为东非共同体门户，辐射整个东非市场。</p><h4>核心服务</h4><p>公司注册与执照 · KEBS产品认证 · 税务登记与合规 · 海关清关与物流 · 本地招聘与人事管理 · 政府关系对接</p><h4>优势产业</h4><p>农业与食品加工、可再生能源、基础设施建设、物流与运输、科技与创新</p>'},
+  'country-de':{title:'德国',subtitle:'germany',content:'<h4>服务概览</h4><p>德国是欧洲最大经济体，制造业全球领先。柏林与汉堡双中心提供德国与欧盟市场准入全套服务。</p><h4>核心服务</h4><p>GmbH公司注册 · VAT税务登记与申报 · CE认证办理 · 商标注册 · 投资并购咨询 · 法律与税务合规</p><h4>优势产业</h4><p>汽车及零部件、机械制造、新能源、化工医药、信息技术</p>'},
+  'country-nl':{title:'荷兰',subtitle:'netherlands',content:'<h4>服务概览</h4><p>荷兰是欧洲门户，鹿特丹港和中国企业进入欧洲的重要桥头堡。阿姆斯特丹服务中心专注贸易与物流服务。</p><h4>核心服务</h4><p>BV公司注册 · VAT税务登记 · 海关备案与物流 · 欧盟CE认证 · 知识产权与品牌保护</p><h4>优势产业</h4><p>物流运输、农业食品、高科技、化工、金融服务</p>'},
+  'country-pl':{title:'波兰',subtitle:'poland',content:'<h4>服务概览</h4><p>波兰是中东欧最大经济体，也是中欧班列进入欧洲的第一站。华沙服务中心深入制造业与IT领域。</p><h4>核心服务</h4><p>公司注册（Sp. z o.o.） · VAT税务登记 · 工作许可与居留卡 · 投资特区优惠申请 · 本地招聘与人事外包</p><h4>优势产业</h4><p>电子制造、IT外包、汽车零部件、食品加工、家具出口</p>'}
+};
+
+// INIT
+let currentSlide=0;
+let slideInterval;
+
+function init(){
+  renderSlides();
+  renderDots();
+  startSlideShow();
+  initScrollEffects();
+  initNavScroll();
+  
+  document.getElementById('arrowPrev').addEventListener('click',()=>{prevSlide();resetSlideShow();});
+  document.getElementById('arrowNext').addEventListener('click',()=>{nextSlide();resetSlideShow();});
+  
+  setTimeout(()=>{document.getElementById('preloader').classList.add('hide');},500);
+}
+
+function renderSlides(){
+  const track=document.getElementById('heroTrack');
+  track.innerHTML=SLIDE_CONFIG.map((slide,i)=>`
+    <div class="hero-slide" data-index="${i}" onclick="handleSlideClick(${i},event)">
+      <div class="hero-text">
+        <div class="ht-label"><div class="dot"></div><span>SLIDE 0${i+1}</span></div>
+        <h1>${slide.title}</h1>
+        <p>${slide.desc}</p>
+        <a class="hero-link" onclick="event.stopPropagation();openDetail('${slide.detailId}')">了解更多 &#8594;</a>
+      </div>
+      <div class="hero-image-panel">
+        <img src="${slide.img}" alt="${slide.subtitle}" loading="${i===0?'eager':'lazy'}">
+        <div class="hip-overlay"></div>
+        <div class="hip-frame"></div>
+        <div class="hip-tag"><div class="dot"></div><span>${slide.subtitle}</span></div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('slideTotal').textContent=String(SLIDE_CONFIG.length).padStart(2,'0');
+}
+
+function renderDots(){
+  const dots=document.getElementById('heroDots');
+  dots.innerHTML=SLIDE_CONFIG.map((_,i)=>`<button class="hero-dot ${i===0?'active':''}" data-index="${i}" onclick="goToSlide(${i});resetSlideShow();"></button>`).join('');
+}
+
+function updateSlide(){
+  const track=document.getElementById('heroTrack');
+  track.style.transform=`translateX(-${currentSlide*100}%)`;
+  document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===currentSlide));
+  document.getElementById('slideCurrent').textContent=String(currentSlide+1).padStart(2,'0');
+}
+
+function nextSlide(){currentSlide=(currentSlide+1)%SLIDE_CONFIG.length;updateSlide();}
+function prevSlide(){currentSlide=(currentSlide-1+SLIDE_CONFIG.length)%SLIDE_CONFIG.length;updateSlide();}
+function goToSlide(index){currentSlide=index;updateSlide();}
+
+function startSlideShow(){slideInterval=setInterval(nextSlide,5000);}
+function resetSlideShow(){clearInterval(slideInterval);startSlideShow();}
+
+function handleSlideClick(index,event){
+  const slide=event.currentTarget;
+  const startX=event.clientX||event.touches?.[0]?.clientX;
+  
+  function onMove(e){const x=e.clientX||e.touches?.[0]?.clientX;if(Math.abs(x-startX)>10)slide._dragged=true;}
+  function onUp(e){
+    document.removeEventListener('mousemove',onMove);
+    document.removeEventListener('mouseup',onUp);
+    if(!slide._dragged){openDetail(SLIDE_CONFIG[index].detailId);}
+    delete slide._dragged;
+  }
+  
+  document.addEventListener('mousemove',onMove);
+  document.addEventListener('mouseup',onUp);
+}
+
+// DETAIL OVERLAY
+function openDetail(id){
+  const content=DETAIL_CONTENT[id];
+  if(!content)return;
+  document.getElementById('detailTitle').textContent=content.title;
+  document.getElementById('detailSubtitle').textContent=content.subtitle;
+  document.getElementById('detailBody').innerHTML=content.content;
+  document.getElementById('detailOverlay').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+
+function closeDetail(){
+  document.getElementById('detailOverlay').classList.remove('active');
+  document.body.style.overflow='';
+}
+
+function closeDetailOnBackground(event){if(event.target===event.currentTarget)closeDetail();}
+
+// NAV SCROLL
+function initNavScroll(){
+  const nav=document.getElementById('navbar');
+  window.addEventListener('scroll',()=>{
+    if(window.scrollY>50)nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  },{passive:true});
+}
+
+// SCROLL REVEAL
+function initScrollEffects(){
+  const reveals=document.querySelectorAll('.reveal');
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('active');observer.unobserve(e.target);}});
+  },{threshold:0.1});
+  reveals.forEach(r=>observer.observe(r));
+}
+
+// MOBILE MENU
+function toggleMobileMenu(){
+  const nav=document.querySelector('.nav-links');
+  nav.style.display=nav.style.display==='flex'?'none':'flex';
+}
+
+// WECHAT / BOOKING
+function openWechat(){alert('请添加微信客服：SilkRoadTrade');}
+function openBook(){alert('预约演示功能即将上线，请添加微信咨询。');}
+
+// INIT
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>

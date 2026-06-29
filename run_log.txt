@@ -1,0 +1,22 @@
+﻿Step 1: Reading source document...
+Extracted 12 paragraphs
+Step 2: Analyzing content structure...
+Content distributed to 2 chapters
+  第一章：外贸全链条概述: 11 paragraphs
+  第二章：中医出海市场机遇: 0 paragraphs
+  第三章：品牌运营官角色定位: 0 paragraphs
+  第四章：社媒客户开发（TikTok/Facebook/WhatsApp）: 1 paragraphs
+  第五章：报价与谈判策略: 0 paragraphs
+  第六章：供应链与生产管理: 0 paragraphs
+  第七章：跨文化沟通技巧: 0 paragraphs
+  第八章：实战案例解析: 0 paragraphs
+  第九章：常见问题与解决方案: 0 paragraphs
+  第十章：行动计划与总结: 0 paragraphs
+Step 3: Generating structured training material...
+SUCCESS: Document saved to E:\郑州录音\外贸全链条培训学习资料_结构化版.docx
+Document structure:
+  - Cover page
+  - 2 chapters
+  - Table of contents
+  - Review questions for each chapter
+  - Appendix with checklists

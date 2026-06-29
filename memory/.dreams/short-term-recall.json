@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-18T10:06:42.213Z",
+  "entries": {
+    "memory:memory/2026-04-25.md:1:32": {
+      "key": "memory:memory/2026-04-25.md:1:32",
+      "path": "memory/2026-04-25.md",
+      "startLine": 1,
+      "endLine": 32,
+      "source": "memory",
+      "snippet": "# 2026-04-25 日记 ## 今日主要工作 ### 1. 腾讯文档下载任务（完成） - 用户提供腾讯文档链接：https://docs.qq.com/aio/DZUNiQXRYVkdtZWRo - 文档标题：海外营销指南 - 使用 tencent-docs MCP 工具获取内容，成功 - Node.js 通过 winget 安装成功（v24.15.0） - mcporter 安装成功 - 文档内容已保存为 `C:\\Users\\ASDCF\\Desktop\\海外营销指南.md`（摘要版，约5700字节） - 完整文档内容非常庞大（原始超过50万字），保存为精炼摘要版 ### 2. 技术环境 - 当前机器：DESKTOP-7EN52OD（用户名 ASDCF） - Node.js：v24.15.0（通过 winget 安装到 C:\\Program Files\\nodejs\\） - npm：11.12.1 - mcporter：已全局安装到 C:\\Users\\ASDCF\\AppData\\Roaming\\npm\\node_modules\\mcporter - 腾讯文档 MCP 工具（tencent-docs）：已配置，有 OAuth token ### 3. 环境路径问题记录 - winget 安装 Node.js 后，当前 PowerShell session 的 PATH 未自动刷新 - npm 不在 PATH 中，需用完整路径调用：`\"C:\\Program Files\\nodejs\\npm.cmd\"` - mcporter 全局安装在 `C:\\Users\\ASD",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7237079650163649,
+      "maxScore": 0.3622325479984283,
+      "firstRecalledAt": "2026-06-16T03:53:39.086Z",
+      "lastRecalledAt": "2026-06-18T10:06:42.213Z",
+      "queryHashes": [
+        "b769c818bd28",
+        "8080c9870b53"
+      ],
+      "recallDays": [
+        "2026-06-16",
+        "2026-06-18"
+      ],
+      "conceptTags": [
+        "tencent-docs",
+        "node.js",
+        "v24.15.0",
+        "海外营销指南.md",
+        "desktop-7en52od",
+        "11.12.1",
+        "node-modules",
+        "npm.cmd"
+      ]
+    },
+    "memory:memory/2026-06-03.md:21:36": {
+      "key": "memory:memory/2026-06-03.md:21:36",
+      "path": "memory/2026-06-03.md",
+      "startLine": 21,
+      "endLine": 36,
+      "source": "memory",
+      "snippet": "- 脚本路径：`C:\\Users\\ASDCF\\.qclaw\\workspace\\generate_ppt.js` - **输出文件**：`E:\\郑州录音\\外贸全链条培训记录.pptx`（25张幻灯片） - 设计风格：深蓝 `#065A82` + 金绿 `#02C39A` 强调色，卡片式布局 - 依赖：`pptxgenjs`、`react-icons`、`sharp`（均已安装） ## 技术笔记 - `python-docx` 读取中文 DOCX 出现乱码，改用 `python-docx` 的 `document.paragraphs` 直接读取文本解决 - PPT 生成使用 `pptxgenjs`（npm 全局安装），通过 `node` 执行 JS 脚本 - PowerShell 不支持 `&&`，需用 `;` 分隔命令 - 全局 npm 模块在 PowerShell 中可能无法找到，需在项目目录本地安装依赖 ## 待确认 - 用户尚未确认 PPT 效果是否满意，可能会要求调整内容、配色或增删页面",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35864708125591277,
+      "maxScore": 0.35864708125591277,
+      "firstRecalledAt": "2026-06-16T03:53:39.086Z",
+      "lastRecalledAt": "2026-06-16T03:53:39.086Z",
+      "queryHashes": [
+        "b769c818bd28"
+      ],
+      "recallDays": [
+        "2026-06-16"
+      ],
+      "conceptTags": [
+        "generate-ppt.js",
+        "外贸全链条培训记录.pptx",
+        "react-icons",
+        "python-docx",
+        "document.paragraphs",
+        "脚本",
+        "路径",
+        "users"
+      ]
+    },
+    "memory:memory/2026-06-03.md:1:27": {
+      "key": "memory:memory/2026-06-03.md:1:27",
+      "path": "memory/2026-06-03.md",
+      "startLine": 1,
+      "endLine": 27,
+      "source": "memory",
+      "snippet": "# 2026-06-03 工作日志 ### 14:23 - 技能安装与代理排查 - 用户称呼为\"龙虾\" - 讨论了通过 SkillHub 安装 GitHub 技能，因网络代理问题安装受阻 - 尝试了多种网络代理排查方案，最终选择方案3（PowerShell 绕过代理）但仍未成功 ### 16:54 - 录音转写与PPT制作 - 完成了E盘\"郑州录音\"文件夹中多个录音文件的转写任务 - 需要将DOCX文档内容制作成精美的PPT培训记录 # 2026-06-03 Daily Notes ## PPT 生成任务 - 用户提供了 `E:\\郑州录音\\新建 DOCX 文档.docx`（外贸培训录音转写稿），要求整理成精美 PPT 培训记录 - 文档内容：外贸全链条培训，涵盖身份选择、1039模式、外汇管理、海关报关、税务合规、品牌运营官等 - 先派出子任务生成 PPT 大纲（10章，约25页） - 大纲完成后，用 `pptxgenjs` 手动编写 JS 脚本生成 PPT - 脚本路径：`C:\\Users\\ASDCF\\.qclaw\\workspace\\generate_ppt.js` - **输出文件**：`E:\\郑州录音\\外贸全链条培训记录.pptx`（25张幻灯片） - 设计风格：深蓝 `#065A82` + 金绿 `#02C39A` 强调色，卡片式布局 - 依赖：`pptxgenjs`、`react-icons`、`sharp`（均已安装） ## 技术笔记",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7092279523611069,
+      "maxScore": 0.35797517001628876,
+      "firstRecalledAt": "2026-06-16T03:53:39.086Z",
+      "lastRecalledAt": "2026-06-18T10:06:42.213Z",
+      "queryHashes": [
+        "b769c818bd28",
+        "8080c9870b53"
+      ],
+      "recallDays": [
+        "2026-06-16",
+        "2026-06-18"
+      ],
+      "conceptTags": [
+        "网络",
+        "文档.docx",
+        "generate-ppt.js",
+        "外贸全链条培训记录.pptx",
+        "react-icons",
+        "工作",
+        "日志",
+        "技能"
+      ]
+    }
+  }
+}

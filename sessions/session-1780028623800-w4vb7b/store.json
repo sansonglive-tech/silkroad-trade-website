@@ -1,0 +1,25 @@
+{
+  "id": "session-1780028623800-w4vb7b",
+  "name": "新丝路文案",
+  "status": "active",
+  "createdAt": "2026-06-03T09:08:28.876Z",
+  "updatedAt": "2026-06-15T03:05:18.472Z",
+  "agents": [
+    {
+      "id": "agent_ri5lfgzs",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-06-03T09:08:28.876Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_niec9hzt",
+    "title": "新丝路文案",
+    "createdAt": "2026-06-03T09:08:28.876Z",
+    "file": "summary_niec9hzt.md"
+  },
+  "lastMessageCount": 33
+}

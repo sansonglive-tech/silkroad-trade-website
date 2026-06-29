@@ -1,0 +1,25 @@
+{
+  "id": "session-1781596958496-ru95fl",
+  "name": "海报转视频",
+  "status": "active",
+  "createdAt": "2026-06-16T08:05:45.639Z",
+  "updatedAt": "2026-06-17T02:47:39.330Z",
+  "agents": [
+    {
+      "id": "agent_ycdxmg20",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-06-16T08:05:45.639Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_pp4tflpd",
+    "title": "海报转视频",
+    "createdAt": "2026-06-16T08:05:45.639Z",
+    "file": "summary_pp4tflpd.md"
+  },
+  "lastMessageCount": 111
+}

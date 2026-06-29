@@ -1,0 +1,25 @@
+{
+  "id": "0b319e5e-3156-4798-a05b-4ec97e099947",
+  "name": "PPT大纲制作",
+  "status": "active",
+  "createdAt": "2026-06-03T08:55:50.351Z",
+  "updatedAt": "2026-06-03T08:55:50.351Z",
+  "agents": [
+    {
+      "id": "agent_1t2lvngu",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-06-03T08:55:50.351Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_ww2i2lv3",
+    "title": "PPT大纲制作",
+    "createdAt": "2026-06-03T08:55:50.351Z",
+    "file": "summary_ww2i2lv3.md"
+  },
+  "lastMessageCount": 4
+}

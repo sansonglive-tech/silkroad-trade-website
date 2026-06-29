@@ -166,6 +166,7 @@ h1{font-size:1.4rem;color:#c44536;margin-bottom:.2rem}
 <div class="toolbar">
 <button class="btn btn-g" onclick="svAll()" id="sb">保存全部</button>
 <button class="btn btn-o" onclick="window.open('/preview','_blank')">预览</button>
+<button class="btn btn-o" onclick="publishToGitHub()" id="pubBtn" style="background:#24292e;color:#fff;border-color:#24292e">📤 发布到 GitHub</button>
 </div>
 <div class="tp on" id="tp_cp"></div>
 <div class="tp" id="tp_sl"></div>
@@ -377,6 +378,32 @@ function svAll(){
     b.textContent='保存全部';b.disabled=false;setTimeout(mhide,3000);
   };
   x.onerror=function(){msg('网络错误','er');b.textContent='保存全部';b.disabled=false;};
+  x.send(JSON.stringify(D));
+}
+
+// ========== 发布到 GitHub ==========
+function publishToGitHub(){
+  var b=g('pubBtn');b.textContent='发布中...';b.disabled=true;msg('正在生成发布文件并推送到 GitHub...','ok');
+  var x=new XMLHttpRequest();
+  x.open('POST','/api/publish',true);
+  x.setRequestHeader('Content-Type','application/json');
+  x.onload=function(){
+    var d=JSON.parse(x.responseText);
+    if(d.success){
+      msg('✅ 发布成功! GitHub Pages 将在 1-2 分钟后更新','ok');
+      if(d.url){
+        setTimeout(function(){
+          if(confirm('发布成功! 是否打开 GitHub 查看?')){
+            window.open(d.url,'_blank');
+          }
+        },500);
+      }
+    }else{
+      msg('❌ 发布失败: '+d.message,'er');
+    }
+    b.textContent='📤 发布到 GitHub';b.disabled=false;setTimeout(mhide,5000);
+  };
+  x.onerror=function(){msg('网络错误','er');b.textContent='📤 发布到 GitHub';b.disabled=false;};
   x.send(JSON.stringify(D));
 }
 </script></body></html>"""
@@ -653,6 +680,9 @@ class Handler(BaseHTTPRequestHandler):
                 data = json.loads(self.rfile.read(n).decode("utf-8"))
                 save_cfg(data)
                 self.rjson({"success": True, "message": "配置已保存"})
+            elif p == "/api/publish":
+                result = self.publish_to_github()
+                self.rjson(result)
             else:
                 self.rjson({"success": False, "message": "unknown"})
         except Exception as e:
@@ -771,6 +801,106 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self, fmt, *args):
         print(f"[{args[0]}] {args[1]} {args[2]}")
 
+
+    def publish_to_github(self):
+        """生成 index.html 并推送到 GitHub"""
+        import subprocess
+        from datetime import datetime
+        
+        trace_section("PUBLISH: 发布到 GitHub")
+        
+        try:
+            # 1. 读取 v7 HTML
+            html = self.read_v7()
+            if not html or html == "<h1>v7 not found</h1>":
+                return {"success": False, "message": "v7 HTML 文件不存在"}
+            
+            # 2. 注入最新配置（生成静态 HTML）
+            trace("注入最新配置到 HTML...")
+            publish_html = self.inject_config(html)
+            
+            # 3. 保存为 index.html（GitHub Pages 默认入口）
+            index_path = os.path.join(WORKSPACE, "index.html")
+            with open(index_path, "w", encoding="utf-8") as f:
+                f.write(publish_html)
+            trace(f"✅ index.html 生成成功: {len(publish_html):,} 字符")
+            
+            # 4. 执行 git 命令推送
+            trace("执行 git 推送...")
+            git_exe = r"E:\腾讯龙虾\QClaw\v0.2.29.592\resources\git\cmd\git.exe"
+            trace(f"使用 git: {git_exe}")
+            env = os.environ.copy()
+            env["GIT_ASKPASS"] = "echo"
+            env["GIT_TERMINAL_PROMPT"] = "0"
+            
+            # git add
+            result = subprocess.run(
+                [git_exe, "add", "index.html", "site_config.json"],
+                cwd=WORKSPACE,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                env=env
+            )
+            if result.returncode != 0:
+                trace(f"⚠️ git add 警告: {result.stderr}")
+            
+            # git commit
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            commit_msg = f"Update website content - {timestamp}"
+            result = subprocess.run(
+                [git_exe, "commit", "-m", commit_msg],
+                cwd=WORKSPACE,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                env=env
+            )
+            if result.returncode != 0:
+                # 可能是没有变化
+                if "nothing to commit" in result.stdout.lower() or "nothing to commit" in result.stderr.lower():
+                    trace("没有变化需要提交")
+                else:
+                    trace(f"⚠️ git commit 警告: {result.stderr}")
+            else:
+                trace(f"✅ git commit: {commit_msg}")
+            
+            # git push
+            result = subprocess.run(
+                [git_exe, "push", "origin", "master"],
+                cwd=WORKSPACE,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                env=env
+            )
+            if result.returncode != 0:
+                error_msg = result.stderr or result.stdout
+                trace(f"❌ git push 失败: {error_msg[:200]}")
+                if "Could not connect" in error_msg or "Failed to connect" in error_msg:
+                    return {"success": False, "message": f"无法连接到 GitHub，请检查 VPN/代理是否开启。\n建议: 开启 VPN 后再尝试发布，或确认网络能访问 github.com"}
+                if "could not read" in error_msg.lower() or "prompt" in error_msg.lower():
+                    return {"success": False, "message": f"GitHub Token 认证失败，需要重新配置远程仓库认证"}
+                return {"success": False, "message": f"推送到 GitHub 失败: {error_msg[:200]}"}
+            
+            trace("✅ git push 成功")
+            
+            # 5. 返回成功信息
+            repo_url = "https://github.com/sansonglive-tech/silkroad-trade-website"
+            pages_url = "https://sansonglive-tech.github.io/silkroad-trade-website"
+            
+            return {
+                "success": True,
+                "message": "发布成功！GitHub Pages 将在 1-2 分钟后更新",
+                "url": repo_url,
+                "pages_url": pages_url,
+                "timestamp": timestamp
+            }
+            
+        except Exception as e:
+            trace(f"❌ 发布失败: {str(e)}")
+            print(traceback.format_exc())
+            return {"success": False, "message": f"发布失败: {str(e)}"}
 
     def diagnose(self):
         """诊断 v7 文件结构"""

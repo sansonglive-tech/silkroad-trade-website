@@ -1,0 +1,25 @@
+{
+  "id": "session-1781517103171-l9gth7",
+  "name": "docx转PDF",
+  "status": "active",
+  "createdAt": "2026-06-15T09:58:13.989Z",
+  "updatedAt": "2026-06-15T09:58:13.989Z",
+  "agents": [
+    {
+      "id": "agent_0v3dgjwh",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-06-15T09:58:13.989Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_1osrb2rk",
+    "title": "docx转PDF",
+    "createdAt": "2026-06-15T09:58:13.989Z",
+    "file": "summary_1osrb2rk.md"
+  },
+  "lastMessageCount": 56
+}

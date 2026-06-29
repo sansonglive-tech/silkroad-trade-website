@@ -1,0 +1,25 @@
+{
+  "id": "session-1781514618003-xnnhp6",
+  "name": "商业模式方案",
+  "status": "active",
+  "createdAt": "2026-06-15T09:16:56.779Z",
+  "updatedAt": "2026-06-15T09:16:56.779Z",
+  "agents": [
+    {
+      "id": "agent_keji9a5h",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-06-15T09:16:56.779Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_ji941bmv",
+    "title": "商业模式方案",
+    "createdAt": "2026-06-15T09:16:56.779Z",
+    "file": "summary_ji941bmv.md"
+  },
+  "lastMessageCount": 32
+}

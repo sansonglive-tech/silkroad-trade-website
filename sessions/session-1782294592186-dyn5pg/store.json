@@ -1,0 +1,25 @@
+{
+  "id": "session-1782294592186-dyn5pg",
+  "name": "会话摘要",
+  "status": "active",
+  "createdAt": "2026-06-24T09:53:44.558Z",
+  "updatedAt": "2026-06-27T03:41:24.499Z",
+  "agents": [
+    {
+      "id": "agent_akvyuua7",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-06-24T09:53:44.558Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_wefb0rje",
+    "title": "会话摘要",
+    "createdAt": "2026-06-24T09:53:44.558Z",
+    "file": "summary_wefb0rje.md"
+  },
+  "lastMessageCount": 134
+}

@@ -1,0 +1,25 @@
+{
+  "id": "session-1781576089292-1f3sg8",
+  "name": "PDF转换",
+  "status": "active",
+  "createdAt": "2026-06-16T02:19:05.366Z",
+  "updatedAt": "2026-06-16T02:19:05.366Z",
+  "agents": [
+    {
+      "id": "agent_t29v8zre",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-06-16T02:19:05.366Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_a4kbvibc",
+    "title": "PDF转换",
+    "createdAt": "2026-06-16T02:19:05.366Z",
+    "file": "summary_a4kbvibc.md"
+  },
+  "lastMessageCount": 20
+}

@@ -1,0 +1,25 @@
+{
+  "id": "session-1781495096632-s63wxk",
+  "name": "新丝路系列",
+  "status": "active",
+  "createdAt": "2026-06-15T04:00:55.815Z",
+  "updatedAt": "2026-06-15T09:02:54.892Z",
+  "agents": [
+    {
+      "id": "agent_2ujqenh0",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-06-15T04:00:55.815Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_rg3wn6ba",
+    "title": "新丝路系列",
+    "createdAt": "2026-06-15T04:00:55.815Z",
+    "file": "summary_rg3wn6ba.md"
+  },
+  "lastMessageCount": 30
+}

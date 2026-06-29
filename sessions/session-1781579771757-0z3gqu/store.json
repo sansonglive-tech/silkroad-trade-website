@@ -1,0 +1,25 @@
+{
+  "id": "session-1781579771757-0z3gqu",
+  "name": "供应链矩阵",
+  "status": "active",
+  "createdAt": "2026-06-16T03:19:07.603Z",
+  "updatedAt": "2026-06-16T03:19:07.603Z",
+  "agents": [
+    {
+      "id": "agent_53mev98r",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-06-16T03:19:07.603Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_8viqkaeb",
+    "title": "供应链矩阵",
+    "createdAt": "2026-06-16T03:19:07.603Z",
+    "file": "summary_8viqkaeb.md"
+  },
+  "lastMessageCount": 26
+}

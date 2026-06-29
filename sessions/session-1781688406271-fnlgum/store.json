@@ -1,0 +1,25 @@
+{
+  "id": "session-1781688406271-fnlgum",
+  "name": "商业计划书",
+  "status": "active",
+  "createdAt": "2026-06-17T09:36:07.573Z",
+  "updatedAt": "2026-06-17T09:36:07.573Z",
+  "agents": [
+    {
+      "id": "agent_p0azz2x1",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-06-17T09:36:07.573Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_psaiog22",
+    "title": "商业计划书",
+    "createdAt": "2026-06-17T09:36:07.573Z",
+    "file": "summary_psaiog22.md"
+  },
+  "lastMessageCount": 45
+}
