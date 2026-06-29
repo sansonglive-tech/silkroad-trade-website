@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # 丝路山海通 可视化后台 v3 — 独立运行，不改 v7
 import json, os, re, shutil, traceback, sys, secrets
@@ -470,10 +470,12 @@ if(si && c.stats && c.stats.length > 0) {
 
 // --- Render policies from CONFIG ---
 var pg = document.querySelector(".policy-grid");
+var policyIds = ['policy-research', 'policy-network', 'policy-park', 'policy-finance'];
 if(pg && c.policies && c.policies.length > 0) {
   pg.innerHTML = c.policies.map(function(p, i){
     var n = String(i + 1).padStart(2, '0');
-    return '<div class="policy-card" onclick="openDetail(\\'' + (p.detailId || p.id) + '\\')">' +
+    var detailId = policyIds[i] || ('policy-' + i);
+    return '<div class="policy-card" onclick="openDetail(\\'' + detailId + '\\')">' +
       '<div class="pn">' + n + '</div><div>' +
       '<h3>' + p.title + '</h3><p>' + (p.desc || '') + '</p></div></div>';
   }).join('');
@@ -481,10 +483,12 @@ if(pg && c.policies && c.policies.length > 0) {
 
 // --- Render testimonials from CONFIG ---
 var tg = document.querySelector(".testimonials-grid");
+var caseIds = ['case-zhang', 'case-li', 'case-wang'];
 if(tg && c.testimonials && c.testimonials.length > 0) {
   tg.innerHTML = c.testimonials.map(function(t, i){
     var av = t.avatar || (t.name ? t.name.charAt(0) : "\\ud83d\\udc64");
-    return '<div class="t-card" onclick="openDetail(\\'' + (t.detailId || ("case-" + i)) + '\\')">' +
+    var detailId = t.detailId || caseIds[i] || ('case-' + i);
+    return '<div class="t-card" onclick="openDetail(\\'' + detailId + '\\')">' +
       '<div class="tq">&ldquo;</div><p class="t-text">' + (t.text || '') + '</p>' +
       '<div class="t-author"><div class="t-av">' + av + '</div><div>' +
       '<div class="t-name">' + (t.name || '') + '</div><div class="t-role">' + (t.role || '') + '</div></div></div></div>';
@@ -493,9 +497,11 @@ if(tg && c.testimonials && c.testimonials.length > 0) {
 
 // --- Render process from CONFIG ---
 var pr = document.querySelector(".process-grid");
+var processIds = ['process-step1', 'process-step2', 'process-step3', 'process-step4'];
 if(pr && c.process && c.process.length > 0) {
-  pr.innerHTML = c.process.map(function(p){
-    return '<div class="pstep" onclick="openDetail(\\'' + (p.detailId || ("process-step" + p.num)) + '\\')">' +
+  pr.innerHTML = c.process.map(function(p, i){
+    var detailId = p.detailId || processIds[i] || ('process-step' + (i+1));
+    return '<div class="pstep" onclick="openDetail(\\'' + detailId + '\\')">' +
       '<div class="ring"><div class="n">' + (p.num || '') + '</div></div>' +
       '<h3>' + (p.title || '') + '</h3><p>' + (p.desc || '') + '</p></div>';
   }).join('');
@@ -872,7 +878,7 @@ class Handler(BaseHTTPRequestHandler):
             # git pull first (to avoid "fetch first" error)
             trace("先拉取远程最新代码...")
             result = subprocess.run(
-                [git_exe, "pull", "origin", "master", "--rebase"],
+                [git_exe, "pull", "origin", "main", "--rebase"],
                 cwd=WORKSPACE,
                 capture_output=True,
                 text=True,
@@ -887,7 +893,7 @@ class Handler(BaseHTTPRequestHandler):
             
             # git push
             result = subprocess.run(
-                [git_exe, "push", "origin", "master"],
+                [git_exe, "push", "origin", "main"],
                 cwd=WORKSPACE,
                 capture_output=True,
                 text=True,
@@ -898,7 +904,7 @@ class Handler(BaseHTTPRequestHandler):
                 error_msg = result.stderr or result.stdout
                 trace(f"❌ git push 失败: {error_msg[:200]}")
                 if "fetch first" in error_msg.lower() or "rejected" in error_msg.lower():
-                    return {"success": False, "message": "推送到 GitHub 失败: 本地代码落后于远程。\n建议: 先在命令行运行 'git pull origin master' 后再试。"}
+                    return {"success": False, "message": "推送到 GitHub 失败: 本地代码落后于远程。\n建议: 先在命令行运行 'git pull origin main' 后再试。"}
                 if "Could not connect" in error_msg or "Failed to connect" in error_msg:
                     return {"success": False, "message": f"无法连接到 GitHub，请检查 VPN/代理是否开启。\n建议: 开启 VPN 后再尝试发布，或确认网络能访问 github.com"}
                 if "could not read" in error_msg.lower() or "prompt" in error_msg.lower():
