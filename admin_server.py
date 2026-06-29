@@ -217,7 +217,11 @@ function arrAdd(k,obj){if(!D[k])D[k]=[];D[k].push(obj);}
 function arrDel(k,i){D[k].splice(i,1);}
 /* Label helpers */
 var LB={'name':'公司名称','slogan':'副标题/标语','email':'联系邮箱','phone':'联系电话','icp':'备案号','wechatId':'微信号'};
-function fIn(k,p,v){return '<div class="fg"><label>'+LB[p||k]+'</label><input value="'+es(v)+'" onchange="sp(\''+k+'\',this.value)"></div>';}
+function fIn(k,p,v){
+  var label = LB[p] || p || k;
+  if(label===k && k.indexOf('.')>0) label=k.split('.').pop();
+  return '<div class="fg"><label>'+label+'</label><input value="'+es(v)+'" onchange="sp(\''+k+'\',this.value)"></div>';
+}
 function fImg(k,v){return '<div class="fg"><label>二维码链接</label><input value="'+es(v)+'" onchange="sp(\''+k+'\',this.value)">'+ip(v)+'<div class="ht">二维码上传图床后粘贴链接</div></div>';}
 
 window.onload=function(){
@@ -865,6 +869,22 @@ class Handler(BaseHTTPRequestHandler):
             else:
                 trace(f"✅ git commit: {commit_msg}")
             
+            # git pull first (to avoid "fetch first" error)
+            trace("先拉取远程最新代码...")
+            result = subprocess.run(
+                [git_exe, "pull", "origin", "master", "--rebase"],
+                cwd=WORKSPACE,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                env=env
+            )
+            if result.returncode != 0:
+                trace(f"⚠️ git pull 警告: {result.stderr[:100]}")
+                # pull 失败不一定阻止 push，继续尝试
+            else:
+                trace("✅ git pull 成功")
+            
             # git push
             result = subprocess.run(
                 [git_exe, "push", "origin", "master"],
@@ -877,6 +897,8 @@ class Handler(BaseHTTPRequestHandler):
             if result.returncode != 0:
                 error_msg = result.stderr or result.stdout
                 trace(f"❌ git push 失败: {error_msg[:200]}")
+                if "fetch first" in error_msg.lower() or "rejected" in error_msg.lower():
+                    return {"success": False, "message": "推送到 GitHub 失败: 本地代码落后于远程。\n建议: 先在命令行运行 'git pull origin master' 后再试。"}
                 if "Could not connect" in error_msg or "Failed to connect" in error_msg:
                     return {"success": False, "message": f"无法连接到 GitHub，请检查 VPN/代理是否开启。\n建议: 开启 VPN 后再尝试发布，或确认网络能访问 github.com"}
                 if "could not read" in error_msg.lower() or "prompt" in error_msg.lower():
