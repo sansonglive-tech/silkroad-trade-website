@@ -282,8 +282,8 @@ section{padding:5rem 3rem;position:relative;z-index:2}
 }
 .process-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1.5rem}
 .pstep{text-align:center;position:relative;cursor:pointer;pointer-events:auto;z-index:10}
-.pstep .ring{width:68px;height:68px;margin:0 auto 1rem;background:#fff;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;transition:.4s}
-.pstep:hover .ring{border-color:var(--red);box-shadow:0 0 0 4px var(--red-soft)}
+.pstep .ring{width:68px;height:68px;margin:0 auto 1rem;background:#fff;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;transition:.4s;pointer-events:none}
+.pstep:hover .ring{border-color:var(--red);box-shadow:0 0 0 4px var(--red-soft);pointer-events:none}
 .pstep .ring .n{font-family:'Noto Serif SC',serif;font-weight:900;font-size:1.4rem;color:var(--red)}
 .pstep h3{font-family:'Noto Serif SC',serif;font-size:.9rem;font-weight:700;margin-bottom:.3rem}
 .pstep p{color:var(--gray);font-size:.78rem;line-height:1.8;max-width:200px;margin:0 auto}
@@ -635,10 +635,10 @@ footer a:hover{color:var(--gold-bright)}
   <div class="label-tag"><div class="line"></div><div class="txt">服务流程</div></div>
   <div class="section-head"><h2>四步走，<span class="red">轻松出海</span></h2><p>规范化流程，每一步都保障企业安全、高效落地海外市场。</p></div>
   <div class="process-grid">
-    <div class="pstep" onclick="openDetail('process-step1')"><div class="ring"><div class="n">01</div></div><h3>需求诊断</h3><p>深入了解企业出海目标与需求，定制化出海方案。</p></div>
-    <div class="pstep" onclick="openDetail('process-step2')"><div class="ring"><div class="n">02</div></div><h3>尽职调研</h3><p>市场调研、法律评估、财税分析，规避风险前置。</p></div>
-    <div class="pstep" onclick="openDetail('process-step3')"><div class="ring"><div class="n">03</div></div><h3>落地执行</h3><p>公司注册、资质办理、团队搭建，全程陪伴推进。</p></div>
-    <div class="pstep" onclick="openDetail('process-step4')"><div class="ring"><div class="n">04</div></div><h3>持续运营</h3><p>财税代账、法务支持、政府维护，长期运营保障。</p></div>
+    <div class="pstep" style="pointer-events:auto;position:relative;z-index:100;" onclick="openDetail('process-step1')"><div class="ring"><div class="n">01</div></div><h3>需求诊断</h3><p>深入了解企业出海目标与需求，定制化出海方案。</p></div>
+    <div class="pstep" style="pointer-events:auto;position:relative;z-index:100;" onclick="openDetail('process-step2')"><div class="ring"><div class="n">02</div></div><h3>尽职调研</h3><p>市场调研、法律评估、财税分析，规避风险前置。</p></div>
+    <div class="pstep" style="pointer-events:auto;position:relative;z-index:100;" onclick="openDetail('process-step3')"><div class="ring"><div class="n">03</div></div><h3>落地执行</h3><p>公司注册、资质办理、团队搭建，全程陪伴推进。</p></div>
+    <div class="pstep" style="pointer-events:auto;position:relative;z-index:100;" onclick="openDetail('process-step4')"><div class="ring"><div class="n">04</div></div><h3>持续运营</h3><p>财税代账、法务支持、政府维护，长期运营保障。</p></div>
   </div>
 </section>
 
