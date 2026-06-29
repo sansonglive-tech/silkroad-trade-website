@@ -1,0 +1,23 @@
+﻿# Node modules
+node_modules/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local config (keep site_config.json for now)
+# site_config.json
+
+# Backup files
+*_BACKUP_*
