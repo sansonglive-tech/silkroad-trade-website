@@ -400,7 +400,7 @@ footer a:hover{color:var(--gold-bright)}
 .reveal.active{opacity:1;transform:translateY(0)}
 
 /* ========== DETAIL OVERLAY - 弹出详情页 ========== */
-.detail-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:2rem;animation:detailFadeIn .3s ease}
+.detail-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:2rem}
 .detail-overlay.active{display:flex}
 .detail-modal{background:var(--cream);border-radius:var(--radius-lg);width:100%;max-width:680px;max-height:85vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow-xl);animation:detailSlideUp .35s var(--ease)}
 @keyframes detailFadeIn{from{opacity:0}to{opacity:1}}
@@ -634,7 +634,7 @@ footer a:hover{color:var(--gold-bright)}
 <section id="process" class="process reveal">
   <div class="label-tag"><div class="line"></div><div class="txt">服务流程</div></div>
   <div class="section-head"><h2>四步走，<span class="red">轻松出海</span></h2><p>规范化流程，每一步都保障企业安全、高效落地海外市场。</p></div>
-  <div class="process-grid">
+  <div class="process-grid" id="processGrid">
     <div class="pstep" style="pointer-events:auto;position:relative;z-index:100;" onclick="openDetail('process-step1')"><div class="ring"><div class="n">01</div></div><h3>需求诊断</h3><p>深入了解企业出海目标与需求，定制化出海方案。</p></div>
     <div class="pstep" style="pointer-events:auto;position:relative;z-index:100;" onclick="openDetail('process-step2')"><div class="ring"><div class="n">02</div></div><h3>尽职调研</h3><p>市场调研、法律评估、财税分析，规避风险前置。</p></div>
     <div class="pstep" style="pointer-events:auto;position:relative;z-index:100;" onclick="openDetail('process-step3')"><div class="ring"><div class="n">03</div></div><h3>落地执行</h3><p>公司注册、资质办理、团队搭建，全程陪伴推进。</p></div>
