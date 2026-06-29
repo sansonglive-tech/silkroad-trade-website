@@ -73,7 +73,7 @@ body::after{
 
 /* PRELOADER */
 #preloader{position:fixed;inset:0;z-index:9999;background:#f0f0f0;display:flex;align-items:center;justify-content:center;transition:opacity .4s,visibility .4s}
-#preloader.hide{opacity:0;visibility:hidden;pointer-events:none}
+#preloader.hide{opacity:0;visibility:hidden}
 .pd{display:flex;gap:.3rem}.pd span{display:block;width:6px;height:6px;background:var(--red);border-radius:50%;animation:pd .8s ease-in-out infinite}
 .pd span:nth-child(2){animation-delay:.15s}.pd span:nth-child(3){animation-delay:.3s}
 @keyframes pd{0%,100%{transform:translateY(0);opacity:.3}50%{transform:translateY(-8px);opacity:1}}
@@ -1189,10 +1189,12 @@ if(si && c.stats && c.stats.length > 0) {
 
 // --- Render policies from CONFIG ---
 var pg = document.querySelector(".policy-grid");
+var policyIds = ['policy-research', 'policy-network', 'policy-park', 'policy-finance'];
 if(pg && c.policies && c.policies.length > 0) {
   pg.innerHTML = c.policies.map(function(p, i){
     var n = String(i + 1).padStart(2, '0');
-    return '<div class="policy-card" onclick="openDetail(\'' + (p.detailId || p.id) + '\')">' +
+    var detailId = policyIds[i] || ('policy-' + i);
+    return '<div class="policy-card" onclick="openDetail(\'' + detailId + '\')">' +
       '<div class="pn">' + n + '</div><div>' +
       '<h3>' + p.title + '</h3><p>' + (p.desc || '') + '</p></div></div>';
   }).join('');
@@ -1200,10 +1202,12 @@ if(pg && c.policies && c.policies.length > 0) {
 
 // --- Render testimonials from CONFIG ---
 var tg = document.querySelector(".testimonials-grid");
+var caseIds = ['case-zhang', 'case-li', 'case-wang'];
 if(tg && c.testimonials && c.testimonials.length > 0) {
   tg.innerHTML = c.testimonials.map(function(t, i){
     var av = t.avatar || (t.name ? t.name.charAt(0) : "\ud83d\udc64");
-    return '<div class="t-card" onclick="openDetail(\'' + (t.detailId || ("case-" + i)) + '\')">' +
+    var detailId = t.detailId || caseIds[i] || ('case-' + i);
+    return '<div class="t-card" onclick="openDetail(\'' + detailId + '\')">' +
       '<div class="tq">&ldquo;</div><p class="t-text">' + (t.text || '') + '</p>' +
       '<div class="t-author"><div class="t-av">' + av + '</div><div>' +
       '<div class="t-name">' + (t.name || '') + '</div><div class="t-role">' + (t.role || '') + '</div></div></div></div>';
@@ -1212,9 +1216,11 @@ if(tg && c.testimonials && c.testimonials.length > 0) {
 
 // --- Render process from CONFIG ---
 var pr = document.querySelector(".process-grid");
+var processIds = ['process-step1', 'process-step2', 'process-step3', 'process-step4'];
 if(pr && c.process && c.process.length > 0) {
-  pr.innerHTML = c.process.map(function(p){
-    return '<div class="pstep" onclick="openDetail(\'' + (p.detailId || ("process-step" + p.num)) + '\')">' +
+  pr.innerHTML = c.process.map(function(p, i){
+    var detailId = p.detailId || processIds[i] || ('process-step' + (i+1));
+    return '<div class="pstep" onclick="openDetail(\'' + detailId + '\')">' +
       '<div class="ring"><div class="n">' + (p.num || '') + '</div></div>' +
       '<h3>' + (p.title || '') + '</h3><p>' + (p.desc || '') + '</p></div>';
   }).join('');
