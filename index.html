@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -816,30 +816,88 @@ const CONFIG = {
     }
   ],
   "stats": [
-    {"num": "80+", "label": "一带一路覆盖国家"},
-    {"num": "1,600+", "label": "服务出海企业"},
-    {"num": "400+", "label": "海外本地员工"},
-    {"num": "5+", "label": "区域服务网络"}
+    {
+      "num": "80+",
+      "label": "一带一路覆盖国家"
+    },
+    {
+      "num": "1,600+",
+      "label": "服务出海企业"
+    },
+    {
+      "num": "400+",
+      "label": "海外本地员工"
+    },
+    {
+      "num": "5+",
+      "label": "区域服务网络"
+    }
   ],
   "policies": [
-    {"num": "01", "title": "政策研究与解读", "desc": "60+国家政策数据库，专业团队实时追踪政策动态"},
-    {"num": "02", "title": "政府与商会对接", "desc": "深耕本地政商关系，搭建企业与当地政府沟通桥梁"},
-    {"num": "03", "title": "产业园区落地", "desc": "对接一带一路沿线重点产业园区，享优惠政策"},
-    {"num": "04", "title": "投融资对接", "desc": "串联政策性金融机构与商业资本，多路径融资通道"}
+    {
+      "num": "01",
+      "title": "政策研究与解读",
+      "desc": "60+国家政策数据库，专业团队实时追踪政策动态"
+    },
+    {
+      "num": "02",
+      "title": "政府与商会对接",
+      "desc": "深耕本地政商关系，搭建企业与当地政府沟通桥梁"
+    },
+    {
+      "num": "03",
+      "title": "产业园区落地",
+      "desc": "对接一带一路沿线重点产业园区，享优惠政策"
+    },
+    {
+      "num": "04",
+      "title": "投融资对接",
+      "desc": "串联政策性金融机构与商业资本，多路径融资通道"
+    }
   ],
   "testimonials": [
-    {"name": "张宏伟", "role": "新能源汽车 印尼工厂负责人", "text": "帮我们在雅加达完成了公司注册和工厂选址，从考察到落地只用了2个月。", "avatar": "张"},
-    {"name": "李峰", "role": "工程机械 中亚事业部总经理", "text": "响应一带一路开拓中亚市场，从法律合规到政府关系一路护航。", "avatar": "李"},
-    {"name": "王琳", "role": "食品饮料 海外拓展总监", "text": "印尼的SNI认证和清真认证一站式包办，产品准入周期缩短了60%。", "avatar": "王"}
+    {
+      "name": "张宏伟",
+      "role": "新能源汽车 印尼工厂负责人",
+      "text": "帮我们在雅加达完成了公司注册和工厂选址，从考察到落地只用了2个月。",
+      "avatar": "张"
+    },
+    {
+      "name": "李峰",
+      "role": "工程机械 中亚事业部总经理",
+      "text": "响应一带一路开拓中亚市场，从法律合规到政府关系一路护航。",
+      "avatar": "李"
+    },
+    {
+      "name": "王琳",
+      "role": "食品饮料 海外拓展总监",
+      "text": "印尼的SNI认证和清真认证一站式包办，产品准入周期缩短了60%。",
+      "avatar": "王"
+    }
   ],
   "process": [
-    {"num": "01", "title": "需求诊断", "desc": "深入了解企业出海目标与需求，定制化出海方案。"},
-    {"num": "02", "title": "尽职调研", "desc": "市场调研、法律评估、财税分析，规避风险前置。"},
-    {"num": "03", "title": "落地执行", "desc": "公司注册、资质办理、团队搭建，全程陪伴推进。"},
-    {"num": "04", "title": "持续运营", "desc": "财税代账、法务支持、政府维护，长期运营保障。"}
+    {
+      "num": "01",
+      "title": "需求诊断",
+      "desc": "深入了解企业出海目标与需求，定制化出海方案。"
+    },
+    {
+      "num": "02",
+      "title": "尽职调研",
+      "desc": "市场调研、法律评估、财税分析，规避风险前置。"
+    },
+    {
+      "num": "03",
+      "title": "落地执行",
+      "desc": "公司注册、资质办理、团队搭建，全程陪伴推进。"
+    },
+    {
+      "num": "04",
+      "title": "持续运营",
+      "desc": "财税代账、法务支持、政府维护，长期运营保障。"
+    }
   ]
-}
-;;
+};
 
 // ================================================================
 
@@ -1074,80 +1132,122 @@ document.addEventListener('DOMContentLoaded',init);
   </div>
 </div>
 
+
 <script>
+// Config-driven DOM update - injected by admin server
 (function(){
-  console.log('[Config Inject] Starting...');
-  var c = (typeof CONFIG !== 'undefined') ? CONFIG : {};
-  
-  if(c.company) {
-    document.querySelectorAll('.logo-text strong').forEach(function(el){ if(c.company.name) el.textContent = c.company.name; });
-    document.querySelectorAll('.logo-text span').forEach(function(el){ if(c.company.slogan) el.textContent = c.company.slogan.toUpperCase(); });
-    document.querySelectorAll("a[href^='mailto:']").forEach(function(el){ if(c.company.email) { el.href = 'mailto:' + c.company.email; el.textContent = c.company.email; } });
+var c = CONFIG;
+if(!c || !c.company) return;
+
+// --- Update title ---
+var t = document.querySelector("title");
+if(t) t.textContent = c.company.name + " - " + c.company.slogan;
+
+// --- Update footer ---
+document.querySelectorAll(".footer-bottom span").forEach(function(el){
+  var txt = el.textContent;
+  if(txt.indexOf("\u00a9") >= 0 || txt.indexOf("All rights") >= 0) {
+    el.textContent = "\u00a9 " + new Date().getFullYear() + " " + c.company.name + ". All rights reserved.";
   }
-  
-  if(c.services && c.services.length) {
-    var sg = document.querySelector('.services-grid');
-    if(sg) {
-      sg.innerHTML = c.services.map(function(s) {
-        return '<div class="service-card" onclick="openDetail(\'' + (s.detailId || s.id) + '\')">' +
-          '<div class="service-icon">' + (s.icon || '') + '</div>' +
-          '<h3>' + (s.title || '') + '</h3>' +
-          '<div class="service-sub">' + (s.sub || '') + '</div>' +
-          '<p>' + (s.desc || '') + '</p>' +
-          '</div>';
-      }).join('');
-    }
+  if(txt.indexOf("ICP") >= 0 || txt.indexOf("\u7ca4") >= 0) {
+    if(c.company.icp) el.textContent = c.company.icp;
   }
-  
-  if(c.stats && c.stats.length) {
-    var sb = document.querySelector('.stats-row');
-    if(sb) {
-      sb.innerHTML = c.stats.map(function(st) {
-        return '<div class="stat-item"><div class="stat-num">' + (st.num || '') + '</div><div class="stat-label">' + (st.label || '') + '</div></div>';
-      }).join('');
-    }
+});
+
+// --- Update email ---
+var mailtoLinks = document.querySelectorAll("a[href^='mailto:']");
+console.log("[Config Inject] Found " + mailtoLinks.length + " mailto links");
+mailtoLinks.forEach(function(el, i){
+  if(c.company.email) {
+    console.log("[Config Inject] Updating mailto link #" + i + ": " + el.href + " -> " + c.company.email);
+    el.href = "mailto:" + c.company.email;
+    el.textContent = c.company.email;
   }
-  
-  if(c.policies && c.policies.length) {
-    var pg = document.querySelector('.policy-grid');
-    if(pg) {
-      pg.innerHTML = c.policies.map(function(p, i) {
-        var detailIds = ['policy-research', 'policy-network', 'policy-park', 'policy-finance'];
-        return '<div class="policy-card" onclick="openDetail(\'' + detailIds[i] + '\')">' +
-          '<div class="pn">' + (p.num || '') + '</div>' +
-          '<div><h3>' + (p.title || '') + '</h3><p>' + (p.desc || '') + '</p></div>' +
-          '</div>';
-      }).join('');
-    }
+});
+
+// --- Render services from CONFIG ---
+var sg = document.querySelector(".services-grid");
+if(sg && c.services && c.services.length > 0) {
+  var cols = ["linear-gradient(135deg,#C44536,#8B2D1E)","linear-gradient(135deg,#C8923E,#8B6914)","linear-gradient(135deg,#1A1512,#302824)","linear-gradient(135deg,#6B625C,#A89E96)","linear-gradient(135deg,#C44536,#C8923E)","linear-gradient(135deg,#302824,#6B625C)"];
+  var ems = ["\ud83c\udfed","\ud83d\udccb","\u2696\ufe0f","\ud83d\udee1\ufe0f","\ud83c\udf10","\ud83d\udee2\ufe0f"];
+  sg.innerHTML = c.services.map(function(s,i){
+    return '<div class="service-card" onclick="openDetail(\'' + (s.detailId || s.id) + '\')">' +
+      '<div class="sc-img"><div class="sc-img-bg" style="background:' + cols[i % cols.length] + '"></div><span>' + ems[i % ems.length] + '</span></div>' +
+      '<h3>' + s.title + '</h3>' +
+      (s.sub ? '<div class="sc-sub">' + s.sub + '</div>' : '') +
+      '<p>' + (s.desc || '') + '</p></div>';
+  }).join('');
+}
+
+// --- Render stats from CONFIG ---
+var si = document.querySelector(".stats-inner");
+if(si && c.stats && c.stats.length > 0) {
+  si.innerHTML = c.stats.map(function(s){
+    return '<div class="stat-item"><div class="num">' + (s.num || '') + '</div><div class="label">' + (s.label || '') + '</div></div>';
+  }).join('');
+}
+
+// --- Render policies from CONFIG ---
+var pg = document.querySelector(".policy-grid");
+if(pg && c.policies && c.policies.length > 0) {
+  pg.innerHTML = c.policies.map(function(p, i){
+    var n = String(i + 1).padStart(2, '0');
+    return '<div class="policy-card" onclick="openDetail(\'' + (p.detailId || p.id) + '\')">' +
+      '<div class="pn">' + n + '</div><div>' +
+      '<h3>' + p.title + '</h3><p>' + (p.desc || '') + '</p></div></div>';
+  }).join('');
+}
+
+// --- Render testimonials from CONFIG ---
+var tg = document.querySelector(".testimonials-grid");
+if(tg && c.testimonials && c.testimonials.length > 0) {
+  tg.innerHTML = c.testimonials.map(function(t, i){
+    var av = t.avatar || (t.name ? t.name.charAt(0) : "\ud83d\udc64");
+    return '<div class="t-card" onclick="openDetail(\'' + (t.detailId || ("case-" + i)) + '\')">' +
+      '<div class="tq">&ldquo;</div><p class="t-text">' + (t.text || '') + '</p>' +
+      '<div class="t-author"><div class="t-av">' + av + '</div><div>' +
+      '<div class="t-name">' + (t.name || '') + '</div><div class="t-role">' + (t.role || '') + '</div></div></div></div>';
+  }).join('');
+}
+
+// --- Render process from CONFIG ---
+var pr = document.querySelector(".process-grid");
+if(pr && c.process && c.process.length > 0) {
+  pr.innerHTML = c.process.map(function(p){
+    return '<div class="pstep" onclick="openDetail(\'' + (p.detailId || ("process-step" + p.num)) + '\')">' +
+      '<div class="ring"><div class="n">' + (p.num || '') + '</div></div>' +
+      '<h3>' + (p.title || '') + '</h3><p>' + (p.desc || '') + '</p></div>';
+  }).join('');
+}
+
+// --- Update SLIDE_CONFIG from CONFIG.slides ---
+if(c.slides && c.slides.length > 0) {
+  var newSlides = c.slides.map(function(s, i){
+    return {
+      id: s.id || ("slide-" + (i+1)),
+      title: s.title || '',
+      subtitle: s.subtitle || '',
+      desc: s.desc || '',
+      img: s.img || '',
+      detailId: s.detailId || ''
+    };
+  });
+  window.SLIDE_CONFIG = newSlides;
+  if(typeof window.updateSlide === 'function') {
+    window.currentSlide = 0;
+    window.updateSlide();
   }
-  
-  if(c.testimonials && c.testimonials.length) {
-    var tg = document.querySelector('.testimonials-grid');
-    if(tg) {
-      tg.innerHTML = c.testimonials.map(function(t) {
-        return '<div class="testimonial-card">' +
-          '<div class="quote">' + (t.text || '') + '</div>' +
-          '<div class="author"><div class="avatar">' + (t.avatar || '') + '</div><div><strong>' + (t.name || '') + '</strong><span>' + (t.role || '') + '</span></div></div>' +
-          '</div>';
-      }).join('');
-    }
-  }
-  
-  if(c.process && c.process.length) {
-    var pr = document.querySelector('.process-steps');
-    if(pr) {
-      pr.innerHTML = c.process.map(function(p, i) {
-        var detailIds = ['process-step1', 'process-step2', 'process-step3', 'process-step4'];
-        return '<div class="pstep" onclick="openDetail(\'' + detailIds[i] + '\')">' +
-          '<div class="ring"><div class="n">' + (p.num || '') + '</div></div>' +
-          '<h4>' + (p.title || '') + '</h4>' +
-          '<p>' + (p.desc || '') + '</p>' +
-          '</div>';
-      }).join('');
-    }
-  }
-  
-  console.log('[Config Inject] Applied CONFIG to DOM');
+}
+
+// --- Update logo text ---
+document.querySelectorAll(".logo-text strong").forEach(function(el){
+  if(c.company.name) el.textContent = c.company.name;
+});
+document.querySelectorAll(".logo-text span").forEach(function(el){
+  if(c.company.slogan) el.textContent = c.company.slogan.toUpperCase();
+});
+
+console.log("[Config Inject] Applied CONFIG to DOM");
 })();
 </script></body>
 </html>
