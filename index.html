@@ -1487,7 +1487,7 @@ document.addEventListener('DOMContentLoaded',init);
 </div>
 
 
-<!-- v8动态渲染脚本 v4 - 使用v7实际class -->
+<!-- v8动态渲染脚本 v5 - 修复轮播图和统计数据 -->
 <script>
 (function() {
     function init() {
@@ -1503,11 +1503,55 @@ document.addEventListener('DOMContentLoaded',init);
         console.log('v8渲染完成');
     }
     
-    // 1. 轮播图
+    // 1. 轮播图 - 直接更新DOM，不只是更新SLIDE_CONFIG
     function renderSlides() {
         const slides = CONFIG.slides || [];
-        if (!window.SLIDE_CONFIG || slides.length === 0) return;
-        window.SLIDE_CONFIG.slides = slides;
+        if (slides.length === 0) return;
+        
+        // 更新SLIDE_CONFIG供后续使用
+        if (window.SLIDE_CONFIG) {
+            window.SLIDE_CONFIG.slides = slides;
+        }
+        
+        // 直接更新DOM中的轮播图内容
+        const track = document.getElementById('heroTrack');
+        if (!track) {
+            console.log('找不到heroTrack');
+            return;
+        }
+        
+        const slideDivs = track.querySelectorAll('.hero-slide');
+        console.log('轮播图幻灯片数:', slideDivs.length);
+        
+        slideDivs.forEach((div, i) => {
+            if (i >= slides.length) return;
+            const s = slides[i];
+            
+            // 更新标题
+            const titleEl = div.querySelector('h1, .hero-title');
+            if (titleEl && s.title) {
+                titleEl.innerHTML = s.title;
+            }
+            
+            // 更新副标题
+            const subtitleEl = div.querySelector('.hero-subtitle, h2');
+            if (subtitleEl && s.subtitle) {
+                subtitleEl.textContent = s.subtitle;
+            }
+            
+            // 更新描述
+            const descEl = div.querySelector('.hero-desc, p');
+            if (descEl && s.desc) {
+                descEl.textContent = s.desc;
+            }
+            
+            // 更新图片
+            const imgEl = div.querySelector('img');
+            if (imgEl && s.img) {
+                imgEl.src = s.img;
+            }
+        });
+        
         console.log('轮播图已更新:', slides.length);
     }
     
@@ -1569,21 +1613,33 @@ document.addEventListener('DOMContentLoaded',init);
         });
     }
     
-    // 5. 数据统计 - .stats-inner .stat
+    // 5. 数据统计 - 修复选择器为.stat-item
     function renderStats() {
         const stats = CONFIG.stats || [];
         const section = document.querySelector('.stats-inner');
-        if (!section || stats.length === 0) return;
+        if (!section || stats.length === 0) {
+            console.log('统计数据: 找不到stats-inner或没有数据');
+            return;
+        }
         
-        const items = section.querySelectorAll('.stat');
+        // 使用.stat-item而不是.stat
+        const items = section.querySelectorAll('.stat-item');
         console.log('统计项:', items.length);
+        
         items.forEach((item, i) => {
             if (i >= stats.length) return;
             const s = stats[i];
-            const num = item.querySelector('.stat-num, .num');
-            const label = item.querySelector('.stat-label, .label');
-            if (num && s.num) num.textContent = s.num;
-            if (label && s.label) label.textContent = s.label;
+            // 找数字和标签元素
+            const numEl = item.querySelector('.stat-num, [class*="num"]');
+            const labelEl = item.querySelector('.stat-label, [class*="label"]');
+            
+            if (numEl && s.num) {
+                numEl.textContent = s.num;
+                console.log('更新统计数字:', s.num);
+            }
+            if (labelEl && s.label) {
+                labelEl.textContent = s.label;
+            }
         });
     }
     
@@ -1605,7 +1661,7 @@ document.addEventListener('DOMContentLoaded',init);
         });
     }
     
-    // 7. 客户评价 - #testimonials .t-card (注意是t-card不是testimonial)
+    // 7. 客户评价 - #testimonials .t-card
     function renderTestimonials() {
         const testimonials = CONFIG.testimonials || [];
         const section = document.getElementById('testimonials');
