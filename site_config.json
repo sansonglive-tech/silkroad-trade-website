@@ -1,84 +1,197 @@
 {
   "company": {
     "name": "丝路山海通",
-    "slogan": "一带一路企业出海一站式服务",
-    "email": "look@silkroad-trade.com",
-    "phone": "400-xxx-xxxx",
-    "icp": "粤ICP备010101010号",
+    "slogan": "SILK ROAD TRADE",
+    "email": "outlook@silkroad-trade.com",
+    "phone": "",
     "wechatId": "SilkRoadTrade",
-    "wechatQR": ""
+    "icp": "粤ICP备XXXXXXXX号",
+    "qrcode": "",
+    "backgrounds": {}
   },
+  "aboutTitle": "让中国企业出海不难",
+  "aboutText": "丝路山海通积极响应国家「一带一路」倡议，致力于成为中国企业出海的首选服务伙伴。深耕东南亚、中亚、中东、非洲等新兴市场，秉持「本地化服务、全球化视野」理念，帮助企业高效、合规、安全地落地海外。",
+  "aboutQuote": "「让企业出海不再难，促进中国与一带一路国家经贸交往，互利共赢。」",
   "slides": [
     {
-      "id": "slide-1",
       "title": "乘丝路长风通达全球",
       "subtitle": "一带一路企业出海一站式服务",
       "desc": "丝路山海通 — 响应国家一带一路倡议，为企业出海提供公司注册、财税支持、产品准入、本地化运营等一站式落地服务。",
-      "img": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
+      "img": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&auto=format",
       "detailId": "company-advantage"
     },
     {
-      "id": "slide-2",
       "title": "公司注册资质办理",
       "subtitle": "最快7个工作日完成海外公司设立",
-      "desc": "境内境外公司注册、营业执照激活、行业资质证照办理",
-      "img": "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80",
+      "desc": "境内境外公司注册、营业执照激活、行业资质证照办理，让您的企业快速合法落地海外。",
+      "img": "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80&auto=format",
       "detailId": "company-reg"
+    },
+    {
+      "title": "财税人事法务合规",
+      "subtitle": "本地化运营全方位保障",
+      "desc": "财税筹划、代理记账、人事雇佣、法务咨询、合规审计，专业团队为您保驾护航。",
+      "img": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format",
+      "detailId": "tax-legal"
+    },
+    {
+      "title": "产品准入认证通关",
+      "subtitle": "SNI/BPOM/清真认证一站式办理",
+      "desc": "SNI认证、BPOM注册、清真认证、进出口许可证、海关备案等全套产品合规准入服务。",
+      "img": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80&auto=format",
+      "detailId": "certification"
+    },
+    {
+      "title": "本地运营长期陪伴",
+      "subtitle": "真正扎根海外市场",
+      "desc": "行政办公、本地招聘、政府关系、行业资源对接、展会活动策划，让您出海无忧。",
+      "img": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80&auto=format",
+      "detailId": "local-ops"
+    },
+    {
+      "title": "签证考察商务出行",
+      "subtitle": "签证办理与商务考察一站式",
+      "desc": "商务签证、工作签证、工厂考察、市场调研、政府对接，一站式行程安排，助您轻松出海考察。",
+      "img": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80&auto=format",
+      "detailId": "visa"
+    },
+    {
+      "title": "建厂工程落地投产",
+      "subtitle": "海外建厂与基建全流程服务",
+      "desc": "海外选址建厂、建筑工程许可、环境合规、能源矿产、IT通讯等基建配套，让您的工厂快速落地。",
+      "img": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80&auto=format",
+      "detailId": "factory"
     }
   ],
   "services": [
     {
-      "id": "company-reg",
+      "icon": "&#127963;",
       "title": "公司注册与资质",
       "sub": "incorporation & licensing",
-      "desc": "境外公司注册、营业执照激活、行业资质证照办理",
-      "icon": "🏠",
-      "detailId": "company-reg"
+      "desc": "境内境外公司注册、营业执照激活、行业资质证照办理，最快7个工作日完成海外公司设立。",
+      "img": ""
     },
     {
-      "id": "product-cert",
-      "title": "产品准入与认证",
-      "sub": "product certification",
-      "desc": "SNI/BPOM/清真认证一站式办理",
-      "icon": "✅",
-      "detailId": "certification"
-    },
-    {
-      "id": "tax-legal",
+      "icon": "&#128203;",
       "title": "财税人事与法务",
       "sub": "tax, hr & legal",
-      "desc": "财税筹划、代理记账、法务咨询一站式",
-      "icon": "📊",
-      "detailId": "tax-legal"
+      "desc": "财税筹划、代理记账、人事雇佣、法务咨询、合规审计，本地化运营全方位保障。",
+      "img": ""
     },
     {
-      "id": "local-ops",
+      "icon": "&#128706;",
+      "title": "签证与商务考察",
+      "sub": "visa & business trip",
+      "desc": "商务签证、工作签证、工厂考察、市场调研、政府对接，一站式行程安排。",
+      "img": ""
+    },
+    {
+      "icon": "&#128230;",
+      "title": "产品准入与认证",
+      "sub": "product certification",
+      "desc": "SNI认证、BPOM注册、清真认证、进出口许可证、海关备案等全套产品合规准入服务。",
+      "img": ""
+    },
+    {
+      "icon": "&#127959;",
+      "title": "建厂与工程服务",
+      "sub": "factory & construction",
+      "desc": "海外选址建厂、建筑工程许可、环境合规、能源矿产、IT通讯等基建配套服务。",
+      "img": ""
+    },
+    {
+      "icon": "&#129309;",
       "title": "本地化运营支持",
       "sub": "local operation",
-      "desc": "行政办公、本地招聘、政府关系、资源对接",
-      "icon": "🌐",
-      "detailId": "local-ops"
+      "desc": "行政办公、本地招聘、政府关系、行业资源对接、展会活动策划，真正扎根海外市场。",
+      "img": ""
+    }
+  ],
+  "policies": [
+    {
+      "num": "01",
+      "title": "政策研究与解读",
+      "desc": "专业团队追踪分析沿线国家最新外资政策、税收优惠、产业扶持措施，为企业出海提供精准政策导航。",
+      "detailId": ""
     },
     {
-      "id": "visa",
-      "title": "签证考察与出行",
-      "sub": "visa & business travel",
-      "desc": "商务签证、工作签证、工厂考察一站式",
-      "icon": "✈️",
-      "detailId": "visa"
+      "num": "02",
+      "title": "政府与商会对接",
+      "desc": "深度链接当地政府、中国驻外使领馆、华人商会，为企业建立高层级政商关系网络。",
+      "detailId": ""
     },
     {
-      "id": "factory",
-      "title": "建厂工程与投产",
-      "sub": "factory & construction",
-      "desc": "海外建厂选址、工程许可、环境合规",
-      "icon": "🏭",
-      "detailId": "factory"
+      "num": "03",
+      "title": "产业园区落地",
+      "desc": "对接沿线产业园区、经济特区，协助企业享受税收减免、土地优惠等政策红利。",
+      "detailId": ""
+    },
+    {
+      "num": "04",
+      "title": "投融资对接",
+      "desc": "对接丝路基金、亚投行、国开行等金融机构，协助企业获取出海项目资金支持。",
+      "detailId": ""
+    }
+  ],
+  "countries": [
+    {
+      "name": "东南亚",
+      "enName": "Southeast Asia",
+      "count": "5国",
+      "flag": "SEA",
+      "desc": "印度尼西亚(雅加达 · 泗水 · 棉兰), 越南(胡志明 · 河内), 菲律宾(马尼拉) 等5国"
+    },
+    {
+      "name": "俄语区/中亚",
+      "enName": "CIS / Central Asia",
+      "count": "5国",
+      "flag": "RU·CA",
+      "desc": "哈萨克斯坦(阿拉木图 · 阿斯塔纳), 乌兹别克斯坦(塔什干), 吉尔吉斯斯坦(比什凯克) 等5国"
+    },
+    {
+      "name": "中东/非洲",
+      "enName": "Middle East / Africa",
+      "count": "5国",
+      "flag": "ME",
+      "desc": "阿联酋(迪拜 · 阿布扎比), 沙特阿拉伯(利雅得 · 吉达), 埃及(开罗) 等5国"
+    },
+    {
+      "name": "欧洲",
+      "enName": "Europe",
+      "count": "3国",
+      "flag": "EU",
+      "desc": "德国(柏林 · 汉堡), 荷兰(阿姆斯特丹), 波兰(华沙)"
+    }
+  ],
+  "process": [
+    {
+      "num": "01",
+      "title": "需求诊断",
+      "desc": "深入了解企业出海目标与需求，定制化出海方案。",
+      "detailId": ""
+    },
+    {
+      "num": "02",
+      "title": "尽职调研",
+      "desc": "市场调研、法律评估、财税分析，规避风险前置。",
+      "detailId": ""
+    },
+    {
+      "num": "03",
+      "title": "落地执行",
+      "desc": "公司注册、资质办理、团队搭建，全程陪伴推进。",
+      "detailId": ""
+    },
+    {
+      "num": "04",
+      "title": "持续运营",
+      "desc": "财税代账、法务支持、政府维护，长期运营保障。",
+      "detailId": ""
     }
   ],
   "stats": [
     {
-      "num": "80+",
+      "num": "60+",
       "label": "一带一路覆盖国家"
     },
     {
@@ -94,68 +207,30 @@
       "label": "区域服务网络"
     }
   ],
-  "policies": [
-    {
-      "num": "01",
-      "title": "政策研究与解读",
-      "desc": "60+国家政策数据库，专业团队实时追踪政策动态"
-    },
-    {
-      "num": "02",
-      "title": "政府与商会对接",
-      "desc": "深耕本地政商关系，搭建企业与当地政府沟通桥梁"
-    },
-    {
-      "num": "03",
-      "title": "产业园区落地",
-      "desc": "对接一带一路沿线重点产业园区，享优惠政策"
-    },
-    {
-      "num": "04",
-      "title": "投融资对接",
-      "desc": "串联政策性金融机构与商业资本，多路径融资通道"
-    }
-  ],
   "testimonials": [
     {
       "name": "张宏伟",
-      "role": "新能源汽车 印尼工厂负责人",
-      "text": "帮我们在雅加达完成了公司注册和工厂选址，从考察到落地只用了2个月。",
-      "avatar": "张"
+      "role": "新能源汽车 · 印尼工厂负责人",
+      "avatarImg": "张",
+      "text": "帮我们在雅加达完成了公司注册和工厂选址，从考察到落地只用了2个月。当地团队专业靠谱，比我们自己跑效率高太多了。"
     },
     {
-      "name": "李峰",
-      "role": "工程机械 中亚事业部总经理",
-      "text": "响应一带一路开拓中亚市场，从法律合规到政府关系一路护航。",
-      "avatar": "李"
+      "name": "李雪峰",
+      "role": "工程机械 · 中亚事业部总经理",
+      "avatarImg": "李",
+      "text": "响应一带一路开拓中亚市场，丝路山海通从法律合规到政府关系一路护航，节省了大量试错成本，强烈推荐。"
     },
     {
       "name": "王琳",
-      "role": "食品饮料 海外拓展总监",
-      "text": "印尼的SNI认证和清真认证一站式包办，产品准入周期缩短了60%。",
-      "avatar": "王"
+      "role": "食品饮料 · 海外拓展总监",
+      "avatarImg": "王",
+      "text": "印尼的SNI认证和清真认证一度让我们头疼，丝路山海通一站式包办，产品准入周期缩短了60%，效果超出预期。"
     }
   ],
-  "process": [
-    {
-      "num": "01",
-      "title": "需求诊断",
-      "desc": "深入了解企业出海目标与需求，定制化出海方案。"
-    },
-    {
-      "num": "02",
-      "title": "尽职调研",
-      "desc": "市场调研、法律评估、财税分析，规避风险前置。"
-    },
-    {
-      "num": "03",
-      "title": "落地执行",
-      "desc": "公司注册、资质办理、团队搭建，全程陪伴推进。"
-    },
-    {
-      "num": "04",
-      "title": "持续运营",
-      "desc": "财税代账、法务支持、政府维护，长期运营保障。"
-    }
-  ]
+  "cta": {
+    "heading": "乘「一带一路」东风",
+    "subheading": "让您的企业 出海无忧",
+    "desc": "与丝路山海通携手，开启全球化新篇章。丝路万里，山海相通，通达全球。",
+    "btnText": "立即预约"
+  }
 }
