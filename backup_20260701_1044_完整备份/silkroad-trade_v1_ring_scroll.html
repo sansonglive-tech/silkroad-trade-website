@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丝路山海通 — 一带一路企业出海一站式服务</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#C44536;--red-dark:#8B2D1E;--red-soft:rgba(196,69,54,0.06);
+  --gold:#C8923E;--gold-bright:#F0D68A;--gold-soft:rgba(200,146,62,0.08);
+  --ink:#1A1512;--ink-soft:#302824;
+  --paper:#F5F0EA;--paper-warm:#EFE7DB;--cream:#FFFCF8;--cream-soft:#FFF9F2;
+  --gray:#6B625C;--gray-light:#A89E96;--gray-soft:#C8C0B8;
+  --border:rgba(26,21,18,0.04);
+  --radius:8px;--radius-lg:12px;
+  --shadow:0 4px 16px rgba(26,21,18,0.03);
+  --shadow-md:0 8px 32px rgba(26,21,18,0.05);
+  --shadow-lg:0 16px 48px rgba(26,21,18,0.07);
+  --shadow-xl:0 24px 72px rgba(26,21,18,0.09);
+  --ease:cubic-bezier(0.22,1,0.36,1)
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',-apple-system,sans-serif;background:var(--cream);color:var(--ink);
+  overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased
+}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.012;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:100px 100px}
+
+/* PRELOADER */
+#preloader{position:fixed;inset:0;z-index:9999;background:var(--cream);display:flex;align-items:center;justify-content:center;transition:opacity .4s,visibility .4s}
+#preloader.hide{opacity:0;visibility:hidden}
+.pd{display:flex;gap:.3rem}.pd span{display:block;width:6px;height:6px;background:var(--red);border-radius:50%;animation:pd .8s ease-in-out infinite}
+.pd span:nth-child(2){animation-delay:.15s}.pd span:nth-child(3){animation-delay:.3s}
+@keyframes pd{0%,100%{transform:translateY(0);opacity:.3}50%{transform:translateY(-8px);opacity:1}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+nav.scrolled{background:rgba(255,252,248,0.85);backdrop-filter:blur(24px);padding:.5rem 3rem;border-bottom:.5px solid var(--border)}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:var(--ink)}
+.logo-svg{width:38px;height:38px;flex-shrink:0}
+.logo-text{display:flex;flex-direction:column}
+.logo-text strong{font-family:'Noto Serif SC',serif;font-size:1.05rem;font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:.02em}
+.logo-text span{font-size:.48rem;letter-spacing:.3em;color:var(--gray-light);text-transform:uppercase}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:.78rem;font-weight:500;transition:color .3s;position:relative;letter-spacing:.02em}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--red);transition:width .4s var(--ease)}
+.nav-links a:hover{color:var(--red)}.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--red)!important;color:#fff!important;padding:.4rem 1.3rem;border-radius:4px;font-weight:600!important;font-size:.75rem!important}
+.nav-cta::after{display:none!important}.nav-cta:hover{background:var(--red-dark)!important;transform:translateY(-1px);box-shadow:0 4px 12px rgba(196,69,54,0.2)!important}
+.mobile-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.mobile-toggle span{display:block;width:20px;height:1.5px;background:var(--ink);margin:5px 0;border-radius:1px;transition:.3s}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--cream)}
+.hero-bg{position:absolute;inset:0;z-index:0;background:linear-gradient(160deg,var(--cream) 0%,var(--paper) 40%,var(--cream-soft) 100%)}
+.hero-bg::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(196,69,54,0.015) 0%,transparent 60%),radial-gradient(circle at 80% 70%,rgba(200,146,62,0.015) 0%,transparent 50%)}
+.hero-carousel{position:relative;width:100%;z-index:1;padding:6rem 0 1.5rem}
+.hero-viewport{max-width:1400px;margin:0 auto;overflow:hidden}
+.hero-track{display:flex;transition:transform .8s var(--ease);will-change:transform}
+.hero-slide{min-width:100%;cursor:pointer;display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;padding:2rem 3rem}
+.hero-text .ht-label{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1rem}
+.hero-text .ht-label .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.3}
+.hero-text .ht-label span{font-size:.6rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold)}
+.hero-text h1,.hero-text h2{font-family:'Noto Serif SC',serif;font-size:clamp(2rem,3.8vw,3rem);font-weight:900;line-height:1.25;margin-bottom:.8rem;color:var(--ink)}
+.hero-text h1 .gold,.hero-text h2 .gold{color:var(--gold)}
+.hero-text h1 .red,.hero-text h2 .red{color:var(--red);font-family:'Ma Shan Zheng',cursive;font-weight:400}
+.hero-text p{color:var(--gray);font-size:.9rem;line-height:2;margin-bottom:1.5rem;max-width:480px}
+.hero-link{display:inline-flex;align-items:center;gap:.5rem;color:var(--red);font-size:.78rem;font-weight:600;text-decoration:none;padding-bottom:2px;border-bottom:1px solid rgba(196,69,54,0.15);transition:.3s;cursor:pointer}
+.hero-link:hover{gap:.8rem;border-color:var(--red);color:var(--red)}
+.hero-image-panel{position:relative;width:100%;height:380px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-xl);background:var(--ink-soft);pointer-events:none}
+.hero-image-panel img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);display:block}
+.hero-slide:hover .hero-image-panel img{transform:scale(1.03)}
+.hero-image-panel .hip-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(196,69,54,0.2) 0%,rgba(200,146,62,0.1) 50%,transparent 100%);pointer-events:none}
+.hero-image-panel .hip-frame{position:absolute;inset:12px;border:.5px solid rgba(255,255,255,0.1);border-radius:8px;pointer-events:none}
+.hero-image-panel .hip-tag{position:absolute;bottom:16px;left:16px;display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,0.85);backdrop-filter:blur(8px);padding:.4rem .8rem;border-radius:4px;font-size:.6rem;font-weight:600;color:var(--ink-soft);pointer-events:none}
+.hero-image-panel .hip-tag .dot{width:4px;height:4px;border-radius:50%;background:var(--red);opacity:.5}
+.hero-bottom{max-width:1400px;margin:0 auto;padding:1rem 3rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.hero-dots{display:flex;gap:8px}
+.hero-dot{width:32px;height:2.5px;border-radius:2px;background:var(--gray-soft);cursor:pointer;border:none;padding:0;transition:all .5s;position:relative;z-index:10}
+.hero-dot.active{background:var(--red);width:48px}
+.hero-arrows{display:flex;gap:.5rem}
+.hero-arrow{width:36px;height:36px;border-radius:50%;border:.5px solid var(--border);background:rgba(255,255,255,0.6);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--gray);transition:.3s;position:relative;z-index:10}
+.hero-arrow:hover{border-color:var(--red);color:var(--red);background:var(--red-soft)}
+.hero-counter{font-size:.72rem;color:var(--gray-light);font-variant-numeric:tabular-nums}
+.hero-counter strong{color:var(--ink);font-weight:600}
+
+/* SECTION */
+section{padding:5rem 3rem;position:relative;z-index:2}
+.label-tag{display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem}
+.label-tag .line{width:24px;height:1.5px;background:var(--red)}
+.label-tag .txt{font-size:.6rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--red)}
+.section-head{max-width:680px;margin-bottom:3rem}
+.section-head h2{font-family:'Noto Serif SC',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;line-height:1.3;margin-bottom:.6rem;color:var(--ink)}
+.section-head h2 .red{color:var(--red)}.section-head h2 .gold{color:var(--gold)}
+.section-head p{color:var(--gray);font-size:.88rem;line-height:2}
+
+/* ABOUT */
+.about{background:linear-gradient(180deg,var(--cream) 0%,var(--paper) 100%)}
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:start}
+.about-text .slogan{font-family:'Ma Shan Zheng',cursive;font-size:1.2rem;color:var(--red);margin-bottom:.3rem;opacity:.8}
+.about-text h3{font-family:'Noto Serif SC',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:900;line-height:1.3;margin-bottom:1rem}
+.about-text h3 .red{color:var(--red)}
+.about-text>p{color:var(--gray);font-size:.9rem;line-height:2;margin-bottom:1.2rem}
+.about-box{background:#fff;border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:1.2rem 1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+.about-box p{font-family:'Noto Serif SC',serif;font-size:.95rem;font-weight:600;color:var(--ink-soft);line-height:1.9}
+.about-visual{display:flex;flex-direction:column;gap:1.5rem;align-items:center}
+.about-hero-img{width:100%;max-width:440px;height:320px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-xl);position:relative;display:block;text-decoration:none}
+.about-hero-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);display:block}
+.about-hero-img:hover img{transform:scale(1.03)}
+.about-hero-img .ahi-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(196,69,54,0.15) 0%,transparent 50%,rgba(200,146,62,0.08) 100%);pointer-events:none}
+.about-hero-img .ahi-frame{position:absolute;inset:10px;border:.5px solid rgba(255,255,255,0.12);border-radius:8px;pointer-events:none}
+.about-hero-img .ahi-seal{position:absolute;bottom:16px;left:16px;width:56px;height:56px;border:1px solid rgba(255,255,255,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-direction:column;backdrop-filter:blur(4px);background:rgba(0,0,0,0.15);transform:rotate(-3deg);pointer-events:none}
+.about-hero-img .ahi-seal span{font-family:'Ma Shan Zheng',cursive;font-size:1.2rem;color:var(--gold-bright);line-height:.9}
+.about-hero-img .ahi-seal small{font-size:.45rem;color:rgba(230,210,180,0.6);letter-spacing:.1em;pointer-events:none}
+.about-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;width:100%;max-width:440px}
+.about-mini-card{background:#fff;border:.5px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center;box-shadow:var(--shadow);transition:.3s;cursor:pointer}
+.about-mini-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.about-mini-card strong{display:block;font-family:'Noto Serif SC',serif;font-size:1.8rem;font-weight:900;color:var(--red);line-height:1}
+.about-mini-card span{font-size:.65rem;color:var(--gray);letter-spacing:.02em}
+
+/* SERVICES */
+.services{background:var(--cream)}
+.services-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem}
+.service-card{background:#fff;border:.5px solid var(--border);border-radius:var(--radius-lg);padding:1.8rem;transition:.4s;box-shadow:var(--shadow);cursor:pointer}
+.service-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px);border-color:rgba(196,69,54,0.08)}
+.service-card .sc-img{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1rem;position:relative;overflow:hidden}
+.service-card .sc-img .sc-img-bg{position:absolute;inset:0;z-index:0}
+.service-card .sc-img emoji,.service-card .sc-img span{position:relative;z-index:1}
+.service-card h3{font-family:'Noto Serif SC',serif;font-size:.95rem;font-weight:700;margin-bottom:.15rem}
+.service-card .sc-sub{font-size:.6rem;color:var(--gray-light);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.service-card p{color:var(--gray);font-size:.82rem;line-height:1.9}
+
+/* POLICY */
+.policy{background:var(--paper);position:relative;overflow:hidden}
+.policy-bg{position:absolute;top:0;right:0;width:260px;height:260px;background:var(--red);opacity:.02;border-radius:50%;transform:translate(80px,-80px);pointer-events:none}
+.policy-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.policy-card{padding:1.8rem;background:#fff;border:.5px solid var(--border);border-radius:var(--radius-lg);display:flex;gap:1rem;transition:.4s;box-shadow:var(--shadow);cursor:pointer}
+.policy-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:rgba(200,146,62,0.04)}
+.policy-card .pn{font-family:'Noto Serif SC',serif;font-size:2rem;font-weight:900;color:rgba(200,146,62,0.06);line-height:1;flex-shrink:0;min-width:2rem}
+.policy-card h3{font-family:'Noto Serif SC',serif;font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+.policy-card p{color:var(--gray);font-size:.82rem;line-height:1.9}
+
+/* COUNTRIES */
+.countries{background:var(--cream)}
+.countries-grid{display:grid;grid-template-columns:repeat(4,280px);gap:1rem;max-width:1240px;margin:0 auto;justify-content:center;align-items:start}
+.region-card{display:flex;flex-direction:column;align-self:stretch}
+.region-countries{flex:1}
+.region-card{background:#fff;border:.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:.4s;box-shadow:var(--shadow);cursor:pointer}
+.region-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:rgba(196,69,54,0.06)}
+.region-head{padding:.8rem 1rem;display:flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,rgba(196,69,54,0.04) 0%,rgba(200,146,62,0.04) 100%);border-bottom:.5px solid var(--border)}
+.region-icon{width:42px;height:30px;border-radius:6px;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;letter-spacing:.05em;flex-shrink:0}
+.region-icon.gold{background:linear-gradient(135deg,var(--gold),#8B6914)}
+.region-icon.green{background:linear-gradient(135deg,#5A7D6B,#3D5A4B)}
+.region-title{flex:1;min-width:0}
+.region-title h3{font-family:'Noto Serif SC',serif;font-size:.9rem;font-weight:700;color:var(--ink);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.region-title .rsub{font-size:.5rem;color:var(--gray-light);text-transform:uppercase;letter-spacing:.1em;margin-top:.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.region-count{font-size:.6rem;color:var(--gray);background:var(--paper);padding:.15rem .4rem;border-radius:3px;flex-shrink:0}
+.region-countries{padding:.6rem .8rem;display:flex;flex-direction:column;gap:.25rem}
+.region-country{display:flex;align-items:center;gap:.4rem;padding:.35rem .4rem;border-radius:4px;transition:.3s;cursor:pointer;color:var(--ink);text-decoration:none}
+.region-country:hover{background:var(--red-soft)}
+.region-country .rc-flag{font-size:1.1rem;line-height:1;flex-shrink:0}
+.region-country .rc-info{flex:1;min-width:0}
+.region-country .rc-name{font-size:.75rem;font-weight:600;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.region-country .rc-cities{font-size:.55rem;color:var(--gray);margin-top:.05rem;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.region-country .rc-arrow{color:var(--gray-light);font-size:.6rem;transition:.3s;flex-shrink:0}
+.region-country:hover .rc-arrow{color:var(--red);transform:translateX(3px)}
+
+/* PROCESS */
+.process{background:var(--cream-soft)}
+.process-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1.5rem}
+.pstep{text-align:center;position:relative;cursor:pointer}
+.pstep .ring{width:68px;height:68px;margin:0 auto 1rem;background:#fff;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;transition:.4s}
+.pstep:hover .ring{border-color:var(--red);box-shadow:0 0 0 4px var(--red-soft)}
+.pstep .ring .n{font-family:'Noto Serif SC',serif;font-weight:900;font-size:1.4rem;color:var(--red)}
+.pstep h3{font-family:'Noto Serif SC',serif;font-size:.9rem;font-weight:700;margin-bottom:.3rem}
+.pstep p{color:var(--gray);font-size:.78rem;line-height:1.8;max-width:200px;margin:0 auto}
+
+/* STATS */
+.stats-banner{background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);padding:4rem 3rem;position:relative;z-index:2}
+.stats-banner::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpolygon points='30 0 60 30 30 60 0 30'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");background-size:60px 60px;opacity:.3;pointer-events:none}
+.stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;position:relative;z-index:1}
+.stat-item{text-align:center;padding:1rem}
+.stat-item .num{font-family:'Noto Serif SC',serif;font-size:2.6rem;font-weight:900;color:var(--gold-bright);line-height:1;margin-bottom:.3rem}
+.stat-item .label{font-size:.78rem;color:rgba(255,255,255,0.7);letter-spacing:.05em;font-weight:500}
+
+/* TESTIMONIALS */
+.testimonials{background:var(--cream)}
+.testimonials-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem}
+.t-card{background:#fff;border:.5px solid var(--border);border-radius:var(--radius-lg);padding:1.8rem;transition:.4s;box-shadow:var(--shadow);cursor:pointer}
+.t-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.t-card .tq{font-family:'Ma Shan Zheng',cursive;font-size:3rem;color:var(--gold);line-height:.6;opacity:.3;margin-bottom:.2rem}
+.t-card .t-text{color:var(--gray);font-size:.82rem;line-height:1.9;margin-bottom:1.2rem;font-style:italic}
+.t-card .t-author{display:flex;align-items:center;gap:.8rem}
+.t-card .t-av{width:40px;height:40px;border-radius:50%;background:var(--red-soft);display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--red);flex-shrink:0}
+.t-card .t-name{font-size:.82rem;font-weight:600;color:var(--ink)}
+.t-card .t-role{font-size:.68rem;color:var(--gray-light);margin-top:.1rem}
+
+/* CTA */
+.cta{background:var(--paper);text-align:center;position:relative;overflow:hidden;z-index:2}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(196,69,54,0.04) 0%,transparent 70%);pointer-events:none}
+.cta h2{font-family:'Noto Serif SC',serif;font-size:clamp(1.6rem,2.8vw,2.4rem);font-weight:900;color:var(--ink)}
+.cta h2 .gold{color:var(--gold)}
+.cta p{color:var(--gray);max-width:500px;margin:.8rem auto 2rem;font-size:.9rem;line-height:2}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--red);color:#fff;padding:.8rem 2rem;border-radius:4px;text-decoration:none;font-weight:600;font-size:.82rem;transition:.3s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(196,69,54,0.2)}
+.btn-outline{border:1px solid var(--border);background:transparent;color:var(--ink);padding:.8rem 2rem;border-radius:4px;text-decoration:none;font-weight:500;font-size:.82rem;transition:.3s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-outline:hover{border-color:var(--red);color:var(--red)}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,0.6);padding:4rem 3rem 2rem;position:relative;z-index:2}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem}
+.footer-about p{font-size:.8rem;line-height:2;margin-top:.8rem;max-width:320px}
+.footer-about .logo{color:#fff;margin-bottom:.5rem}
+.footer-about .logo svg *{fill:var(--gold-bright)!important}
+.footer-about .logo-text strong{color:#fff!important}
+.footer-about .logo-text span{color:rgba(255,255,255,0.3)!important}
+footer h4{font-size:.78rem;font-weight:600;color:#fff;margin-bottom:.8rem;letter-spacing:.05em}
+footer a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:.75rem;display:block;margin-bottom:.4rem;transition:color .3s;line-height:2}
+footer a:hover{color:var(--gold-bright)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:1.5rem;border-top:.5px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;font-size:.7rem;flex-wrap:wrap;gap:.5rem}
+
+/* DETAIL OVERLAY */
+.detail-overlay{position:fixed;inset:0;z-index:1000;background:rgba(26,21,18,0.6);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:.4s;display:flex;align-items:center;justify-content:center;padding:2rem}
+.detail-overlay.active{opacity:1;visibility:visible}
+.detail-modal{background:var(--cream);border-radius:var(--radius-lg);max-width:800px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-xl);transform:translateY(20px) scale(.97);transition:.4s var(--ease);position:relative}
+.detail-overlay.active .detail-modal{transform:translateY(0) scale(1)}
+.detail-header{position:sticky;top:0;background:var(--cream);z-index:10;padding:1.5rem 2rem;border-bottom:.5px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.detail-header h3{font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:700;color:var(--ink)}
+.detail-header .dh-sub{font-size:.6rem;color:var(--gray-light);text-transform:uppercase;letter-spacing:.1em}
+.detail-close{width:32px;height:32px;border-radius:50%;border:none;background:var(--red-soft);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--red);transition:.3s;flex-shrink:0}
+.detail-close:hover{background:var(--red);color:#fff}
+.detail-body{padding:2rem}
+.detail-body .dh-hero{width:100%;height:200px;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:1.5rem;position:relative;background:linear-gradient(135deg,#1A2A3E,#25405C)}
+.detail-body .dh-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.detail-body .dh-hero .dh-hero-code{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Inter',sans-serif;font-size:4rem;font-weight:800;color:#fff;text-shadow:0 4px 24px rgba(0,0,0,0.4);letter-spacing:.05em;pointer-events:none}
+.detail-body .dh-hero .dh-hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,42,62,0.3) 0%,rgba(26,42,62,0.5) 100%);pointer-events:none}
+.detail-body .dh-intro{color:var(--gray);font-size:.88rem;line-height:2;margin-bottom:1.5rem;padding:1rem 1.2rem;background:#fff;border-radius:var(--radius);border-left:3px solid var(--red)}
+.detail-body .dh-heading{font-family:'Noto Serif SC',serif;font-size:1rem;font-weight:700;color:var(--ink);margin-top:1.5rem;margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+.detail-body ul{padding-left:1rem;margin-bottom:1rem}
+.detail-body ul li{color:var(--gray);font-size:.82rem;line-height:2.2;list-style-type:none;position:relative;padding-left:1rem}
+.detail-body ul li::before{content:'◆';position:absolute;left:-.2rem;color:var(--gold);font-size:.4rem;top:.7rem}
+.detail-cta-bar{display:flex;gap:.8rem;margin-top:2rem;padding-top:1.5rem;border-top:.5px solid var(--border)}
+.detail-cta-bar .btn-primary{font-size:.75rem;padding:.6rem 1.5rem}
+
+/* WECHAT OVERLAY */
+.wechat-overlay{position:fixed;inset:0;z-index:1100;background:rgba(26,21,18,0.6);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:.4s;display:flex;align-items:center;justify-content:center;padding:2rem}
+.wechat-overlay.active{opacity:1;visibility:visible}
+.wechat-modal{background:var(--cream);border-radius:var(--radius-lg);width:340px;max-width:90vw;box-shadow:var(--shadow-xl);transform:translateY(20px) scale(.97);transition:.4s var(--ease);position:relative;overflow:hidden}
+.wechat-overlay.active .wechat-modal{transform:translateY(0) scale(1)}
+.wechat-head{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.5rem .3rem}
+.wechat-head h3{font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:700;color:var(--ink)}
+.wechat-close{width:28px;height:28px;border-radius:50%;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--gray);transition:.3s}
+.wechat-close:hover{background:var(--red-soft);color:var(--red)}
+.wechat-body{padding:.5rem 1.5rem 1.5rem;text-align:center}
+.wechat-tip{color:var(--gray);font-size:.82rem;margin-bottom:1rem;line-height:1.6}
+.wechat-qr{width:200px;height:200px;margin:0 auto 1rem;padding:10px;background:#fff;border-radius:8px;box-shadow:0 2px 12px rgba(26,21,18,0.06);display:flex;align-items:center;justify-content:center}
+.wechat-qr img{width:100%;height:100%;display:block}
+.wechat-foot{font-size:.7rem;color:var(--gray-light);letter-spacing:.15em;margin-top:.3rem}
+
+/* BOOK OVERLAY */
+.book-modal{background:var(--cream);border-radius:var(--radius-lg);width:480px;max-width:92vw;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-xl);transform:translateY(20px) scale(.97);transition:.4s var(--ease);position:relative}
+.wechat-overlay.active .book-modal{transform:translateY(0) scale(1)}
+.book-body{padding:.3rem 1.8rem 1.8rem}
+.book-tip{color:var(--gray);font-size:.82rem;line-height:1.7;margin-bottom:1.2rem}
+.book-form label{display:block;font-size:.78rem;font-weight:600;color:var(--ink-soft);margin-bottom:.9rem}
+.book-form label .req{color:var(--red);margin-left:2px}
+.book-form input,.book-form textarea{width:100%;margin-top:.4rem;padding:.7rem .9rem;background:#fff;border:.5px solid var(--border);border-radius:6px;font-family:inherit;font-size:.85rem;color:var(--ink);transition:.3s;outline:none;resize:vertical}
+.book-form input:focus,.book-form textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px var(--red-soft)}
+.book-form input::placeholder,.book-form textarea::placeholder{color:var(--gray-light)}
+.book-form textarea{min-height:90px}
+.book-submit{display:block;width:100%;padding:.85rem;background:linear-gradient(135deg,#4A7BC8,#3A5FA8);color:#fff;border:none;border-radius:6px;font-size:.88rem;font-weight:600;letter-spacing:.1em;cursor:pointer;transition:.3s;margin-top:.4rem}
+.book-submit:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(74,123,200,0.3);background:linear-gradient(135deg,#3A5FA8,#2A4A88)}
+.book-foot{text-align:center;font-size:.68rem;color:var(--gray-light);margin-top:.8rem}
+.book-foot a{color:#4A7BC8;text-decoration:none}
+.book-foot a:hover{text-decoration:underline}
+.book-success{text-align:center;padding:2rem 1rem}
+.book-success .ok{font-size:3rem;margin-bottom:1rem;color:var(--red)}
+.book-success h3{font-family:'Noto Serif SC',serif;font-size:1.2rem;font-weight:700;color:var(--ink);margin-bottom:.5rem}
+.book-success p{color:var(--gray);font-size:.85rem;line-height:1.8}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:.8rem 1rem}
+  .nav-links{display:none;position:fixed;top:56px;left:0;right:0;background:rgba(255,252,248,0.97);backdrop-filter:blur(24px);padding:1rem;flex-direction:column;gap:.8rem;border-bottom:.5px solid var(--border)}
+  .nav-links.open{display:flex}
+  .mobile-toggle{display:block}
+  section{padding:3rem 1rem}
+  .hero-carousel{padding:5rem 0 1rem}
+  .hero-slide{grid-template-columns:1fr;padding:1rem;gap:1.5rem}
+  .hero-image-panel{height:240px}
+  .hero-bottom{padding:1rem}
+  .about-grid{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr}
+  .policy-grid{grid-template-columns:1fr}
+  .countries-grid{grid-template-columns:1fr 1fr;justify-content:stretch}
+  .process-grid{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .testimonials-grid{grid-template-columns:1fr}
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .detail-overlay{padding:1rem}
+  .detail-modal{max-height:95vh}
+  .detail-header{padding:1rem}
+  .detail-body{padding:1rem}
+}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<div id="preloader"><div class="pd"><span></span><span></span><span></span></div></div>
+
+<nav id="nav">
+  <a href="#" class="logo" onclick="event.preventDefault();goHome()">
+    <svg class="logo-svg" viewBox="0 0 38 38" fill="none"><rect width="38" height="38" rx="4" fill="#C44536"/><path d="M8 30V12L12 8h14l4 4v18H8z" fill="#8B2D1E"/><path d="M12 24h14v-8H12v8zm2-3h10v-2H14v2z" fill="#F0D68A"/><path d="M16 16l3 4 4-6" stroke="#FFFCF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+    <div class="logo-text"><strong>丝路山海通</strong><span>Silk Road Trade</span></div>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#services" onclick="closeNav()">核心服务</a>
+    <a href="#countries" onclick="closeNav()">全球网络</a>
+    <a href="#process" onclick="closeNav()">服务流程</a>
+    <a href="#testimonials" onclick="closeNav()">客户案例</a>
+    <a href="#" class="nav-cta-outline" onclick="event.preventDefault();closeNav();openBook();">预约演示</a>
+    <a href="#" class="nav-cta" onclick="event.preventDefault();closeNav();openWechat();">微信咨询</a>
+  </div>
+  <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-carousel">
+    <div class="hero-viewport">
+      <div class="hero-track" id="heroTrack"></div>
+    </div>
+    <div class="hero-bottom">
+      <div class="hero-dots" id="heroDots"></div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <div class="hero-counter"><strong id="slideCurrent">01</strong> / <span id="slideTotal">05</span></div>
+        <div class="hero-arrows"><button class="hero-arrow" id="arrowPrev">&#8592;</button><button class="hero-arrow" id="arrowNext">&#8594;</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about reveal">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="label-tag"><div class="line"></div><div class="txt">关于丝路山海通</div></div>
+      <div class="slogan">丝路万里 · 山海相通</div>
+      <h3>让中国企业<span class="red">出海不难</span></h3>
+      <p>丝路山海通积极响应国家「一带一路」倡议，致力于成为中国企业出海的首选服务伙伴。深耕东南亚、中亚、中东、非洲等新兴市场，秉持「本地化服务、全球化视野」理念，帮助企业高效、合规、安全地落地海外。</p>
+      <div class="about-box"><p>「让企业出海不再难，促进中国与一带一路国家经贸交往，互利共赢。」</p></div>
+    </div>
+    <div class="about-visual">
+      <a href="#services" class="about-hero-img" onclick="event.preventDefault();openDetail('about')">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80&auto=format" alt="国际化商务合作">
+        <div class="ahi-overlay"></div><div class="ahi-frame"></div>
+        <div class="ahi-seal"><span>丝路</span><small>山海通</small></div>
+      </a>
+      <div class="about-mini-grid">
+        <div class="about-mini-card" onclick="openDetail('about')"><strong>400+</strong><span>本地团队</span></div>
+        <div class="about-mini-card" onclick="openDetail('about')"><strong>5+</strong><span>区域网络</span></div>
+        <div class="about-mini-card" onclick="openDetail('about')"><strong>14</strong><span>服务中心</span></div>
+        <div class="about-mini-card" onclick="openDetail('about')"><strong>7年</strong><span>深耕经验</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services reveal">
+  <div class="label-tag"><div class="line"></div><div class="txt">核心服务</div></div>
+  <div class="section-head"><h2>全链路出海落地<span class="red">一站式</span> 解决</h2><p>从公司注册到本地化运营，六维服务体系覆盖出海全流程。</p></div>
+  <div class="services-grid">
+    <div class="service-card" onclick="openDetail('company-reg')"><div class="sc-img"><div class="sc-img-bg" style="background:linear-gradient(135deg,#C44536,#8B2D1E)"></div><span>&#x1F3DB;</span></div><h3>公司注册与资质</h3><div class="sc-sub">incorporation &amp; licensing</div><p>境内境外公司注册、营业执照激活、行业资质证照办理，最快7个工作日完成海外公司设立。</p></div>
+    <div class="service-card" onclick="openDetail('tax-legal')"><div class="sc-img"><div class="sc-img-bg" style="background:linear-gradient(135deg,#C8923E,#8B6914)"></div><span>&#x1F4CB;</span></div><h3>财税人事与法务</h3><div class="sc-sub">tax, hr &amp; legal</div><p>财税筹划、代理记账、人事雇佣、法务咨询、合规审计，本地化运营全方位保障。</p></div>
+    <div class="service-card" onclick="openDetail('visa')"><div class="sc-img"><div class="sc-img-bg" style="background:linear-gradient(135deg,#5A7D6B,#3D5A4B)"></div><span>&#x1F6C2;</span></div><h3>签证与商务考察</h3><div class="sc-sub">visa &amp; business trip</div><p>商务签证、工作签证、工厂考察、市场调研、政府对接，一站式行程安排。</p></div>
+    <div class="service-card" onclick="openDetail('certification')"><div class="sc-img"><div class="sc-img-bg" style="background:linear-gradient(135deg,#6B4A3E,#4A3028)"></div><span>&#x1F4E6;</span></div><h3>产品准入与认证</h3><div class="sc-sub">product certification</div><p>SNI认证、BPOM注册、清真认证、进出口许可证、海关备案等全套产品合规准入服务。</p></div>
+    <div class="service-card" onclick="openDetail('factory')"><div class="sc-img"><div class="sc-img-bg" style="background:linear-gradient(135deg,#3A5A78,#25405C)"></div><span>&#x1F3D7;</span></div><h3>建厂与工程服务</h3><div class="sc-sub">factory &amp; construction</div><p>海外选址建厂、建筑工程许可、环境合规、能源矿产、IT通讯等基建配套服务。</p></div>
+    <div class="service-card" onclick="openDetail('local-ops')"><div class="sc-img"><div class="sc-img-bg" style="background:linear-gradient(135deg,#C44536,#C8923E)"></div><span>&#x1F91D;</span></div><h3>本地化运营支持</h3><div class="sc-sub">local operation</div><p>行政办公、本地招聘、政府关系、行业资源对接、展会活动策划，真正扎根海外市场。</p></div>
+  </div>
+</section>
+
+<section id="policy" class="policy reveal">
+  <div class="policy-bg"></div>
+  <div class="label-tag"><div class="line"></div><div class="txt">一带一路政策</div></div>
+  <div class="section-head"><h2>紧跟国家战略<span class="red">借势出海</span></h2><p>响应一带一路倡议，为企业提供政策解读与落地支持。</p></div>
+  <div class="policy-grid">
+    <div class="policy-card" onclick="openDetail('policy-overview')"><div class="pn">01</div><div><h3>政策研究与解读</h3><p>专业团队追踪分析沿线国家最新外资政策、税收优惠、产业扶持措施，为企业出海提供精准政策导航。</p></div></div>
+    <div class="policy-card" onclick="openDetail('policy-overview')"><div class="pn">02</div><div><h3>政府与商会对接</h3><p>深度链接当地政府、中国驻外使领馆、华人商会，为企业建立高层级政商关系网络。</p></div></div>
+    <div class="policy-card" onclick="openDetail('policy-overview')"><div class="pn">03</div><div><h3>产业园区落地</h3><p>对接沿线产业园区、经济特区，协助企业享受税收减免、土地优惠等政策红利。</p></div></div>
+    <div class="policy-card" onclick="openDetail('policy-overview')"><div class="pn">04</div><div><h3>投融资对接</h3><p>对接丝路基金、亚投行、国开行等金融机构，协助企业获取出海项目资金支持。</p></div></div>
+  </div>
+</section>
+
+<section id="countries" class="countries reveal">
+  <div class="label-tag"><div class="line"></div><div class="txt">全球网络</div></div>
+  <div class="section-head"><h2>丝路所至，<span class="red">服务所达</span></h2><p>深耕一带一路沿线核心市场，本地团队陪伴企业落地每一站。</p></div>
+  <div class="countries-grid">
+    <div class="region-card" onclick="openDetail('region-sea')">
+      <div class="region-head">
+        <div class="region-icon">SEA</div>
+        <div class="region-title"><h3>东南亚</h3><div class="rsub">Southeast Asia</div></div>
+        <span class="region-count">5 国</span>
+      </div>
+      <div class="region-countries">
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-id')"><span class="rc-flag">&#x1F1EE;&#x1F1E9;</span><div class="rc-info"><div class="rc-name">印度尼西亚</div><div class="rc-cities">雅加达 · 泗水 · 棉兰</div></div><span class="rc-arrow">&#x2192;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-vn')"><span class="rc-flag">&#x1F1FB;&#x1F1F3;</span><div class="rc-info"><div class="rc-name">越南</div><div class="rc-cities">胡志明 · 河内</div></div><span class="rc-arrow">&#x2192;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-ph')"><span class="rc-flag">&#x1F1F5;&#x1F1ED;</span><div class="rc-info"><div class="rc-name">菲律宾</div><div class="rc-cities">马尼拉</div></div><span class="rc-arrow">&#x2192;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-th')"><span class="rc-flag">&#x1F1F9;&#x1F1ED;</span><div class="rc-info"><div class="rc-name">泰国</div><div class="rc-cities">曼谷</div></div><span class="rc-arrow">&#x2192;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-sg')"><span class="rc-flag">&#x1F1F8;&#x1F1EC;</span><div class="rc-info"><div class="rc-name">新加坡</div><div class="rc-cities">东南亚总部</div></div><span class="rc-arrow">&#x2192;</span></a>
+      </div>
+    </div>
+    <div class="region-card" onclick="openDetail('region-ru')">
+      <div class="region-head">
+        <div class="region-icon" style="background:linear-gradient(135deg,#25405C,#1A2A3E)">RU·CA</div>
+        <div class="region-title"><h3>俄语区 / 中亚</h3><div class="rsub">CIS / Central Asia</div></div>
+        <span class="region-count">3+5 国</span>
+      </div>
+      <div class="region-countries">
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-kz')"><span class="rc-flag">&#x1F1F0;&#x1F1FF;</span><div class="rc-info"><div class="rc-name">哈萨克斯坦</div><div class="rc-cities">阿拉木图 · 阿斯塔纳</div></div><span class="rc-arrow">&#x2192;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-uz')"><span class="rc-flag">&#x1F1FA;&#x1F1FF;</span><div class="rc-info"><div class="rc-name">乌兹别克斯坦</div><div class="rc-cities">塔什干</div></div><span class="rc-arrow">&#x2192;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-kg')"><span class="rc-flag">&#x1F1F0;&#x1F1EC;</span><div class="rc-info"><div class="rc-name">吉尔吉斯斯坦</div><div class="rc-cities">比什凯克</div></div><span class="rc-arrow">&#x2192;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-tj')"><span class="rc-flag">&#x1F1F9;&#x1F1EF;</span><div class="rc-info"><div class="rc-name">塔吉克斯坦</div><div class="rc-cities">杜尚别</div></div><span class="rc-arrow">&#x2192;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-tm')"><span class="rc-flag">&#x1F1F9;&#x1F1F2;</span><div class="rc-info"><div class="rc-name">土库曼斯坦</div><div class="rc-cities">阿什哈巴德</div></div><span class="rc-arrow">&#x2192;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-ru')"><span class="rc-flag">&#x1F1F7;&#x1F1FA;</span><div class="rc-info"><div class="rc-name">俄罗斯</div><div class="rc-cities">莫斯科 · 圣彼得堡</div></div><span class="rc-arrow">&#x2192;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-by')" style="opacity:.7"><span class="rc-flag">&#x1F1E7;&#x1F1E7;</span><div class="rc-info"><div class="rc-name">白俄罗斯</div><div class="rc-cities">明斯克（拓展中）</div></div><span class="rc-arrow">&#x2192;</span></a>
+      </div>
+    </div>
+    <div class="region-card" onclick="openDetail('region-me')">
+      <div class="region-head">
+        <div class="region-icon green">ME</div>
+        <div class="region-title"><h3>中东</h3><div class="rsub">Middle East</div></div>
+        <span class="region-count">1+ 国</span>
+      </div>
+      <div class="region-countries">
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-ae')"><span class="rc-flag">&#x1F1E6;&#x1F1EA;</span><div class="rc-info"><div class="rc-name">阿联酋</div><div class="rc-cities">迪拜</div></div><span class="rc-arrow">&#x2192;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-ir')"><span class="rc-flag">&#x1F1EE;&#x1F1F7;</span><div class="rc-info"><div class="rc-name">伊朗</div><div class="rc-cities">德黑兰</div></div><span class="rc-arrow">&#x2192;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-sa')" style="opacity:.7"><span class="rc-flag">&#x1F1F8;&#x1F1E6;</span><div class="rc-info"><div class="rc-name">沙特阿拉伯</div><div class="rc-cities">利雅得（拓展中）</div></div><span class="rc-arrow">&#x2192;</span></a>
+      </div>
+    </div>
+    <div class="region-card" onclick="openDetail('region-eu')">
+    <div class="region-card" onclick="openDetail('region-eu')">
+      <div class="region-head">
+        <div class="region-icon" style="background:linear-gradient(135deg,#3A5A78,#1A3A5A)">EU</div>
+        <div class="region-title"><h3>欧洲</h3><div class="rsub">Europe</div></div>
+        <span class="region-count">拓展中</span>
+      </div>
+      <div class="region-countries">
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-de')" style="opacity:.7"><span class="rc-flag">&#x1F1EA;&#x1F1FA;</span><div class="rc-info"><div class="rc-name">德国</div><div class="rc-cities">法兰克福（拓展中）</div></div><span class="rc-arrow">&#x2192;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-gb')" style="opacity:.7"><span class="rc-flag">&#x1F1EC;&#x1F1E7;</span><div class="rc-info"><div class="rc-name">英国</div><div class="rc-cities">伦敦（拓展中）</div></div><span class="rc-arrow">&#x2192;</span></a>
+        <a class="region-country" onclick="event.stopPropagation();openDetail('country-fr')" style="opacity:.7"><span class="rc-flag">&#x1F1EB;&#x1F1F7;</span><div class="rc-info"><div class="rc-name">法国</div><div class="rc-cities">巴黎（拓展中）</div></div><span class="rc-arrow">&#x2192;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process" class="process reveal">
+  <div class="label-tag"><div class="line"></div><div class="txt">服务流程</div></div>
+  <div class="section-head"><h2>四步走，<span class="red">轻松出海</span></h2><p>规范化流程，每一步都保障企业安全、高效落地海外市场。</p></div>
+  <div class="process-grid">
+    <div class="pstep" onclick="openDetail('service-process')"><div class="ring"><div class="n">01</div></div><h3>需求诊断</h3><p>深入了解企业出海目标与需求，定制化出海方案。</p></div>
+    <div class="pstep" onclick="openDetail('service-process')"><div class="ring"><div class="n">02</div></div><h3>尽职调研</h3><p>市场调研、法律评估、财税分析，规避风险前置。</p></div>
+    <div class="pstep" onclick="openDetail('service-process')"><div class="ring"><div class="n">03</div></div><h3>落地执行</h3><p>公司注册、资质办理、团队搭建，全程陪伴推进。</p></div>
+    <div class="pstep" onclick="openDetail('service-process')"><div class="ring"><div class="n">04</div></div><h3>持续运营</h3><p>财税代账、法务支持、政府维护，长期运营保障。</p></div>
+  </div>
+</section>
+
+<section class="stats-banner reveal">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="num">60+</div><div class="label">一带一路覆盖国家</div></div>
+    <div class="stat-item"><div class="num">1,600+</div><div class="label">服务出海企业</div></div>
+    <div class="stat-item"><div class="num">400+</div><div class="label">海外本地员工</div></div>
+    <div class="stat-item"><div class="num">5+</div><div class="label">区域服务网络</div></div>
+  </div>
+</section>
+
+<section id="testimonials" class="testimonials reveal">
+  <div class="label-tag"><div class="line"></div><div class="txt">客户心声</div></div>
+  <div class="section-head"><h2>出海企业 <span class="red">信赖之选</span></h2><p>听听他们如何借助丝路山海通成功落地海外市场。</p></div>
+  <div class="testimonials-grid">
+    <div class="t-card" onclick="openDetail('client-cases')"><div class="tq">&ldquo;</div><p class="t-text">帮我们在雅加达完成了公司注册和工厂选址，从考察到落地只用了2个月。当地团队专业靠谱，比我们自己跑效率高太多了。</p><div class="t-author"><div class="t-av">&#x5F20;</div><div><div class="t-name">张宏伟</div><div class="t-role">新能源汽车 · 印尼工厂负责人</div></div></div></div>
+    <div class="t-card" onclick="openDetail('client-cases')"><div class="tq">&ldquo;</div><p class="t-text">响应一带一路开拓中亚市场，丝路山海通从法律合规到政府关系一路护航，节省了大量试错成本，强烈推荐。</p><div class="t-author"><div class="t-av">&#x674E;</div><div><div class="t-name">李雪峰</div><div class="t-role">工程机械 · 中亚事业部总经理</div></div></div></div>
+    <div class="t-card" onclick="openDetail('client-cases')"><div class="tq">&ldquo;</div><p class="t-text">印尼的SNI认证和清真认证一度让我们头疼，丝路山海通一站式包办，产品准入周期缩短了60%，效果超出预期。</p><div class="t-author"><div class="t-av">&#x738B;</div><div><div class="t-name">王琳</div><div class="t-role">食品饮料 · 海外拓展总监</div></div></div></div>
+  </div>
+</section>
+
+<section id="contact" class="cta reveal">
+  <h2>乘「一带一路」东风</h2>
+  <h2 style="margin-top:-0.2rem;">让您的企业 <span class="gold">出海无忧</span></h2>
+  <p>与丝路山海通携手，开启全球化新篇章。丝路万里，山海相通，通达全球。</p>
+  <div class="cta-btns">
+    <a href="#" class="btn-primary" onclick="event.preventDefault();openBook();">预约演示 &#x2192;</a>
+    <a href="#" class="btn-outline" onclick="event.preventDefault();openWechat();">微信咨询</a>
+    <a href="#services" class="btn-outline" onclick="closeDetail()">了解服务</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-about">
+      <a href="#" class="logo" onclick="event.preventDefault();goHome()">
+        <svg class="logo-svg" viewBox="0 0 38 38" fill="none"><rect width="38" height="38" rx="4" fill="#C44536"/><path d="M8 30V12L12 8h14l4 4v18H8z" fill="#8B2D1E"/><path d="M12 24h14v-8H12v8zm2-3h10v-2H14v2z" fill="#F0D68A"/></svg>
+        <div class="logo-text"><strong>丝路山海通</strong><span>Silk Road Trade</span></div>
+      </a>
+      <p>以丝路为脉，通商天下。助力中国企业出海，服务一带一路沿线市场。</p>
+    </div>
+    <div><h4>核心服务</h4><a href="#services" onclick="closeDetail()">公司注册</a><a href="#services" onclick="closeDetail()">财税人事</a><a href="#services" onclick="closeDetail()">产品认证</a><a href="#services" onclick="closeDetail()">本地化运营</a></div>
+    <div><h4>全球网络</h4><a onclick="closeDetail()">印度尼西亚</a><a onclick="closeDetail()">越南</a><a onclick="closeDetail()">菲律宾</a><a onclick="closeDetail()">哈萨克斯坦</a></div>
+    <div><h4>关于我们</h4><a onclick="event.preventDefault();openDetail('about')">公司介绍</a><a onclick="event.preventDefault();openDetail('about-contact')">联系咨询</a><a onclick="event.preventDefault();openDetail('about-join')">加入我们</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 丝路山海通 · 丝路山海通国际商务有限公司</span>
+    <span>经世致用 · 丝路通达</span>
+  </div>
+</footer>
+
+<div class="detail-overlay" id="detailOverlay">
+  <div class="detail-modal">
+    <div class="detail-header">
+      <div><h3 id="detailTitle">详情</h3><span class="dh-sub" id="detailSubtitle"></span></div>
+      <button class="detail-close" onclick="closeDetail()">&#x2715;</button>
+    </div>
+    <div class="detail-body" id="detailBody"></div>
+  </div>
+</div>
+
+<!-- 微信咨询弹窗 -->
+<div class="wechat-overlay" id="wechatOverlay">
+  <div class="wechat-modal">
+    <div class="wechat-head">
+      <h3>添加微信</h3>
+      <button class="wechat-close" onclick="closeWechat()" aria-label="关闭">&#x2715;</button>
+    </div>
+    <div class="wechat-body">
+      <p class="wechat-tip">请扫码添加微信，获取更多咨询</p>
+      <div class="wechat-qr">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=weixin%3A%2F%2Fcontact%2Fsilkroad-trade" alt="丝路山海通微信二维码">
+      </div>
+      <p class="wechat-foot">扫一扫  立即沟通</p>
+    </div>
+  </div>
+</div>
+
+<!-- 预约演示弹窗 -->
+<div class="wechat-overlay" id="bookOverlay">
+  <div class="book-modal">
+    <div class="wechat-head">
+      <h3>预约演示</h3>
+      <button class="wechat-close" onclick="closeBook()" aria-label="关闭">&#x2715;</button>
+    </div>
+    <div class="book-body">
+      <p class="book-tip">留下您的需求，我们将在 1 个工作日内与您联系</p>
+      <form class="book-form" onsubmit="event.preventDefault();submitBook();">
+        <label>称呼 <span class="req">*</span>
+          <input type="text" name="name" placeholder="请输入称呼" required>
+        </label>
+        <label>手机 <span class="req">*</span>
+          <input type="tel" name="phone" placeholder="请输入手机" required pattern="[0-9+\-\s]{6,20}">
+        </label>
+        <label>公司 <span class="req">*</span>
+          <input type="text" name="company" placeholder="请输入公司" required>
+        </label>
+        <label>邮箱
+          <input type="email" name="email" placeholder="请输入邮箱">
+        </label>
+        <label>您的需求 <span class="req">*</span>
+          <textarea name="msg" rows="4" placeholder="请输入您的需求" required></textarea>
+        </label>
+        <button type="submit" class="book-submit">立即提交</button>
+        <p class="book-foot">提交即表示您已阅读并同意 <a href="#" onclick="event.preventDefault();">《个人信息保护声明》</a></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+// ========== SLIDE_CONFIG ==========
+var SLIDE_CONFIG = [
+  { idx:'01', title1:'乘丝路长风', title2:'<span class="gold">通达全球</span>', desc:'丝路山海通 — 响应国家一带一路倡议，为企业出海提供公司注册、财税支持、产品准入、本地化运营等一站式落地服务。', img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&auto=format', imgAlt:'现代商务办公大楼', imgTag:'一带一路 · 企业出海', detailId:'company-advantage' },
+  { idx:'02', title1:'公司注册', title2:'<span class="gold">快速合规落地</span>', desc:'境内境外公司注册、营业执照激活、投资许可、行业资质证照等全套手续。最快7个工作日完成海外公司设立。', img:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format', imgAlt:'现代商务大厦', imgTag:'最快7个工作日完成设立', detailId:'company-reg' },
+  { idx:'03', title1:'财税人事', title2:'<span class="gold">全流程合规保障</span>', desc:'从财税筹划、代理记账到人事雇佣、法务咨询、合规审计等全方位保障。本地化团队，解决您所有后顾之忧。', img:'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80&auto=format', imgAlt:'财务报表分析', imgTag:'财税人事法务一站式', detailId:'tax-legal' },
+  { idx:'04', title1:'产品认证', title2:'<span class="gold">一张证书通市场</span>', desc:'SNI认证、BPOM注册、清真认证、进出口许可证等全套产品准入服务。7年经验，助您快速通过目标国认证。', img:'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80&auto=format', imgAlt:'货运港口集装箱', imgTag:'市场准入周期缩短60%', detailId:'certification' },
+  { idx:'05', title1:'本地化运营', title2:'<span class="gold">不止落地，更要扎根</span>', desc:'本地行政办公、政府关系维护、行业资源对接&#x2026;400+海外本地团队全程陪伴，帮助企业真正融入当地市场。', img:'https://images.unsplash.com/photo-1526778548025-fa2f459b5fc1?w=800&q=80&auto=format', imgAlt:'全球商务网络', imgTag:'400+海外团队 · 全程陪伴', detailId:'local-ops' }
+];
+
+// ========== DETAIL_CONTENT ==========
+var DETAIL_CONTENT = {
+  'about': {
+    title: '关于丝路山海通 · 公司介绍',
+    subtitle: 'about us',
+    hero: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&auto=format',
+    sections: [
+      { type: 'text', content: '丝路山海通国际商务有限公司成立于 2018 年，总部位于北京市东城区通正国际大厦 615 室，是一家专注于中国企业「一带一路」出海落地的本地化服务公司。我们响应国家「一带一路」倡议，深耕东南亚、中亚、中东、俄语区、欧洲等核心市场，为出海企业提供全链路、一站式服务。' },
+      { type: 'heading', content: '公司定位' },
+      { type: 'list', items: [
+        '专注中国企业出海落地的本地化服务集团',
+        '响应「一带一路」倡议，连接中国与沿线国家市场',
+        '集商务咨询、本地化服务、政府关系于一体的综合服务商',
+        '致力于成为中国企业出海的首选服务伙伴'
+      ] },
+      { type: 'heading', content: '核心优势' },
+      { type: 'list', items: [
+        '400+ 海外本地员工，分布在 8+ 国家 14+ 服务中心',
+        '7 年本地深耕经验，熟稔各国外资政策与审批流程',
+        '中、英、当地语三语服务能力，消除沟通与跨文化障碍',
+        '已累计服务 1,600+ 出海企业，覆盖多行业'
+      ] },
+      { type: 'heading', content: '服务网络' },
+      { type: 'list', items: [
+        '东南亚：印尼、越南、菲律宾、泰国、新加坡',
+        '中亚：哈萨克斯坦、乌兹别克斯坦等中亚五国',
+        '中东：阿联酋、伊朗、沙特阿拉伯',
+        '俄语区：俄罗斯、白俄罗斯等独联体国家',
+        '欧洲：德国、英国、法国为重点拓展方向'
+      ] },
+      { type: 'heading', content: '企业愿景' },
+      { type: 'text', content: '让企业出海不再难，促进中国与一带一路国家经贸交往，互利共赢。我们以「本地化服务、全球化视野」为理念，帮助中国企业高效、合规、安全地落地海外市场。' }
+    ]
+  },
+  'about-contact': {
+    title: '联系我们',
+    subtitle: 'contact us',
+    hero: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80&auto=format',
+    sections: [
+      { type: 'text', content: '欢迎随时联系丝路山海通，我们的服务团队将在 24 小时内为您回复，提供专业的出海咨询与方案评估。' },
+      { type: 'heading', content: '联系方式' },
+      { type: 'list', items: [
+        '联系电话：+86 157 0107 1176',
+        '客服时间：周一至周五 9:00 - 18:00',
+        '电子邮箱：service@silkroad-trade.com',
+        '微信咨询：扫描官网底部二维码添加专属顾问'
+      ] },
+      { type: 'heading', content: '办公地址' },
+      { type: 'list', items: [
+        '总部地址：北京市东城区通正国际大厦 615 室',
+        '交通指引：地铁 2 号线、5 号线 崇文门站下车步行约 5 分钟',
+        '办公时间：周一至周五 9:00 - 18:00',
+        '预约拜访：请提前 1 个工作日电话或微信预约'
+      ] },
+      { type: 'heading', content: '业务咨询' },
+      { type: 'list', items: [
+        '公司注册与资质办理：业务一部',
+        '财税人事与法务咨询：业务二部',
+        '产品认证与市场准入：业务三部',
+        '本地化运营支持：业务四部'
+      ] },
+      { type: 'heading', content: '海外服务点' },
+      { type: 'list', items: [
+        '东南亚区域总部：新加坡',
+        '印尼服务中心：雅加达',
+        '越南服务中心：胡志明市',
+        '中东服务中心：迪拜',
+        '俄语区服务中心：莫斯科'
+      ] }
+    ]
+  },
+  'about-join': {
+    title: '加入我们 · 携手出海',
+    subtitle: 'join us',
+    hero: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80&auto=format',
+    sections: [
+      { type: 'text', content: '丝路山海通正处于快速扩张期，诚邀有激情、有梦想、有能力的人才加入我们的团队。无论你是深耕行业多年的资深专家，还是刚刚毕业怀揣梦想的应届生，只要你愿意投身中国企业出海事业，这里都有属于你的舞台。' },
+      { type: 'heading', content: '招聘岗位' },
+      { type: 'list', items: [
+        '海外业务经理（印尼 / 越南 / 阿联酋 / 俄罗斯 / 欧洲）',
+        '本地化运营专员（驻外）',
+        '财税顾问 / 法务顾问（东南亚 / 中东 / 俄语区）',
+        '产品认证工程师（SNI / BPOM / Halal / CE / EAC）',
+        '海外市场拓展经理',
+        '客户成功经理'
+      ] },
+      { type: 'heading', content: '岗位要求' },
+      { type: 'list', items: [
+        '本科及以上学历，国际贸易 / 工商管理 / 法学 / 财税相关专业',
+        '英语听说读写流利，会当地语言优先',
+        '1-5 年相关行业工作经验',
+        '具备良好的跨文化沟通能力与抗压能力',
+        '接受海外常驻或频繁出差'
+      ] },
+      { type: 'heading', content: '福利待遇' },
+      { type: 'list', items: [
+        '行业领先薪资 + 海外补贴 + 绩效奖金',
+        '五险一金 + 商业医疗保险 + 境外保险',
+        '带薪年假 + 海外探亲假 + 年度旅游',
+        '系统化培训 + 清晰的职业晋升通道',
+        '海外团队建设 + 跨文化工作体验'
+      ] },
+      { type: 'heading', content: '投递方式' },
+      { type: 'list', items: [
+        '邮箱投递：hr@silkroad-trade.com',
+        '邮件主题：姓名 + 应聘岗位 + 期望工作地',
+        '简历要求：中文 + 英文双语简历',
+        '联系电话：+86 157 0107 1176（HR 直线）',
+        '办公地址：北京市东城区通正国际大厦 615 室'
+      ] }
+    ]
+  },
+  'company-advantage': {
+    title: '丝路山海通 · 公司核心优势',
+    subtitle: 'why choose us',
+    hero: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80&auto=format',
+    sections: [
+      { type: 'text', content: '丝路山海通积极响应国家「一带一路」倡议，深耕东南亚、中亚、中东、非洲等新兴市场，提供企业出海全链路一站式服务。以下是我们无可替代的核心优势。' },
+      { type: 'heading', content: '本地化团队 · 深谙本土规则' },
+      { type: 'list', items: ['400+海外本地员工，覆盖东南亚、中亚、中东、俄语区、欧洲 5 大区域','14个本地服务中心，辐射一带一路 20+ 重点国家','团队涵盖当地注册会计师、律师、行业顾问等专业人才','中英俄阿土多语服务能力，消除沟通与跨文化障碍'] },
+      { type: 'heading', content: '全链路服务 · 一站式交付' },
+      { type: 'list', items: ['公司注册 → 财税法务 → 产品认证 → 建厂工程 → 本地化运营','从前期市场调研到后期持续运营，全程陪伴、无缝衔接','无需企业对接多家供应商，一个窗口解决所有出海问题','标准化流程 + 定制化方案，灵活适配不同企业规模与行业'] },
+      { type: 'heading', content: '政策红利 · 借势一带一路' },
+      { type: 'list', items: ['深度参与一带一路倡议，与沿线国家政府保持紧密合作','对接丝路基金、亚投行、国开行等金融机构','协助企业享受税收减免、产业园区土地优惠等政策红利','紧跟各国外资政策动态，提前为企业规避政策风险'] },
+      { type: 'heading', content: '懂中国企业 · 更懂出海痛点' },
+      { type: 'list', items: ['创始团队具备成熟的中国企业服务经验，深度理解企业出海决策逻辑','已累计服务1,600+出海企业，覆盖新能源、工程机械、食品、电子等行业','从公司注册到本地化运营，帮助企业出海试错成本降低70%','专属客户经理一对一服务，7×24小时响应'] },
+      { type: 'heading', content: '安全合规 · 风险前置把控' },
+      { type: 'list', items: ['尽职调研贯穿全流程，法律评估、财税分析、市场调研前置','严控合规风险，避免因不合规导致的罚款、停工等重大损失','与当地顶级律所、会计师事务所建立长期合作','合同审查、知识产权保护、反腐败合规等全方位法务保障'] }
+    ]
+  },
+  'company-reg': {
+    title: '公司注册与资质',
+    subtitle: 'incorporation & licensing',
+    hero: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format',
+    sections: [
+      { type: 'text', content: '丝路山海通提供海外公司注册全流程服务，从公司名称核准、公司章程制定、营业执照申请、税务登记、银行开户到行业许可证办理，一步到位。' },
+      { type: 'heading', content: '服务内容' },
+      { type: 'list', items: ['海外公司注册：有限公司、代表处、分公司等多种类型','营业执照激活与税务登记','银行开户与资本金注入','行业资质证照办理（建筑许可、贸易许可、投资许可等）','后续年度维护：年审、报税、秘书服务'] },
+      { type: 'text', content: '本地化专业团队全程代办，最快7个工作日完成海外公司设立。我们熟悉各国最新外资公司法规，帮助企业规避设立过程中的各类风险。' }
+    ]
+  },
+  'tax-legal': {
+    title: '财税人事与法务',
+    subtitle: 'tax, hr & legal',
+    hero: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80&auto=format',
+    sections: [
+      { type: 'text', content: '海外经营中，财税合规与人力资源管理是企业面临的核心挑战。丝路山海通拥有当地注册会计师、律师、HR专家组成的专业团队，为企业提供全方位的财税人事与法务保障服务。' },
+      { type: 'heading', content: '服务内容' },
+      { type: 'list', items: ['税收筹划：税收优惠申请、转让定价、税务合规审计','代理记账：月度/季度/年度账务处理及财务报表','人事雇佣：本地招聘落地、劳动合同管理、社会保险办理','法务咨询：合同审查、纠纷调解、知识产权保护','合规审计：年度审计、内控审查、反腐败合规','签证服务：工作签证、商务签证、居留许可办理'] },
+      { type: 'text', content: '我们的团队既精通当地语言文化，又具备成熟的中国企业服务经验，真正做到「中国企业的语言，本地化的专业能力」。' }
+    ]
+  },
+  'visa': {
+    title: '签证与商务考察',
+    subtitle: 'visa & business trip',
+    hero: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80&auto=format',
+    sections: [
+      { type: 'text', content: '出海第一步，从亲自考察开始。丝路山海通提供从签证办理到商务考察全流程服务，让您省心出行。' },
+      { type: 'heading', content: '服务内容' },
+      { type: 'list', items: ['签证办理：KITAS、工作许可卡等全套办理','工厂与市场考察：安排当地企业拜访、园区参观','政府对接：安排与投资局、工业部等部门会面','全程接待：专车接送、翻译陪同、商务酒店预订','反程安排：考察报告撰写、投资方案建议'] },
+      { type: 'text', content: '签证办理 → 落地接待 → 考察执行 → 总结报告。最快7个工作日完成签证申请，确保商务出行顺畅无阻。' }
+    ]
+  },
+  'certification': {
+    title: '产品准入与认证',
+    subtitle: 'product certification',
+    hero: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80&auto=format',
+    sections: [
+      { type: 'text', content: '产品出海，认证先行。丝路山海通提供一站式产品准入服务，帮助企业快速合规进入目标市场。' },
+      { type: 'heading', content: '服务内容' },
+      { type: 'list', items: ['SNI认证：印度尼西亚国家标准认证','BPOM注册：印尼食品药品监管局注册','清真认证（Halal）：马来西亚JAKIM、印尼MUI等机构认证','进出口许可证：进口许可证（API）、进口商注册','海关备案：出口商品预归类、海关编码认定','其他认证：CE、FDA等国际认证咨询'] },
+      { type: 'heading', content: '我们的优势' },
+      { type: 'text', content: '7年认证服务经验，熟悉各国认证法规与流程，与当地认证机构保持紧密合作。标准化流程降低企业试错成本，帮助企业规避认证踩坑，市场准入周期缩短60%。' }
+    ]
+  },
+  'factory': {
+    title: '建厂与工程服务',
+    subtitle: 'factory & construction',
+    hero: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80&auto=format',
+    sections: [
+      { type: 'text', content: '在海外建立生产基地是企业深度出海的关键一步。丝路山海通提供全链条建厂服务，从蓝图到落地的全程保驾护航。' },
+      { type: 'heading', content: '服务内容' },
+      { type: 'list', items: ['前期调研：选址评估、基础设施考察、投资环境分析','政府审批：投资许可批准、环境影响评估（AMDAL）、建筑许可','工程建设：厂房设计、施工管理、设备安装调试','配套服务：水电能源接入、通信网络建设','合规运营：环保合规、安全生产、排污许可'] },
+      { type: 'text', content: '配备中+当地双语项目经理，定期向国内汇报工程进度、预算执行、风险预警，确保建厂项目按计划高效推进。' }
+    ]
+  },
+  'local-ops': {
+    title: '本地化运营支持',
+    subtitle: 'local operation',
+    hero: 'https://images.unsplash.com/photo-1526778548025-fa2f459b5fc1?w=800&q=80&auto=format',
+    sections: [
+      { type: 'text', content: '公司落地只是开始，真正的挑战在于本地化运营。丝路山海通400+海外本地团队提供持续运营支持，帮助企业真正扎根当地市场。' },
+      { type: 'heading', content: '服务内容' },
+      { type: 'list', items: ['行政办公：办公室租赁、行政后勤、签证延期办理','本地招聘：人才招聘、培训、绩效管理体系建设','政府关系：本地政府机构对接、政策解读、危机公关','行业资源：行业协会对接、上下游伙伴引荐、商业人脉拓展','跨文化管理：文化培训、团队融合、中-当地团队沟通协调','展会与活动：海外展会参展策划、商务活动组织、品牌推广'] },
+      { type: 'heading', content: '我们的承诺' },
+      { type: 'text', content: '专属客户经理一对一服务，7×24小时响应。定期回访与风险预警，确保企业在海外运营中始终有专业后盾。' }
+    ]
+  },
+  'policy-overview': {
+    title: '一带一路政策解读与支持',
+    subtitle: 'belt & road policy',
+    hero: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=800&q=80&auto=format',
+    sections: [
+      { type: 'text', content: '「一带一路」倡议为中国企业出海提供了前所未有的政策红利。丝路山海通专业政策研究团队，持续追踪沿线国家最新外资政策、税收优惠、产业扶持措施，为企业出海提供精准政策导航。' },
+      { type: 'heading', content: '政策研究与解读' },
+      { type: 'list', items: ['专业团队追踪分析沿线国家最新外资政策动态','税收优惠与产业扶持措施深度解读','行业准入政策与限制条件梳理','定期发布一带一路投资政策白皮书'] },
+      { type: 'heading', content: '政府与商会对接' },
+      { type: 'list', items: ['深度链接当地政府部门及中国驻外使领馆','对接华人商会与行业协会资源','协助企业建立高层级政商关系网络','组织政策解读会与政府对接活动'] },
+      { type: 'heading', content: '产业园区落地支持' },
+      { type: 'list', items: ['对接沿线产业园区、经济特区','协助申请税收减免与土地优惠政策','提供园区选位与基础设施评估','全流程入园手续代办服务'] },
+      { type: 'heading', content: '投融资对接' },
+      { type: 'list', items: ['对接丝路基金、亚投行、国开行等金融机构','协助企业获取出海项目资金支持','跨境融资方案设计与政策合规审查','投资保险与风险对冲建议'] }
+    ]
+  },
+
+  'service-process': {
+    title: '服务流程 · 四步走轻松出海',
+    subtitle: 'our process',
+    hero: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format',
+    sections: [
+      { type: 'text', content: '丝路山海通建立了标准化、规范化的服务流程体系，从需求诊断到持续运营，每一步都保障企业安全、高效落地海外市场。' },
+      { type: 'heading', content: '第一步：需求诊断' },
+      { type: 'list', items: ['深入了解企业出海目标与具体需求','评估企业发展阶段与资源配置','对标分析目标市场行业竞争格局','制定个性化出海落地方案'] },
+      { type: 'heading', content: '第二步：尽职调研' },
+      { type: 'list', items: ['目标市场深度调研：政策环境、法规要求、文化习俗','法律合规评估：公司法、劳动法、行业准入限制','财税分析：税收政策、转移定价、合规申报','供应链与渠道调研：寻找目标市场合作伙伴'] },
+      { type: 'heading', content: '第三步：落地执行' },
+      { type: 'list', items: ['境内外公司注册与银行开户','行业资质证照与产品认证办理','办公选址与团队搭建','政府关系对接与投资许可审批','最快7个工作日完成海外公司设立'] },
+      { type: 'heading', content: '第四步：持续运营' },
+      { type: 'list', items: ['财税代账与合规审计服务','法务支持与知识产权保护','本地员工招聘与人力管理体系搭建','定期回访与风险预警机制','长期扎根海外市场的运营保障'] }
+    ]
+  },
+  'client-cases': {
+    title: '客户成功案例 · 出海信赖之选',
+    subtitle: 'client success',
+    hero: 'https://images.unsplash.com/photo-1552581234-26160f608093?w=800&q=80&auto=format',
+    sections: [
+      { type: 'text', content: '7年来，丝路山海通累计服务1,600+出海企业，涵盖新能源、工程机械、食品饮料、电子制造、IT通讯等多个行业。客户的信任是我们最大的动力。' },
+      { type: 'heading', content: '案例一：新能源汽车 · 印尼工厂落地' },
+      { type: 'list', items: ['客户需求：需快速在印尼建立组装工厂，完成公司注册、工厂选址、环评、生产许可','服务内容：公司注册+工厂选址评估+BKPM投资许可+环境评估报告+建筑许可+设备通关','成果：从首次考察到工厂投产仅用4个月，节省企业60%落地时间','客户反馈：「当地团队专业靠谱，比我们自己跑效率高太多了」'] },
+      { type: 'heading', content: '案例二：工程机械 · 中亚市场拓展' },
+      { type: 'list', items: ['客户需求：拓展哈萨克斯坦及中亚市场，需解决法律合规、政府关系与本地团队建设','服务内容：市场调研+法律合规评估+公司注册+政府关系对接+本地招聘','成果：成功落地阿拉木图服务中心，中标当地基建项目','客户反馈：「从法律合规到政府关系一路护航，节省了大量试错成本」'] },
+      { type: 'heading', content: '案例三：食品饮料 · 印尼产品准入' },
+      { type: 'list', items: ['客户需求：产品需获取SNI认证、BPOM注册及清真认证，方可进入印尼市场','服务内容：BPOM注册辅导+SNI认证流程管理+清真认证全程代办','成果：产品准入周期缩短60%，3个月内完成所有认证','客户反馈：「一度让我们头疼的认证，一站式包办，效果超出预期」'] },
+      { type: 'heading', content: '合作企业（部分）' },
+      { type: 'list', items: ['中鋢、中兴通讯、上海电气、中国有色','比亚迪、中国联通、用友网络、华侨银行','覆盖：新能源、工程机械、食品、电子、IT通讯等多领域'] }
+    ]
+  },
+  'about': {
+    title: '关于丝路山海通 · 核心优势',
+    subtitle: 'about us',
+    hero: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80&auto=format',
+    sections: [
+      { type: 'text', content: '丝路山海通积极响应国家「一带一路」倡议，深耕东南亚、中亚、中东、非洲等新兴市场，秉持「本地化服务、全球化视野」理念，整合全球资源为企业出海保驾护航。' },
+      { type: 'heading', content: '我们是谁' },
+      { type: 'list', items: ['专注企业出海一站式服务7年','400+海外本地团队，覆盖8个国家14个服务中心','累计服务1,600+出海企业','中英当地语三语服务能力'] },
+      { type: 'heading', content: '我们的使命' },
+      { type: 'text', content: '让企业出海不再难。以本地化专业能力，降低中国企业出海门槛，助力中国企业全球化进程。' }
+    ]
+  }
+};
+
+// ========== REGION & COUNTRY DETAIL DATA ==========
+var REGION_DATA = {
+  'region-sea': { name:'东南亚', en:'Southeast Asia', region:'亚太枢纽 · 1.6 万亿美元经济体', img:'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=800&q=80&auto=format', desc:'东南亚是中国出海的首选练兵场，GDP 总量超过 1.6 万亿美元，中产阶级快速崛起。丝路山海通在 5 个核心国家设立本地团队，从公司注册、资质办理到本地团队招聘，全链路交付。', points:['5国本地服务中心','中、印、英、越、泰多语能力','印尼、越南制造业重镇资源','新加坡区域总部统筹'] },
+  'region-ca': { name:'中亚', en:'Central Asia', region:'已合并至俄语区', img:'', desc:'已合并至俄语区。', points:[] },
+  'region-me': { name:'中东', en:'Middle East', region:'全球贸易枢纽 · 高净值市场', img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80&auto=format', desc:'中东是连接亚、非、欧三大洲的贸易中枢，迪拜作为中东商业首都，是品牌出海辐射海湾六国和北非市场的桥头堡。', points:['迪拜、德黑兰双中心','中东商会资源对接','高端品牌准入服务','清真认证等本地化合规'] },
+  'region-ru': { name:'俄语区 / 中亚', en:'CIS & Central Asia', region:'欧亚大陆 · 8 国完整服务网络', img:'https://images.unsplash.com/photo-1547448415-e9f5b28e570d?w=800&q=80&auto=format', desc:'俄语区 / 中亚覆盖俄罗斯、白俄罗斯 + 中亚五国（哈萨克斯坦、乌兹别克斯坦、吉尔吉斯斯坦、塔吉克斯坦、土库曼斯坦），是「一带一路」向西延伸的核心走廊。俄语 + 中亚本地语双能力，提供公司注册、税务合规、政府关系、本地团队搭建等全链路服务。', points:['8 国服务网络（俄·白 + 中亚五国）','俄语 + 中亚本地语服务能力','欧亚经济联盟（EAEU）合规','能源、装备、消费品、纺织业资源'] },
+  'region-eu': { name:'欧洲', en:'Europe', region:'高端市场 · 品牌升级跳板', img:'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80&auto=format', desc:'欧洲是中国品牌实现高端化、国际化的重要跳板。德国、英国、法国为重点拓展方向，CE 认证、欧盟税务体系、品牌进驻是高阶服务。', points:['德、英、法三重点拓展中','CE 认证全流程','欧盟合规咨询','品牌出海战略规划'] }
+};
+
+var COUNTRY_DATA = {
+  'country-id': { name:'印度尼西亚', code:'ID', en:'Indonesia', cities:'雅加达 · 泗水 · 棉兰', capital:'雅加达', lang:'印尼语、英语', currency:'印尼盾 (IDR)', pop:'2.77 亿人', gdp:'1.32 万亿美元', img:'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=800&q=80&auto=format', desc:'印尼是东南亚最大经济体、全球第四人口大国，中产阶级迅速崛起。雅加达是政治经济中心，泗水和棉兰是工业重镇。', industries:['新能源、汽车组装', '电子制造', '棕桐油、农产品加工', '纺织鞋帽', '基础设施建设'], services:['公司注册：PMA 公司、代表处', '行业资质：BKPM 投资许可、营业执照', '产品认证：SNI、BPOM、Halal', '税务：增值税 PPN、个人所得税 PPh', '签证：KITAS、工作签证'], tax:'企业所得税 22%，增值税 11%，中小微企业享减免优惠' },
+  'country-vn': { name:'越南', code:'VN', en:'Vietnam', cities:'胡志明 · 河内', capital:'河内', lang:'越南语、英语', currency:'越南盾 (VND)', pop:'1 亿人', gdp:'4,300 亿美元', img:'https://images.unsplash.com/photo-1528127269322-539801943592?w=800&q=80&auto=format', desc:'越南是中美贸易摩擦背景下的「世界工厂新首选」，电子制造、纺织鞋帽、家具产业承接大量转移产能。', industries:['电子制造、手机零部件', '纺织服装、鞋帽', '家具家居', '农产品、水产加工', '可再生能源'], services:['公司注册：有限责任公司、股份公司', '外资准入：投资登记证 IRC、企业注册证 ERC', '税务：VAT、个人所得税', '工作许可：工作证、TRC 居留', '行业许可：制造、贸易等'], tax:'标准企业所得税 20%，高科技项目 10%，4 年免税 + 9 年减半' },
+  'country-ph': { name:'菲律宾', code:'PH', en:'Philippines', cities:'马尼拉', capital:'马尼拉', lang:'菲律宾语、英语', currency:'比索 (PHP)', pop:'1.13 亿人', gdp:'4,000 亿美元', img:'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80&auto=format', desc:'菲律宾是东南亚英语普及率最高的国家，BPO 行业全球领先。马尼拉是经济中心，宿务为南部重镇，年轻消费群体庞大。', industries:['BPO、离岸服务', '电子半导体', '消费品、零售', '再生能源', '旅游业'], services:['公司注册：独资、合资、代表处', 'PEZA 经济区入驻（税收优惠）', '税务：BIR 注册、增值税', '签证：9G 工作签证、SRRV 退休签证', '产品认证：PS、ICC'], tax:'企业所得税 25%，PEZA 经济区享 4-8 年免税期' },
+  'country-th': { name:'泰国', code:'TH', en:'Thailand', cities:'曼谷', capital:'曼谷', lang:'泰语、英语', currency:'泰铢 (THB)', pop:'7,200 万人', gdp:'5,000 亿美元', img:'https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=800&q=80&auto=format', desc:'泰国是东南亚第二大经济体，汽车制造、家电、食品加工产业基础雄厚。BOI 投资促进政策极具吸引力。', industries:['汽车制造、家电', '食品加工、农业', '旅游业、酒店业', '医疗器械', '数字经济'], services:['公司注册：有限公司、代表处', 'BOI 投资促进申请（税收减免）', '工厂许可：工业厅、环评', '税务：增值税 7%、企业所得税 20%', '签证：WP 工作证、Smart Visa'], tax:'企业所得税 20%，BOI 项目享 3-8 年豁免，最长 13 年' },
+  'country-sg': { name:'新加坡', code:'SG', en:'Singapore', cities:'新加坡', capital:'新加坡', lang:'英语、华语、马来语、泰米尔语', currency:'新币 (SGD)', pop:'590 万人', gdp:'4,700 亿美元', img:'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80&auto=format', desc:'新加坡是东南亚的金融、贸易、航运中心，营商环境全球第一。作为出海东南亚的区域总部，是品牌国际化的首选跳板。', industries:['金融服务、财富管理', '贸易、航运', '科技、创新创业', '生物医药', '教育服务'], services:['公司注册：Pte Ltd 私人有限公司', '金融牌照：MAS 各类金融许可证', '税务：17% 企业所得税、新加坡税务居民', '工作准证：EP、SP、ONE Pass', '知识产权、商标专利'], tax:'企业所得税 17%，新成立公司首 10 万新币利润 75% 免税' },
+  'country-kz': { name:'哈萨克斯坦', code:'KZ', en:'Kazakhstan', cities:'阿拉木图', capital:'阿斯塔纳', lang:'哈萨克语、俄语', currency:'坚戈 (KZT)', pop:'1,900 万人', gdp:'2,200 亿美元', img:'https://images.unsplash.com/photo-1602941525436-0eaf6cc89113?w=800&q=80&auto=format', desc:'哈萨克斯坦是中亚最大经济体、欧亚经济联盟成员，是「一带一路」向西延伸的第一站。能源、矿产、工程机械需求旺盛。', industries:['能源、石油天然气', '矿业、冶金', '工程机械、基础设施建设', '农业、粮食加工', '化工业'], services:['公司注册：TOO 有限责任公司、АО 股份公司', '外资准入：AIFC 阿斯塔纳国际金融中心', '税务：KZT 增值税 12%', '签证：工作许可、IRL 居留', '行业许可：矿产、工程施工'], tax:'企业所得税 20%，AIFC 享 0% 至 50 年税收优惠' },
+  'country-uz': { name:'乌兹别克斯坦', code:'UZ', en:'Uzbekistan', cities:'塔什干（拓展中）', capital:'塔什干', lang:'乌兹别克语、俄语', currency:'苏姆 (UZS)', pop:'3,500 万人', gdp:'800 亿美元', img:'https://images.unsplash.com/photo-1542052125323-e69ad37a47c4?w=800&q=80&auto=format', desc:'乌兹别克斯坦是中亚人口最多的国家，改革后外资准入大幅放宽，制造业、农业、能源、纺织业潜力巨大。', industries:['黄金、天然气', '棉纺织业', '汽车工业', '农业、食品加工', '化工业'], services:['公司注册：LLC 有限责任公司', '外资准入：投资注册、税收优惠申请', '税务：增值税 12%、企业所得税 7.5-15%', '签证：工作许可、临时居留', '行业许可：制造、贸易'], tax:'企业所得税 7.5%（生产业）- 15%（其他），重点行业享税收减免' },
+  'country-ae': { name:'阿联酋', code:'AE', en:'UAE', cities:'迪拜', capital:'阿布扎比', lang:'阿拉伯语、英语', currency:'迪拉姆 (AED)', pop:'990 万人', gdp:'5,000 亿美元', img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80&auto=format', desc:'阿联酋是中东商业首都，迪拜连接东西方市场。零企业所得税、100% 外资所有权、世界级基础设施，是品牌出海辐射中东非的桥头堡。', industries:['贸易、电商', '金融服务', '房地产、旅游酒店', '新能源', '医疗健康'], services:['公司注册：自由区公司、大陆公司', 'DMCC、RAK、SHAMS 等自由区入驻', '税务：9% 企业所得税（年收入 37.5 万迪拉姆以上）', '签证：投资者签证、绿卡', '银行开户：本地与国际银行'], tax:'标准企业所得税 9%，自由区合格实体享 0% 至 50 年' },
+  '': 1,
+  'country-ir': { name:'伊朗', code:'IR', en:'Iran', cities:'德黑兰', capital:'德黑兰', lang:'波斯语', currency:'里亚尔 (IRR)', pop:'8,800 万人', gdp:'4,000 亿美元', img:'https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80&auto=format', desc:'伊朗是中东人口最多的国家，8,800 万人口市场规模庞大，石油、汽车、家电、消费品市场需求旺盛。德黑兰是经济中心。', industries:['石油天然气、石化', '汽车、家电', '矿业、钢鋢', '农业、食品', '建筑、基础设施'], services:['公司注册：有限责任公司、股份公司', '外资准入：FDI 投资许可、贸易许可', '税务：企业所得税 25%', '签证：投资签证、工作签证', '行业许可：制造、贸易'], tax:'企业所得税 25%，生产业、农业享 5 年免税期' },
+  'country-sa': { name:'沙特阿拉伯', code:'SA', en:'Saudi Arabia', cities:'利雅得（拓展中）', capital:'利雅得', lang:'阿拉伯语、英语', currency:'里亚尔 (SAR)', pop:'3,500 万人', gdp:'1.1 万亿美元', img:'https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=800&q=80&auto=format', desc:'沙特是中东最大经济体，2030 愿景推动经济多元化。新能源、科技、旅游、制造业对外资需求强劲。', industries:['石油、石化', '新能源、可再生能源', '科技、数字经济', '旅游、文化娱乐', '矿业'], services:['公司注册：SJL 有限责任公司、合资公司', 'MISA 投资许可', '税务：增值税 15%、企业所得税 20%', '签证：投资签证、Premium Residency', '行业许可：能源、制造、贸易等'], tax:'企业所得税 20%，特定行业享 10 年税收减免' },
+  'country-ru': { name:'俄罗斯', code:'RU', en:'Russia', cities:'莫斯科 · 圣彼得堡', capital:'莫斯科', lang:'俄语', currency:'卢布 (RUB)', pop:'1.44 亿人', gdp:'2.2 万亿美元', img:'https://images.unsplash.com/photo-1547448415-e9f5b28e570d?w=800&q=80&auto=format', desc:'俄罗斯是欧亚大陆最大消费市场，工业基础雄厚。能源、装备制造、消费品、农业机械、建材出海需求旺盛。', industries:['能源、石油天然气', '装备制造、工程机械', '消费品、家电', '农业机械、化肥', '建材、装修'], services:['公司注册：OOO 有限责任公司、AO 股份公司', '外资准入：俄央行登记、行业许可', '税务：增值税 20%、企业所得税 20%', '工作许可：工作签证、专利', '认证：EAC 认证、GOST-R'], tax:'企业所得税 20%，增值税 20%，IT 行业享 0% 至 2024' },
+  'country-by': { name:'白俄罗斯', code:'BY', en:'Belarus', cities:'明斯克（拓展中）', capital:'明斯克', lang:'白俄罗斯语、俄语', currency:'白俄罗斯卢布 (BYN)', pop:'940 万人', gdp:'730 亿美元', img:'https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80&auto=format', desc:'白俄罗斯位于欧亚经济联盟核心位置，是进入俄罗斯、哈萨克斯坦等独联体市场的中转站。明斯克自由经济区享税收优惠。', industries:['机械制造', '石油化工', 'IT 软件', '农业、农产品加工', '木材加工'], services:['公司注册：OOO 有限责任公司', '外资准入：明斯克自由经济区入驻', '税务：增值税 20%、企业所得税 18%', '签证：工作许可、临时居留', '认证：EAC、STB'], tax:'企业所得税 18%，明斯克自由经济区享所得税免税' },
+  'country-kg': { name:'吉尔吉斯斯坦', code:'KG', en:'Kyrgyzstan', cities:'比什凯克', capital:'比什凯克', lang:'吉尔吉斯语、俄语', currency:'索姆 (KGS)', pop:'700 万人', gdp:'120 亿美元', img:'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80&auto=format', desc:'吉尔吉斯斯坦是欧亚经济联盟成员，改革后营商环境大幅改善，水电资源丰富。农业、矿业、轻工业、跨境贸易是主要产业。', industries:['黄金开采', '水电能源', '农业、畜牧产品加工', '轻工业、纺织', '跨境贸易'], services:['公司注册：有限责任公司、股份公司', '外资准入：投资注册、税收优惠', '税务：增值税 12%、企业所得税 10%', '签证：工作许可、临时居留', '行业许可：矿产、贸易'], tax:'企业所得税 10%，增值税 12%，特区享 5 年免税' },
+  'country-tj': { name:'塔吉克斯坦', code:'TJ', en:'Tajikistan', cities:'杜尚别', capital:'杜尚别', lang:'塔吉克语、俄语', currency:'索莫尼 (TJS)', pop:'1,000 万人', gdp:'100 亿美元', img:'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80&auto=format', desc:'塔吉克斯坦是中亚内陆国家，水电资源丰富，铝业、棉花种植是支柱产业。中亚市场拓展中，服务能力持续建设。', industries:['水电能源', '铝业、有色金属', '棉花、纺织', '农业、果品加工', '建材'], services:['公司注册：有限责任公司、代表处', '外资准入：投资许可、税收优惠申请', '税务：增值税 14%、企业所得税 13%', '签证：工作许可、临时居留', '行业许可：矿产、贸易'], tax:'企业所得税 13%，增值税 14%，自由经济区享优惠' },
+  'country-tm': { name:'土库曼斯坦', code:'TM', en:'Turkmenistan', cities:'阿什哈巴德', capital:'阿什哈巴德', lang:'土库曼语、俄语', currency:'马纳特 (TMT)', pop:'600 万人', gdp:'450 亿美元', img:'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80&auto=format', desc:'土库曼斯坦拥有全球第四大天然气储量，能源出口是经济命脉。营商环境谨慎外资，但能源、纺织、农业有合作空间。', industries:['天然气、石油化工', '棉花、纺织', '农业、畜牧业', '建材、化工业', '电力'], services:['公司注册：合资公司、代表处', '外资准入：需与土方合资，个别领域可独资', '税务：增值税 15%、企业所得税 20%', '签证：商务签证、工作许可', '行业许可：能源、贸易'], tax:'企业所得税 20%，增值税 15%，能源企业享特别规定' },
+  'country-de': { name:'德国', code:'DE', en:'Germany', cities:'法兰克福（拓展中）', capital:'柏林', lang:'德语、英语', currency:'欧元 (EUR)', pop:'8,400 万人', gdp:'4.1 万亿美元', img:'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80&auto=format', desc:'德国是欧洲最大经济体、全球制造业强国。中国品牌进入欧洲市场，德国是品牌高地的首选落地点。', industries:['汽车、机械制造', '化工、医药', '新能源、环保科技', '电子、信息技术', '消费品、零售'], services:['公司注册：GmbH 有限责任公司、AG 股份公司', 'CE 认证全流程', '税务：增值税 19%、企业所得税 15%', '工作签证：欧盟蓝卡、专业人才签证', '商标专利：EUIPO、DPMA'], tax:'企业所得税 15%，增值税 19%，团结附加税 5.5%' },
+  'country-gb': { name:'英国', code:'GB', en:'UK', cities:'伦敦（拓展中）', capital:'伦敦', lang:'英语', currency:'英镑 (GBP)', pop:'6,700 万人', gdp:'3.1 万亿美元', img:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80&auto=format', desc:'英国是全球金融、创意、科技中心。伦敦作为欧洲第一金融中心，是中国资本出海、品牌国际化的关键节点。', industries:['金融服务、保险', '科技、人工智能', '创意产业、文化传媒', '教育服务', '奢侈品、零售'], services:['公司注册：Ltd 私人有限公司', '金融牌照：FCA 各类金融许可', '税务：企业所得税 25%、增值税 20%', '签证：Skilled Worker、Global Talent', '商标：UKIPO、欧盟商标'], tax:'企业所得税 25%（2023 年起），年利润 5 万英镑以下 19%' },
+  'country-fr': { name:'法国', code:'FR', en:'France', cities:'巴黎（拓展中）', capital:'巴黎', lang:'法语、英语', currency:'欧元 (EUR)', pop:'6,800 万人', gdp:'2.9 万亿美元', img:'https://images.unsplash.com/photo-1431274172761-fca41d930114?w=800&q=80&auto=format', desc:'法国是欧洲第三大经济体，奢侈品、农业、航空航天、生物医药产业全球领先。巴黎是欧洲时尚与文化中心。', industries:['奢侈品、时尚', '航空航天', '农业、食品加工', '生物医药', '旅游服务业'], services:['公司注册：SARL 有限责任公司、SAS 简化股份公司', 'CE 认证', '税务：增值税 20%、企业所得税 15-25%', '工作签证：Passeport Talent', '商标：INPI、EUIPO'], tax:'企业所得税 15%（首 4.25 万欧元）、25%（以上）' }
+};
+
+function buildRegionDetail(id) {
+  var d = REGION_DATA[id]; if (!d) return null;
+  return {
+    title: d.name + ' · 区域服务总览',
+    subtitle: d.en,
+    hero: d.img,
+    heroCode: id === 'region-sea' ? 'SEA' : id === 'region-me' ? 'ME' : id === 'region-ru' ? 'RU·CA' : id === 'region-eu' ? 'EU' : '',
+    sections: [
+      { type: 'text', content: d.desc },
+      { type: 'heading', content: '区域定位' },
+      { type: 'text', content: d.region },
+      { type: 'heading', content: '丝路山海通核心优势' },
+      { type: 'list', items: d.points },
+      { type: 'heading', content: '服务内容' },
+      { type: 'list', items: ['公司注册与投资许可','财税代账与税务筹划','人事招聘与劳动合同','产品认证与市场准入','政府关系与商会对接','本地化运营支持'] },
+      { type: 'heading', content: '推荐行业' },
+      { type: 'list', items: ['新能源与可再生能源','机械装备与基建工程','电子信息与科技','消费品与零售贸易','农业与食品加工'] }
+    ]
+  };
+}
+
+function buildCountryDetail(id) {
+  var d = COUNTRY_DATA[id]; if (!d) return null;
+  return {
+    title: d.name + ' · 国别服务详情',
+    subtitle: d.en + ' · ' + d.code,
+    hero: d.img,
+    heroCode: d.code,
+    sections: [
+      { type: 'text', content: d.desc },
+      { type: 'heading', content: '基本信息' },
+      { type: 'list', items: ['首都：' + d.capital, '人口：' + d.pop, 'GDP：' + d.gdp, '官方语言：' + d.lang, '货币：' + d.currency, '本地中心：' + d.cities] },
+      { type: 'heading', content: '重点行业' },
+      { type: 'list', items: d.industries },
+      { type: 'heading', content: '服务内容' },
+      { type: 'list', items: d.services },
+      { type: 'heading', content: '税务概览' },
+      { type: 'text', content: d.tax },
+      { type: 'heading', content: '为什么选择丝路山海通' },
+      { type: 'list', items: [d.name + '本地团队常驻，精通当地语言与商业文化','中' + d.name + '双语项目经理全程跟进，沟通零障碍','熟知当地外资政策与审批流程，最快 4-6 周完成设立','提供公司注册、税务、人事的全周期服务','已成功服务多家中国企业落地' + d.name] }
+    ]
+  };
+}
+
+['region-sea','region-me','region-ru','region-eu'].forEach(function(k){ var d = buildRegionDetail(k); if (d) DETAIL_CONTENT[k] = d; });
+['country-id','country-vn','country-ph','country-th','country-sg','country-kz','country-uz','country-kg','country-tj','country-tm','country-ae','country-ir','country-sa','country-ru','country-by','country-de','country-gb','country-fr'].forEach(function(k){ var d = buildCountryDetail(k); if (d) DETAIL_CONTENT[k] = d; });
+
+// ========== CAROUSEL ==========
+var slideIndex = 0;
+var track, dotsContainer, slideCurrent, slideTotal;
+
+function renderSlide(s, i) {
+  var link = s.detailId ? 'onclick="openDetail(\''+s.detailId+'\')"' : '';
+  return '<div class="hero-slide" '+link+'>'+
+    '<div class="hero-text">'+
+      '<div class="ht-label"><span class="dot"></span><span>SLIDE '+s.idx+'</span></div>'+
+      '<h2>'+s.title1+'<br>'+s.title2+'</h2>'+
+      '<p>'+s.desc+'</p>'+
+      '<span class="hero-link" onclick="event.stopPropagation();openDetail(\''+s.detailId+'\')">了解更多 &#x2192;</span>'+
+    '</div>'+
+    '<div class="hero-image-panel">'+
+      '<img src="'+s.img+'" alt="'+s.imgAlt+'" loading="lazy">'+
+      '<div class="hip-overlay"></div><div class="hip-frame"></div>'+
+      '<div class="hip-tag"><span class="dot"></span><span>'+s.imgTag+'</span></div>'+
+    '</div></div>';
+}
+
+function initCarousel() {
+  track = document.getElementById('heroTrack');
+  dotsContainer = document.getElementById('heroDots');
+  slideCurrent = document.getElementById('slideCurrent');
+  slideTotal = document.getElementById('slideTotal');
+  var html = '';
+  for (var i = 0; i < SLIDE_CONFIG.length; i++) html += renderSlide(SLIDE_CONFIG[i], i);
+  track.innerHTML = html;
+  slideTotal.textContent = '0' + SLIDE_CONFIG.length;
+  updateDots();
+  updateCounter();
+  
+  // Drag-to-navigate
+  var isDown = false, startX = 0;
+  track.addEventListener('mousedown', function(e) { isDown = true; startX = e.clientX; });
+  document.addEventListener('mouseup', function() { isDown = false; });
+  document.addEventListener('mousemove', function(e) { if (!isDown) return; var diff = e.clientX - startX; if (Math.abs(diff) > 8) { isDown = false; if (diff < 0) nextSlide(); else prevSlide(); } });
+}
+
+function updateDots() {
+  var html = '';
+  for (var i = 0; i < SLIDE_CONFIG.length; i++) html += '<button class="hero-dot' + (i === slideIndex ? ' active' : '') + '" onclick="goToSlide('+i+')"></button>';
+  dotsContainer.innerHTML = html;
+}
+
+function updateCounter() { slideCurrent.textContent = '0' + (slideIndex + 1); }
+
+function goToSlide(n) {
+  slideIndex = n;
+  track.style.transform = 'translateX(-' + (n * 100) + '%)';
+  updateDots();
+  updateCounter();
+}
+
+function nextSlide() { goToSlide((slideIndex + 1) % SLIDE_CONFIG.length); }
+function prevSlide() { goToSlide((slideIndex - 1 + SLIDE_CONFIG.length) % SLIDE_CONFIG.length); }
+
+document.getElementById('arrowNext').addEventListener('click', nextSlide);
+document.getElementById('arrowPrev').addEventListener('click', prevSlide);
+
+// ========== DETAIL ==========
+function openDetail(id) {
+  var data = DETAIL_CONTENT[id];
+  if (!data) return;
+  document.getElementById('detailTitle').textContent = data.title;
+  document.getElementById('detailSubtitle').textContent = data.subtitle;
+  var html = '';
+  if (data.hero || data.heroCode) {
+    html += '<div class="dh-hero">';
+    if (data.hero) html += '<img src="'+data.hero+'" alt="'+data.title+'" onerror="this.style.display=\'none\'">';
+    html += '<div class="dh-hero-overlay"></div>';
+    if (data.heroCode) html += '<div class="dh-hero-code">'+data.heroCode+'</div>';
+    html += '</div>';
+  }
+  for (var j = 0; j < data.sections.length; j++) {
+    var sec = data.sections[j];
+    if (sec.type === 'text') html += '<div class="dh-intro">'+sec.content+'</div>';
+    else if (sec.type === 'heading') html += '<div class="dh-heading">'+sec.content+'</div>';
+    else if (sec.type === 'list') {
+      html += '<ul>';
+      for (var k = 0; k < sec.items.length; k++) html += '<li>'+sec.items[k]+'</li>';
+      html += '</ul>';
+    }
+  }
+  html += '<div class="detail-cta-bar"><a href="#contact" class="btn-primary" onclick="closeDetail();openWechat();return false;">立即咨询 &#x2192;</a></div>';
+  document.getElementById('detailBody').innerHTML = html;
+  document.getElementById('detailOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+  document.getElementById('detailOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('detailOverlay').addEventListener('click', function(e) { if (e.target === this) closeDetail(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeDetail(); closeWechat(); } });
+
+// ========== WECHAT MODAL ==========
+function openWechat() {
+  closeDetail();
+  document.getElementById('wechatOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeWechat() {
+  document.getElementById('wechatOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.getElementById('wechatOverlay').addEventListener('click', function(e) { if (e.target === this) closeWechat(); });
+
+// ========== BOOK MODAL ==========
+function openBook() {
+  closeDetail(); closeWechat();
+  document.getElementById('bookOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeBook() {
+  document.getElementById('bookOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+function submitBook() {
+  var body = document.querySelector('#bookOverlay .book-body');
+  body.innerHTML = '<div class="book-success"><div class="ok">&#10003;</div><h3>提交成功</h3><p>我们已收到您的预约需求，专属顾问将在 1 个工作日内与您联系。</p><p style="margin-top:1.4rem;"><a href="#" onclick="event.preventDefault();closeBook();" style="display:inline-block;padding:.6rem 1.6rem;background:var(--red);color:#fff;border-radius:4px;text-decoration:none;font-size:.8rem;font-weight:600;">关闭</a></p></div>';
+}
+document.getElementById('bookOverlay').addEventListener('click', function(e) { if (e.target === this) closeBook(); });
+
+// ========== REVEAL ==========
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+// ========== NAV SCROLL ==========
+window.addEventListener('scroll', function() {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ========== PRELOADER ==========
+window.addEventListener('load', function() { document.getElementById('preloader').classList.add('hide'); });
+setTimeout(function() { document.getElementById('preloader').classList.add('hide'); }, 1500);
+
+// ========== HELPERS ==========
+function goHome() { window.scrollTo({top:0,behavior:'smooth'}); closeDetail(); }
+function closeNav() { document.getElementById('navLinks').classList.remove('open'); }
+
+// ========== INIT ==========
+initCarousel();
+</script>
+</body>
+</html>
+

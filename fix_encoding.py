@@ -1,148 +1,48 @@
-# -*- coding: utf-8 -*-
-import sys
+#!/usr/bin/env python3
+"""修复 admin_server.py 的编码问题"""
+import subprocess, os, ast
 
-with open('C:\\Users\\ASDCF\\.qclaw\\workspace\\silkroad-trade.html', 'rb') as f:
-    raw = f.read()
-print(f'Size: {len(raw)}')
-text = raw.decode('utf-8', errors='replace')
-print(f'U+FFFD count: {text.count(chr(0xFFFD))}')
+WORKSPACE = r'C:\Users\ASDCF\.qclaw\workspace'
+git_exe = r'E:\腾讯龙虾\QClaw\v0.2.29.592\resources\git\cmd\git.exe'
+target = os.path.join(WORKSPACE, 'admin_server.py')
 
-replacements = {
-    '丝路山海????一带一路企业出海一站式服务': '丝路山海通 — 一带一路企业出海一站式服务',
-    'arrowPrev">←/button>': 'arrowPrev">←</button>',
-    'arrowNext">→/button>': 'arrowNext">→</button>',
-    '首页??=': '首页 -->',
-    '关于丝路山海??': '关于丝路山海通',
-    '山海相??': '山海相通',
-    '中国企??': '中国企业',
-    '落地海外??': '落地海外。',
-    '互利共赢??': '互利共赢。',
-    '商务合??': '商务合作',
-    '深耕经??': '深耕经验',
-    '出海落??': '出海落地',
-    '全流程??': '全流程。',
-    '注册与资??': '注册与资质',
-    '最快个工作日': '最快7个工作日',
-    '完成设立??': '完成设立。',
-    '财税人事与法??': '财税人事与法务',
-    '全方位保障??': '全方位保障。',
-    '行程安排??': '行程安排。',
-    '产品准入与认??': '产品准入与认证',
-    '合规准入服务??': '合规准入服务。',
-    '建厂与工程服??': '建厂与工程服务',
-    '基建配套服务??': '基建配套服务。',
-    '本地化运营支??': '本地化运营支持',
-    '扎根海外市场??': '扎根海外市场。',
-    '一带一路政??': '一带一路政策',
-    '政策研究与解??': '政策研究与解读',
-    '精准政策导航??': '精准政策导航。',
-    '政府与商会对??': '政府与商会对接',
-    '政商关系网络??': '政商关系网络。',
-    '政策红利??': '政策红利。',
-    '投融资对??': '投融资对接',
-    '项目资金支持??': '项目资金支持。',
-    '服务所??': '服务所达',
-    '印度尼西??': '印度尼西亚',
-    '雅加??': '雅加达',
-    '菲律??': '菲律宾',
-    '马尼??': '马尼拉',
-    '新加??': '新加坡',
-    '哈萨克斯??': '哈萨克斯坦',
-    '阿联??': '阿联酋',
-    '肯尼??': '肯尼亚',
-    '内罗??': '内罗毕',
-    '需求诊??': '需求诊断',
-    '出海方案??': '出海方案。',
-    '风险前置??': '风险前置。',
-    '全程推进??': '全程推进。',
-    '长期运营保障??': '长期运营保障。',
-    '信赖之??': '信赖之选',
-    '覆盖国??': '覆盖国家',
-    '太多了??': '太多了。',
-    '张宏??': '张宏伟',
-    '新能源汽??': '新能源汽车',
-    '工厂负责??': '工厂负责人',
-    '强烈推荐??': '强烈推荐。',
-    '李雪??': '李雪峰',
-    '总经理??': '总经理',
-    '效果超出预期??': '效果超出预期。',
-    '东??': '东风',
-    '出海无忧': '出海无忧',
-    '新篇章??': '新篇章。',
-    '丝路山海??': '丝路山海通',
-    '有限公??': '有限公司',
-    '渲??': '渲染',
-    '返回首页': '← 返回首页',
-    '动态渲??': '动态渲染',
-    '完成海外公司设立??': '完成海外公司设立。',
-    '设立??': '设立。',
-    '一张证书通市??': '一张证书通市场',
-    '缩短60%??': '缩短60%/',
-    '货运港口集装??': '货运港口集装箱',
-    '更要扎??': '更要扎根',
-    '出海问??': '出海问题',
-    '规模与行??': '规模与行业',
-    '出海痛??': '出海痛点',
-    '出海需??': '出海需求',
-    '行业准入限??': '行业准入限制',
-    '规范申??': '规范申报',
-    '合作伙??': '合作伙伴',
-    '银行开??': '银行开户',
-    '认证办??': '认证办理',
-    '团队搭??': '团队搭建',
-    '投资许可审??': '投资许可审批',
-    '人??': '人员',
-    '管理体??': '管理体系',
-    '风险预警机??': '风险预警机制',
-    '出海信赖之??': '出海信赖之选',
-    '最大动力??': '最大动力。',
-    '生产许??': '生产许可',
-    '节省企??': '节省企业',
-    '效率高太多了??': '效率高太多了。',
-    '本地招??': '本地招聘',
-    '试错成本??': '试错成本。',
-    '全程代??': '全程代办',
-    '周期缩??': '周期缩短',
-    '个月完成所有认??': '个月完成所有认证',
-    '包办，效果超出预期??': '包办，效果超出预期。',
-    '华侨银??': '华侨银行',
-    'IT通??': 'IT通讯',
-    '政策风??': '政策风险',
-    'list-style-type:"??"': 'list-style-type:"none"',
-    'fill="#F0D68A">??/': 'fill="#F0D68A">丝/',
-    '丝路山海<?': '丝路山海通<',
-    '一带一<?': '一带一路<',
-}
+# 获取初始提交的版本
+result = subprocess.run([git_exe, 'show', 'eaa054d:admin_server.py'], capture_output=True, cwd=WORKSPACE)
+data = result.stdout
 
-count = 0
-for old, new in replacements.items():
-    if old in text:
-        text = text.replace(old, new)
-        count += 1
+# 检查初始版本里中文是否正常
+needle = '丝路山海通'.encode('utf-8')
+print(f'初始版本大小: {len(data)} 字节')
+print(f'初始版本含丝路山海通: {needle in data}')
 
-print(f'Applied {count} replacements')
+if needle not in data:
+    print('初始版本也乱码了，尝试用 github 上最后一次提交')
+    result = subprocess.run([git_exe, 'show', 'HEAD:admin_server.py'], capture_output=True, cwd=WORKSPACE)
+    data = result.stdout
+    print(f'HEAD版本大小: {len(data)} 字节')
+    print(f'HEAD版本含丝路山海通: {needle in data}')
 
-fffd = chr(0xFFFD)
-remaining = text.count(fffd)
-print(f'Remaining U+FFFD before removal: {remaining}')
+# 直接写入
+with open(target, 'wb') as f:
+    f.write(data)
 
-# Strip all remaining U+FFFD
-text = text.replace(fffd, '')
+# 检查语法
+try:
+    with open(target, 'r', encoding='utf-8') as f:
+        content = f.read()
+    ast.parse(content)
+    print('语法检查通过')
+    
+    # 检查 LB 中的中文
+    idx = content.find('var LB=')
+    if idx >= 0:
+        end = content.index(';', idx)
+        section = content[idx:end+1]
+        print(f'LB定义: {section}')
+        has_chinese = any('\u4e00' <= c <= '\u9fff' for c in section)
+        print(f'LB含中文: {has_chinese}')
+    
+except SyntaxError as e:
+    print(f'语法错误: {e}')
 
-final_count = text.count(fffd)
-print(f'U+FFFD after removal: {final_count}')
-
-with open('C:\\Users\\ASDCF\\.qclaw\\workspace\\silkroad-trade.html', 'w', encoding='utf-8', newline='\r\n') as f:
-    f.write(text)
-
-print('File written successfully')
-
-# Verify
-with open('C:\\Users\\ASDCF\\.qclaw\\workspace\\silkroad-trade.html', 'rb') as f:
-    raw = f.read()
-print(f'Final size: {len(raw)}')
-txt = raw.decode('utf-8')
-if '关于丝路山海通' in txt:
-    print('VERIFIED: Chinese text restored!')
-else:
-    print('STILL ISSUES')
+print('完成')

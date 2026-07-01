@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>管理后台登录 · 丝路山海通</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,"Segoe UI",sans-serif}
+body{background:url(/login_bg.jpg) center/cover no-repeat;display:flex;justify-content:center;align-items:center;min-height:100vh;position:relative}
+body::before{content:"";position:fixed;inset:0;background:linear-gradient(135deg,rgba(245,240,234,.85) 0%,rgba(48,40,36,.4) 100%);z-index:0}
+.l-box{position:relative;z-index:1;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-radius:12px;padding:2.5rem;width:360px;box-shadow:0 8px 32px rgba(48,40,36,.15);text-align:center;border:1px solid rgba(255,255,255,.3)}
+.l-box h1{font-size:1.2rem;color:#302824;margin-bottom:.3rem}
+.l-box p{font-size:.8rem;color:#a89e96;margin-bottom:1.5rem}
+.fg{margin-bottom:.8rem;text-align:left}
+.fg label{display:block;font-size:.78rem;font-weight:600;margin-bottom:.2rem;color:#6b625c}
+.fg input{width:100%;padding:.45rem .5rem;border:1px solid #c8c0b8;border-radius:4px;font-size:.85rem;background:#fff}
+.fg input:focus{outline:none;border-color:#c44536;box-shadow:0 0 0 2px rgba(196,69,54,.1)}
+.btn{padding:.5rem 1.2rem;border-radius:4px;font-size:.85rem;font-weight:600;cursor:pointer;border:none;transition:.2s;width:100%}
+.btn-g{background:#2d8a4e;color:#fff}.btn-g:hover{background:#1e6b37}
+.msg{padding:.5rem .8rem;border-radius:4px;margin-bottom:1rem;font-size:.8rem;display:none}
+.msg.er{display:block;background:#fce4ec;color:#c62828;border:1px solid #ef9a9a}
+.fo{font-size:.72rem;color:#a89e96;margin-top:1.5rem}
+.err{border-color:#c62828!important}
+</style>
+</head><body>
+<div class="l-box">
+<h1>丝路山海通</h1>
+<p>管理后台登录</p>
+<div id="msg" class="msg"></div>
+<div class="fg"><label>用户名</label><input id="user" type="text" autocomplete="username" autofocus></div>
+<div class="fg"><label>密码</label><input id="pass" type="password" autocomplete="current-password"></div>
+<button class="btn btn-g" onclick="login()">登 录</button>
+<div class="fo">后台管理系统</div>
+</div>
+<script>
+function login(){
+  var u=document.getElementById('user'),p=document.getElementById('pass'),m=document.getElementById('msg');
+  u.classList.remove('err');p.classList.remove('err');m.style.display='none';
+  if(!u.value){u.classList.add('err');u.focus();m.textContent='请输入用户名';m.className='msg er';return;}
+  if(!p.value){p.classList.add('err');p.focus();m.textContent='请输入密码';m.className='msg er';return;}
+  var x=new XMLHttpRequest();
+  x.open('POST','/api/login',true);
+  x.setRequestHeader('Content-Type','application/json');
+  x.onload=function(){
+    if(x.status==200){window.location.href='/admin';}
+    else{var r=JSON.parse(x.responseText);m.textContent=r.message||'登录失败';m.className='msg er';}
+  };
+  x.onerror=function(){m.textContent='网络错误';m.className='msg er';};
+  x.send(JSON.stringify({username:u.value,password:p.value}));
+}
+document.getElementById('user').addEventListener('keydown',function(e){if(e.key=='Enter')document.getElementById('pass').focus();});
+document.getElementById('pass').addEventListener('keydown',function(e){if(e.key=='Enter')login();});
+</script>
+</body></html>

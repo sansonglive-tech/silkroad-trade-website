@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>丝路山海通 -- 预约记录管理</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+body{background:#f5f0ea;color:#1a1512;min-height:100vh}
+.header{background:#302824;color:#f5f0ea;padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.header h1{font-size:1.1rem;font-weight:600}
+.header .sub{font-size:.78rem;color:#a09080}
+.container{max-width:1100px;margin:0 auto;padding:2rem}
+.stats{display:flex;gap:1rem;margin-bottom:2rem}
+.stat-card{flex:1;background:#fff;border-radius:10px;padding:1.2rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.stat-card .num{font-size:1.8rem;font-weight:700;color:#302824}
+.stat-card .label{font-size:.78rem;color:#a09080;margin-top:.3rem}
+.stat-card.today .num{color:#b8860b}
+.filter-bar{display:flex;gap:.8rem;margin-bottom:1.2rem;align-items:center;flex-wrap:wrap}
+.filter-bar input,.filter-bar select{padding:.5rem .8rem;border:1px solid #e0d8d0;border-radius:6px;font-size:.82rem;background:#fff;outline:none}
+.filter-bar input:focus,.filter-bar select:focus{border-color:#c9a96e}
+.filter-bar .btn{background:#302824;color:#fff;border:none;padding:.5rem 1rem;border-radius:6px;cursor:pointer;font-size:.82rem}
+.filter-bar .btn:hover{background:#4a3c34}
+.table-wrap{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{background:#f0ebe4;padding:.8rem 1rem;text-align:left;font-weight:600;color:#302824;white-space:nowrap}
+td{padding:.7rem 1rem;border-top:1px solid #f0ebe4}
+tr:hover{background:#faf6f0}
+.status-badge{display:inline-block;padding:.15rem .5rem;border-radius:10px;font-size:.72rem;font-weight:500}
+.status-badge.new{background:#e8f5e9;color:#2e7d32}
+.status-badge.done{background:#eceff1;color:#546e7a}
+.btn-sm{padding:.25rem .6rem;border-radius:4px;border:none;cursor:pointer;font-size:.72rem;transition:.2s}
+.btn-sm.done{background:#e8f5e9;color:#2e7d32}
+.btn-sm.done:hover{background:#c8e6c9}
+.btn-sm.del{background:#fce4ec;color:#c62828}
+.btn-sm.del:hover{background:#f8bbd0}
+.empty{text-align:center;padding:3rem;color:#a09080}
+.refresh-btn{position:fixed;bottom:2rem;right:2rem;background:#302824;color:#fff;border:none;width:48px;height:48px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.refresh-btn:hover{background:#4a3c34}
+@media(max-width:768px){
+  .header{padding:1rem}.container{padding:1rem}
+  .stats{flex-direction:column}
+  .filter-bar input,.filter-bar select{width:100%}
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+    <h1>丝路山海通 - 预约记录管理</h1>
+    <div class="sub">完全独立服务，不影响现有系统</div>
+  </div>
+</div>
+<div class="container">
+  <div class="stats" id="stats">
+    <div class="stat-card"><div class="num" id="totalCount">0</div><div class="label">总预约</div></div>
+    <div class="stat-card today"><div class="num" id="todayCount">0</div><div class="label">今日新增</div></div>
+    <div class="stat-card"><div class="num" id="pendingCount">0</div><div class="label">待处理</div></div>
+  </div>
+  <div class="filter-bar">
+    <input type="text" id="searchInput" placeholder="搜索 姓名/手机号/国家..." oninput="filterTable()">
+    <select id="statusFilter" onchange="filterTable()">
+      <option value="all">全部状态</option>
+      <option value="new">待处理</option>
+      <option value="done">已处理</option>
+    </select>
+    <button class="btn" onclick="loadData()">刷新</button>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th style="width:50px">#</th><th>姓名</th><th>手机号</th>
+        <th>意向国家</th><th style="width:150px">提交时间</th>
+        <th style="width:80px">状态</th><th style="width:130px">操作</th>
+      </tr></thead>
+      <tbody id="bookTable"></tbody>
+    </table>
+    <div class="empty" id="emptyState" style="display:none">
+      <p>暂无预约记录</p>
+      <p style="font-size:.75rem;color:#c0b0a0">用户提交预约后，数据自动显示在此</p>
+    </div>
+  </div>
+</div>
+<button class="refresh-btn" onclick="loadData()" title="刷新">+</button>
+<script>
+var bookings=[];
+function loadData(){
+  fetch('/api/bookings').then(function(r){return r.json();}).then(function(d){
+    bookings=d;renderTable(d);updateStats(d);
+  }).catch(function(e){
+    document.getElementById('bookTable').innerHTML='<tr><td colspan="7" style="text-align:center;padding:2rem;color:#c62828">加载失败: '+e.message+'</td></tr>';
+  });
+}
+function updateStats(data){
+  document.getElementById('totalCount').textContent=data.length;
+  var t=new Date().toISOString().slice(0,10);
+  document.getElementById('todayCount').textContent=data.filter(function(b){return b.created_at&&b.created_at.indexOf(t)===0;}).length;
+  document.getElementById('pendingCount').textContent=data.filter(function(b){return b.status!=='done';}).length;
+}
+function renderTable(data){
+  var tb=document.getElementById('bookTable');
+  if(data.length===0){tb.innerHTML='';document.getElementById('emptyState').style.display='block';return;}
+  document.getElementById('emptyState').style.display='none';
+  tb.innerHTML=data.map(function(b,i){
+    var idx=i+1;
+    var st=b.status==='done'?'done':'new';
+    var stt=b.status==='done'?'已处理':'待处理';
+    return '<tr><td style="color:#a09080">'+idx+'</td><td>'+($esc(b.name)||'-')+'</td><td>'+($esc(b.phone)||'-')+'</td><td>'+($esc(b.country)||'-')+'</td><td style="color:#a09080">'+($esc(b.created_at)||'-')+'</td><td><span class="status-badge '+st+'">'+stt+'</span></td><td>'+(b.status!=='done'?'<button class="btn-sm done" onclick="markDone('+i+')">处理</button> ':'')+'<button class="btn-sm del" onclick="delBooking('+i+')">删除</button></td></tr>';
+  }).join('');
+}
+function $esc(s){if(!s)return s;return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function filterTable(){
+  var q=document.getElementById('searchInput').value.toLowerCase();
+  var s=document.getElementById('statusFilter').value;
+  var f=bookings;
+  if(q)f=f.filter(function(b){return(b.name||'').toLowerCase().indexOf(q)>=0||(b.phone||'').indexOf(q)>=0||(b.country||'').toLowerCase().indexOf(q)>=0;});
+  if(s!=='all')f=f.filter(function(b){return s==='done'?b.status==='done':b.status!=='done';});
+  renderTable(f);
+}
+function markDone(i){
+  var b=bookings[i];if(!b)return;
+  fetch('/api/booking/update',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:b.id,status:'done'})}).then(function(r){return r.json();}).then(function(d){if(d.success)loadData();});
+}
+function delBooking(i){
+  var b=bookings[i];if(!b||!confirm('确定删除 '+b.name+' 的预约记录？'))return;
+  fetch('/api/booking/delete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:b.id})}).then(function(r){return r.json();}).then(function(d){if(d.success)loadData();});
+}
+loadData();setInterval(loadData,30000);
+</script>
+</body>
+</html>
