@@ -23,7 +23,7 @@
     {
       "img": "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80&auto=format",
       "title": "公司注册<span class=\"gold\">资质办理</span>",
-      "subtitle": "最快7个工作日完成海外公司设立",
+      "subtitle": "最快14个工作日完成海外公司设立",
       "detailId": "company-reg",
       "desc": "境内境外公司注册、营业执照激活、行业资质证照办理，让您的企业快速合法落地海外。"
     },
@@ -162,26 +162,6 @@
       "title": "客户案例：王琳",
       "subtitle": "食品饮料 · 海外拓展总监",
       "content": "<div class=\"dh-hero\"><img src=\"https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80&auto=format\" alt=\"\"><div class=\"dh-hero-code\">CASE</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">\"印尼的SNI认证和清真认证一度让我们头疼，丝路山海通一站式包办，产品准入周期缩短了60%，效果超出预期。\"</div><div class=\"dh-heading\">客户背景</div><ul><li>食品饮料行业</li><li>计划进入印尼市场</li><li>需要SNI认证和清真认证</li></ul><div class=\"dh-heading\">服务成果</div><ul><li>SNI认证3个月完成（常规需6-8个月）</li><li>清真认证一站式办理</li><li>BPOM注册顺利通过</li><li>产品准入周期缩短60%</li></ul><div class=\"dh-heading\">客户评价</div><ul><li>\"一站式包办，省心省力\"</li><li>\"产品准入周期缩短了60%\"</li><li>\"效果超出预期\"</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">咨询产品认证</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>"
-    },
-    "process-step1": {
-      "title": "01 需求诊断",
-      "subtitle": "needs assessment",
-      "content": "<div class=\"dh-hero\"><div class=\"dh-hero-code\">STEP 01</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">深入了解企业出海目标与需求，定制化出海方案。这是出海成功的第一步，也是最关键的一步。</div><div class=\"dh-heading\">诊断内容</div><ul><li>企业出海目标与战略规划</li><li>产品特点与市场定位分析</li><li>预算规模与资源评估</li><li>目标市场机会与风险分析</li></ul><div class=\"dh-heading\">交付成果</div><ul><li>定制化出海方案</li><li>目标市场可行性报告</li><li>初步投资预算与时间表</li><li>风险评估与应对建议</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">开始诊断</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>"
-    },
-    "process-step2": {
-      "title": "02 尽职调研",
-      "subtitle": "due diligence",
-      "content": "<div class=\"dh-hero\"><div class=\"dh-hero-code\">STEP 02</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">市场调研、法律评估、财税分析，规避风险前置。用数据和事实为出海决策提供支撑。</div><div class=\"dh-heading\">调研内容</div><ul><li>目标市场规模与竞争格局</li><li>当地法律法规与政策环境</li><li>财税制度与合规要求</li><li>行业准入门槛与资质要求</li></ul><div class=\"dh-heading\">交付成果</div><ul><li>详细市场调研报告</li><li>法律合规评估报告</li><li>财税筹划方案</li><li>风险清单与规避建议</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">预约调研</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>"
-    },
-    "process-step3": {
-      "title": "03 落地执行",
-      "subtitle": "execution",
-      "content": "<div class=\"dh-hero\"><div class=\"dh-hero-code\">STEP 03</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">公司注册、资质办理、团队搭建，全程陪伴推进。将方案转化为实际行动，让企业在海外落地生根。</div><div class=\"dh-heading\">执行内容</div><ul><li>公司注册与营业执照激活</li><li>行业资质与许可证办理</li><li>本地团队招聘与培训</li><li>办公场地与基础设施</li></ul><div class=\"dh-heading\">交付成果</div><ul><li>合法运营的海外公司</li><li>完整的资质证照</li><li>本地运营团队</li><li>办公场地与设备</li></ul><div class=\"detail-grid\"><div class=\"detail-item\"><strong>7个工作日</strong><span>最快完成公司设立</span></div><div class=\"detail-item\"><strong>全程陪伴</strong><span>专人跟进每一步</span></div></div><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">立即执行</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>"
-    },
-    "process-step4": {
-      "title": "04 持续运营",
-      "subtitle": "ongoing support",
-      "content": "<div class=\"dh-hero\"><div class=\"dh-hero-code\">STEP 04</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">财税代账、法务支持、政府维护，长期运营保障。出海不是一锤子买卖，我们陪伴企业长期发展。</div><div class=\"dh-heading\">运营支持</div><ul><li>财税代账与税务申报</li><li>法务咨询与合同审核</li><li>政府关系维护与更新</li><li>本地资源对接与拓展</li></ul><div class=\"dh-heading\">增值服务</div><ul><li>年度合规审计</li><li>业务扩展支持</li><li>危机应对与处理</li><li>战略咨询与优化</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">获取支持</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>"
     }
   },
   "countries": [
