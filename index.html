@@ -1487,123 +1487,147 @@ document.addEventListener('DOMContentLoaded',init);
 </div>
 
 
-<!-- v8动态渲染脚本 v2 - 修正选择器 -->
+<!-- v8动态渲染脚本 v3 - 完整版 -->
 <script>
 (function() {
     function init() {
-        renderProcess();
+        console.log('v8渲染开始');
+        renderSlides();
         renderServices();
         renderPolicies();
+        renderProcess();
+        renderStats();
         renderCountries();
         renderTestimonials();
         renderCTA();
-        console.log('v8动态渲染完成');
+        console.log('v8渲染完成');
     }
     
-    // 渲染服务流程 - v7使用pstep类
-    function renderProcess() {
-        const process = CONFIG.process || [];
-        const section = document.getElementById('process');
-        if (!section || process.length === 0) return;
-        
-        const steps = section.querySelectorAll('.pstep');
-        console.log('找到process步骤:', steps.length);
-        steps.forEach((step, i) => {
-            if (i >= process.length) return;
-            const p = process[i];
-            const h3 = step.querySelector('h3');
-            const pTag = step.querySelector('p');
-            if (h3 && p.title) {
-                console.log('更新标题:', p.title);
-                h3.textContent = p.title;
-            }
-            if (pTag && p.desc) {
-                pTag.textContent = p.desc;
-            }
-        });
+    // 1. 轮播图 - 从CONFIG.slides读取
+    function renderSlides() {
+        const slides = CONFIG.slides || [];
+        if (!window.SLIDE_CONFIG || slides.length === 0) return;
+        window.SLIDE_CONFIG.slides = slides;
+        console.log('轮播图已更新:', slides.length);
     }
     
-    // 渲染核心服务 - v7使用.service-card
+    // 2. 核心服务 - #services .service-card
     function renderServices() {
         const services = CONFIG.services || [];
         const section = document.getElementById('services');
         if (!section || services.length === 0) return;
         
         const cards = section.querySelectorAll('.service-card');
-        console.log('找到service卡片:', cards.length);
+        console.log('服务卡片:', cards.length);
         cards.forEach((card, i) => {
             if (i >= services.length) return;
             const s = services[i];
             const h3 = card.querySelector('h3');
             const p = card.querySelector('p');
-            if (h3 && s.title) h3.textContent = s.title;
+            const small = card.querySelector('small');
+            if (h3 && s.title) h3.innerHTML = s.title;
             if (p && s.desc) p.textContent = s.desc;
+            if (small && s.en) small.textContent = s.en;
         });
     }
     
-    // 渲染政策分析
+    // 3. 政策分析 - #policy .policy-card (注意是#policy不是#policies)
     function renderPolicies() {
         const policies = CONFIG.policies || [];
-        const section = document.getElementById('policies');
+        const section = document.getElementById('policy');
         if (!section || policies.length === 0) return;
         
         const cards = section.querySelectorAll('.policy-card');
+        console.log('政策卡片:', cards.length);
         cards.forEach((card, i) => {
             if (i >= policies.length) return;
             const p = policies[i];
             const h3 = card.querySelector('h3');
-            const pTag = card.querySelector('p');
+            const desc = card.querySelector('p');
             if (h3 && p.title) h3.textContent = p.title;
-            if (pTag && p.desc) pTag.textContent = p.desc;
+            if (desc && p.desc) desc.textContent = p.desc;
         });
     }
     
-    // 渲染国家区域
+    // 4. 服务流程 - #process .pstep
+    function renderProcess() {
+        const process = CONFIG.process || [];
+        const section = document.getElementById('process');
+        if (!section || process.length === 0) return;
+        
+        const steps = section.querySelectorAll('.pstep');
+        console.log('流程步骤:', steps.length);
+        steps.forEach((step, i) => {
+            if (i >= process.length) return;
+            const p = process[i];
+            const h3 = step.querySelector('h3');
+            const pTag = step.querySelector('p');
+            const num = step.querySelector('.num');
+            if (h3 && p.title) h3.textContent = p.title;
+            if (pTag && p.desc) pTag.textContent = p.desc;
+            if (num && p.num) num.textContent = p.num;
+        });
+    }
+    
+    // 5. 数据统计 - 从CONFIG.stats读取
+    function renderStats() {
+        const stats = CONFIG.stats || [];
+        if (!window.SLIDE_CONFIG || stats.length === 0) return;
+        window.SLIDE_CONFIG.stats = stats;
+        console.log('统计数据已更新:', stats.length);
+    }
+    
+    // 6. 国家区域 - #countries .region-card
     function renderCountries() {
         const countries = CONFIG.countries || [];
         const section = document.getElementById('countries');
         if (!section || countries.length === 0) return;
         
-        const regions = section.querySelectorAll('.region-card, .region');
+        const regions = section.querySelectorAll('.region-card');
+        console.log('区域卡片:', regions.length);
         regions.forEach((region, i) => {
             if (i >= countries.length) return;
             const c = countries[i];
             const h3 = region.querySelector('h3');
-            const p = region.querySelector('p');
+            const subtitle = region.querySelector('.subtitle');
             if (h3 && c.title) h3.textContent = c.title;
-            if (p && c.desc) p.textContent = c.desc;
+            if (subtitle && c.subtitle) subtitle.textContent = c.subtitle;
         });
     }
     
-    // 渲染客户评价
+    // 7. 客户评价 - #testimonials .testimonial
     function renderTestimonials() {
         const testimonials = CONFIG.testimonials || [];
         const section = document.getElementById('testimonials');
         if (!section || testimonials.length === 0) return;
         
-        const cards = section.querySelectorAll('.testimonial-card, .testimonial');
+        const cards = section.querySelectorAll('.testimonial');
+        console.log('评价卡片:', cards.length);
         cards.forEach((card, i) => {
             if (i >= testimonials.length) return;
             const t = testimonials[i];
-            const quote = card.querySelector('.quote, q');
+            const quote = card.querySelector('.quote');
             const name = card.querySelector('.name');
             const title = card.querySelector('.title');
+            const company = card.querySelector('.company');
             if (quote && t.quote) quote.textContent = t.quote;
             if (name && t.name) name.textContent = t.name;
             if (title && t.title) title.textContent = t.title;
+            if (company && t.company) company.textContent = t.company;
         });
     }
     
-    // 渲染CTA
+    // 8. CTA - #contact (注意是#contact不是#cta)
     function renderCTA() {
         const cta = CONFIG.cta || {};
-        const section = document.getElementById('cta');
+        const section = document.getElementById('contact');
         if (!section) return;
         
         const h2 = section.querySelector('h2');
         const p = section.querySelector('p');
-        if (h2 && cta.title) h2.textContent = cta.title;
+        if (h2 && cta.title) h2.innerHTML = cta.title;
         if (p && cta.desc) p.textContent = cta.desc;
+        console.log('CTA已更新');
     }
     
     if (document.readyState === 'loading') {
