@@ -1487,7 +1487,7 @@ document.addEventListener('DOMContentLoaded',init);
 </div>
 
 
-<!-- v8动态渲染脚本 v3 - 完整版 -->
+<!-- v8动态渲染脚本 v4 - 使用v7实际class -->
 <script>
 (function() {
     function init() {
@@ -1503,7 +1503,7 @@ document.addEventListener('DOMContentLoaded',init);
         console.log('v8渲染完成');
     }
     
-    // 1. 轮播图 - 从CONFIG.slides读取
+    // 1. 轮播图
     function renderSlides() {
         const slides = CONFIG.slides || [];
         if (!window.SLIDE_CONFIG || slides.length === 0) return;
@@ -1531,7 +1531,7 @@ document.addEventListener('DOMContentLoaded',init);
         });
     }
     
-    // 3. 政策分析 - #policy .policy-card (注意是#policy不是#policies)
+    // 3. 政策分析 - #policy .policy-card
     function renderPolicies() {
         const policies = CONFIG.policies || [];
         const section = document.getElementById('policy');
@@ -1543,7 +1543,7 @@ document.addEventListener('DOMContentLoaded',init);
             if (i >= policies.length) return;
             const p = policies[i];
             const h3 = card.querySelector('h3');
-            const desc = card.querySelector('p');
+            const desc = card.querySelector('.policy-desc, p');
             if (h3 && p.title) h3.textContent = p.title;
             if (desc && p.desc) desc.textContent = p.desc;
         });
@@ -1562,19 +1562,29 @@ document.addEventListener('DOMContentLoaded',init);
             const p = process[i];
             const h3 = step.querySelector('h3');
             const pTag = step.querySelector('p');
-            const num = step.querySelector('.num');
+            const num = step.querySelector('.pnum, .num');
             if (h3 && p.title) h3.textContent = p.title;
             if (pTag && p.desc) pTag.textContent = p.desc;
             if (num && p.num) num.textContent = p.num;
         });
     }
     
-    // 5. 数据统计 - 从CONFIG.stats读取
+    // 5. 数据统计 - .stats-inner .stat
     function renderStats() {
         const stats = CONFIG.stats || [];
-        if (!window.SLIDE_CONFIG || stats.length === 0) return;
-        window.SLIDE_CONFIG.stats = stats;
-        console.log('统计数据已更新:', stats.length);
+        const section = document.querySelector('.stats-inner');
+        if (!section || stats.length === 0) return;
+        
+        const items = section.querySelectorAll('.stat');
+        console.log('统计项:', items.length);
+        items.forEach((item, i) => {
+            if (i >= stats.length) return;
+            const s = stats[i];
+            const num = item.querySelector('.stat-num, .num');
+            const label = item.querySelector('.stat-label, .label');
+            if (num && s.num) num.textContent = s.num;
+            if (label && s.label) label.textContent = s.label;
+        });
     }
     
     // 6. 国家区域 - #countries .region-card
@@ -1589,35 +1599,33 @@ document.addEventListener('DOMContentLoaded',init);
             if (i >= countries.length) return;
             const c = countries[i];
             const h3 = region.querySelector('h3');
-            const subtitle = region.querySelector('.subtitle');
+            const subtitle = region.querySelector('.region-subtitle, .subtitle');
             if (h3 && c.title) h3.textContent = c.title;
             if (subtitle && c.subtitle) subtitle.textContent = c.subtitle;
         });
     }
     
-    // 7. 客户评价 - #testimonials .testimonial
+    // 7. 客户评价 - #testimonials .t-card (注意是t-card不是testimonial)
     function renderTestimonials() {
         const testimonials = CONFIG.testimonials || [];
         const section = document.getElementById('testimonials');
         if (!section || testimonials.length === 0) return;
         
-        const cards = section.querySelectorAll('.testimonial');
+        const cards = section.querySelectorAll('.t-card');
         console.log('评价卡片:', cards.length);
         cards.forEach((card, i) => {
             if (i >= testimonials.length) return;
             const t = testimonials[i];
-            const quote = card.querySelector('.quote');
-            const name = card.querySelector('.name');
-            const title = card.querySelector('.title');
-            const company = card.querySelector('.company');
+            const quote = card.querySelector('.t-text');
+            const name = card.querySelector('.t-name');
+            const role = card.querySelector('.t-role');
             if (quote && t.quote) quote.textContent = t.quote;
             if (name && t.name) name.textContent = t.name;
-            if (title && t.title) title.textContent = t.title;
-            if (company && t.company) company.textContent = t.company;
+            if (role && t.title) role.textContent = t.title;
         });
     }
     
-    // 8. CTA - #contact (注意是#contact不是#cta)
+    // 8. CTA - #contact
     function renderCTA() {
         const cta = CONFIG.cta || {};
         const section = document.getElementById('contact');
