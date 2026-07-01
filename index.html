@@ -738,165 +738,36 @@ footer a:hover{color:var(--gold-bright)}
 // ================================================================
 
 const CONFIG = {
-  "company": {
-    "name": "丝路山海通",
-    "slogan": "一带一路企业出海一站式服务",
-    "email": "look@silkroad-trade.com",
-    "phone": "400-xxx-xxxx",
-    "icp": "粤ICP备010101010号",
-    "wechatId": "SilkRoadTrade",
-    "wechatQR": ""
+
+  // === 公司信息 ===
+  company: {
+    name: '丝路山海通',
+    slogan: '一带一路企业出海一站式服务',
+    email: 'outlook@silkroad-trade.com',
+    icp: '粤ICP备XXXXXXXX号',
+    wechatId: 'SilkRoadTrade',
+    wechatQR: 'wechat/二维码.jpg',
   },
-  "slides": [
-    {
-      "id": "slide-1",
-      "title": "乘丝路长风通达全球",
-      "subtitle": "一带一路企业出海一站式服务",
-      "desc": "丝路山海通 — 响应国家一带一路倡议，为企业出海提供公司注册、财税支持、产品准入、本地化运营等一站式落地服务。",
-      "img": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
-      "detailId": "company-advantage"
-    },
-    {
-      "id": "slide-2",
-      "title": "公司注册资质办理",
-      "subtitle": "最快7个工作日完成海外公司设立",
-      "desc": "境内境外公司注册、营业执照激活、行业资质证照办理",
-      "img": "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80",
-      "detailId": "company-reg"
-    }
+
+  // === 统计数字 ===
+  stats: [
+    { num: '60+', label: '一带一路覆盖国家' },
+    { num: '1,600+', label: '服务出海企业' },
+    { num: '400+', label: '海外本地员工' },
+    { num: '5+', label: '区域服务网络' },
   ],
-  "services": [
-    {
-      "id": "company-reg",
-      "title": "公司注册与资质",
-      "sub": "incorporation & licensing",
-      "desc": "境外公司注册、营业执照激活、行业资质证照办理",
-      "icon": "🏠",
-      "detailId": "company-reg"
-    },
-    {
-      "id": "product-cert",
-      "title": "产品准入与认证",
-      "sub": "product certification",
-      "desc": "SNI/BPOM/清真认证一站式办理",
-      "icon": "✅",
-      "detailId": "certification"
-    },
-    {
-      "id": "tax-legal",
-      "title": "财税人事与法务",
-      "sub": "tax, hr & legal",
-      "desc": "财税筹划、代理记账、法务咨询一站式",
-      "icon": "📊",
-      "detailId": "tax-legal"
-    },
-    {
-      "id": "local-ops",
-      "title": "本地化运营支持",
-      "sub": "local operation",
-      "desc": "行政办公、本地招聘、政府关系、资源对接",
-      "icon": "🌐",
-      "detailId": "local-ops"
-    },
-    {
-      "id": "visa",
-      "title": "签证考察与出行",
-      "sub": "visa & business travel",
-      "desc": "商务签证、工作签证、工厂考察一站式",
-      "icon": "✈️",
-      "detailId": "visa"
-    },
-    {
-      "id": "factory",
-      "title": "建厂工程与投产",
-      "sub": "factory & construction",
-      "desc": "海外建厂选址、工程许可、环境合规",
-      "icon": "🏭",
-      "detailId": "factory"
-    }
+
+  // === 轮播图 ===
+  slides: [
+    { id: 'slide-1', title: '乘丝路长风<span class="gold">通达全球</span>', subtitle: '一带一路企业出海一站式服务', desc: '丝路山海通 — 响应国家一带一路倡议，为企业出海提供公司注册、财税支持、产品准入、本地化运营等一站式落地服务。', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&auto=format', detailId: 'company-advantage' },
+    { id: 'slide-2', title: '公司注册<span class="gold">资质办理</span>', subtitle: '最快7个工作日完成海外公司设立', desc: '境内境外公司注册、营业执照激活、行业资质证照办理，让您的企业快速合法落地海外。', img: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80&auto=format', detailId: 'company-reg' },
+    { id: 'slide-3', title: '财税人事<span class="gold">法务合规</span>', subtitle: '本地化运营全方位保障', desc: '财税筹划、代理记账、人事雇佣、法务咨询、合规审计，专业团队为您保驾护航。', img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format', detailId: 'tax-legal' },
+    { id: 'slide-4', title: '产品准入<span class="gold">认证通关</span>', subtitle: 'SNI/BPOM/清真认证一站式办理', desc: 'SNI认证、BPOM注册、清真认证、进出口许可证、海关备案等全套产品合规准入服务。', img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80&auto=format', detailId: 'certification' },
+    { id: 'slide-5', title: '本地运营<span class="gold">长期陪伴</span>', subtitle: '真正扎根海外市场', desc: '行政办公、本地招聘、政府关系、行业资源对接、展会活动策划，让您出海无忧。', img: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80&auto=format', detailId: 'local-ops' },
+    { id: 'slide-6', title: '签证考察<span class="gold">商务出行</span>', subtitle: '签证办理与商务考察一站式', desc: '商务签证、工作签证、工厂考察、市场调研、政府对接，一站式行程安排，助您轻松出海考察。', img: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80&auto=format', detailId: 'visa' },
+    { id: 'slide-7', title: '建厂工程<span class="gold">落地投产</span>', subtitle: '海外建厂与基建全流程服务', desc: '海外选址建厂、建筑工程许可、环境合规、能源矿产、IT通讯等基建配套，让您的工厂快速落地。', img: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80&auto=format', detailId: 'factory' },
   ],
-  "stats": [
-    {
-      "num": "80+",
-      "label": "一带一路覆盖国家"
-    },
-    {
-      "num": "1,600+",
-      "label": "服务出海企业"
-    },
-    {
-      "num": "400+",
-      "label": "海外本地员工"
-    },
-    {
-      "num": "5+",
-      "label": "区域服务网络"
-    }
-  ],
-  "policies": [
-    {
-      "num": "01",
-      "title": "政策研究与解读",
-      "desc": "60+国家政策数据库，专业团队实时追踪政策动态"
-    },
-    {
-      "num": "02",
-      "title": "政府与商会对接",
-      "desc": "深耕本地政商关系，搭建企业与当地政府沟通桥梁"
-    },
-    {
-      "num": "03",
-      "title": "产业园区落地",
-      "desc": "对接一带一路沿线重点产业园区，享优惠政策"
-    },
-    {
-      "num": "04",
-      "title": "投融资对接",
-      "desc": "串联政策性金融机构与商业资本，多路径融资通道"
-    }
-  ],
-  "testimonials": [
-    {
-      "name": "张宏伟",
-      "role": "新能源汽车 印尼工厂负责人",
-      "text": "帮我们在雅加达完成了公司注册和工厂选址，从考察到落地只用了2个月。",
-      "avatar": "张"
-    },
-    {
-      "name": "李峰",
-      "role": "工程机械 中亚事业部总经理",
-      "text": "响应一带一路开拓中亚市场，从法律合规到政府关系一路护航。",
-      "avatar": "李"
-    },
-    {
-      "name": "王琳",
-      "role": "食品饮料 海外拓展总监",
-      "text": "印尼的SNI认证和清真认证一站式包办，产品准入周期缩短了60%。",
-      "avatar": "王"
-    }
-  ],
-  "process": [
-    {
-      "num": "01",
-      "title": "需求诊断",
-      "desc": "深入了解企业出海目标与需求，定制化出海方案。"
-    },
-    {
-      "num": "02",
-      "title": "尽职调研",
-      "desc": "市场调研、法律评估、财税分析，规避风险前置。"
-    },
-    {
-      "num": "03",
-      "title": "落地执行",
-      "desc": "公司注册、资质办理、团队搭建，全程陪伴推进。"
-    },
-    {
-      "num": "04",
-      "title": "持续运营",
-      "desc": "财税代账、法务支持、政府维护，长期运营保障。"
-    }
-  ]
+
 };
 
 // ================================================================
@@ -1132,128 +1003,30 @@ document.addEventListener('DOMContentLoaded',init);
   </div>
 </div>
 
-
 <script>
-// Config-driven DOM update - injected by admin server
 (function(){
-var c = CONFIG;
-if(!c || !c.company) return;
-
-// --- Update title ---
-var t = document.querySelector("title");
-if(t) t.textContent = c.company.name + " - " + c.company.slogan;
-
-// --- Update footer ---
-document.querySelectorAll(".footer-bottom span").forEach(function(el){
-  var txt = el.textContent;
-  if(txt.indexOf("\u00a9") >= 0 || txt.indexOf("All rights") >= 0) {
-    el.textContent = "\u00a9 " + new Date().getFullYear() + " " + c.company.name + ". All rights reserved.";
-  }
-  if(txt.indexOf("ICP") >= 0 || txt.indexOf("\u7ca4") >= 0) {
-    if(c.company.icp) el.textContent = c.company.icp;
-  }
-});
-
-// --- Update email ---
-var mailtoLinks = document.querySelectorAll("a[href^='mailto:']");
-console.log("[Config Inject] Found " + mailtoLinks.length + " mailto links");
-mailtoLinks.forEach(function(el, i){
-  if(c.company.email) {
-    console.log("[Config Inject] Updating mailto link #" + i + ": " + el.href + " -> " + c.company.email);
-    el.href = "mailto:" + c.company.email;
-    el.textContent = c.company.email;
-  }
-});
-
-// --- Render services from CONFIG ---
-var sg = document.querySelector(".services-grid");
-if(sg && c.services && c.services.length > 0) {
-  var cols = ["linear-gradient(135deg,#C44536,#8B2D1E)","linear-gradient(135deg,#C8923E,#8B6914)","linear-gradient(135deg,#1A1512,#302824)","linear-gradient(135deg,#6B625C,#A89E96)","linear-gradient(135deg,#C44536,#C8923E)","linear-gradient(135deg,#302824,#6B625C)"];
-  var ems = ["\ud83c\udfed","\ud83d\udccb","\u2696\ufe0f","\ud83d\udee1\ufe0f","\ud83c\udf10","\ud83d\udee2\ufe0f"];
-  sg.innerHTML = c.services.map(function(s,i){
-    return '<div class="service-card" onclick="openDetail(\'' + (s.detailId || s.id) + '\')">' +
-      '<div class="sc-img"><div class="sc-img-bg" style="background:' + cols[i % cols.length] + '"></div><span>' + ems[i % ems.length] + '</span></div>' +
-      '<h3>' + s.title + '</h3>' +
-      (s.sub ? '<div class="sc-sub">' + s.sub + '</div>' : '') +
-      '<p>' + (s.desc || '') + '</p></div>';
-  }).join('');
-}
-
-// --- Render stats from CONFIG ---
-var si = document.querySelector(".stats-inner");
-if(si && c.stats && c.stats.length > 0) {
-  si.innerHTML = c.stats.map(function(s){
-    return '<div class="stat-item"><div class="num">' + (s.num || '') + '</div><div class="label">' + (s.label || '') + '</div></div>';
-  }).join('');
-}
-
-// --- Render policies from CONFIG ---
-var pg = document.querySelector(".policy-grid");
-var policyIds = ['policy-research', 'policy-network', 'policy-park', 'policy-finance'];
-if(pg && c.policies && c.policies.length > 0) {
-  pg.innerHTML = c.policies.map(function(p, i){
-    var n = String(i + 1).padStart(2, '0');
-    var detailId = policyIds[i] || ('policy-' + i);
-    return '<div class="policy-card" onclick="openDetail(\'' + detailId + '\')">' +
-      '<div class="pn">' + n + '</div><div>' +
-      '<h3>' + p.title + '</h3><p>' + (p.desc || '') + '</p></div></div>';
-  }).join('');
-}
-
-// --- Render testimonials from CONFIG ---
-var tg = document.querySelector(".testimonials-grid");
-var caseIds = ['case-zhang', 'case-li', 'case-wang'];
-if(tg && c.testimonials && c.testimonials.length > 0) {
-  tg.innerHTML = c.testimonials.map(function(t, i){
-    var av = t.avatar || (t.name ? t.name.charAt(0) : "\ud83d\udc64");
-    var detailId = t.detailId || caseIds[i] || ('case-' + i);
-    return '<div class="t-card" onclick="openDetail(\'' + detailId + '\')">' +
-      '<div class="tq">&ldquo;</div><p class="t-text">' + (t.text || '') + '</p>' +
-      '<div class="t-author"><div class="t-av">' + av + '</div><div>' +
-      '<div class="t-name">' + (t.name || '') + '</div><div class="t-role">' + (t.role || '') + '</div></div></div></div>';
-  }).join('');
-}
-
-// --- Render process from CONFIG ---
-var pr = document.querySelector(".process-grid");
-var processIds = ['process-step1', 'process-step2', 'process-step3', 'process-step4'];
-if(pr && c.process && c.process.length > 0) {
-  pr.innerHTML = c.process.map(function(p, i){
-    var detailId = p.detailId || processIds[i] || ('process-step' + (i+1));
-    return '<div class="pstep" onclick="openDetail(\'' + detailId + '\')">' +
-      '<div class="ring"><div class="n">' + (p.num || '') + '</div></div>' +
-      '<h3>' + (p.title || '') + '</h3><p>' + (p.desc || '') + '</p></div>';
-  }).join('');
-}
-
-// --- Update SLIDE_CONFIG from CONFIG.slides ---
-if(c.slides && c.slides.length > 0) {
-  var newSlides = c.slides.map(function(s, i){
-    return {
-      id: s.id || ("slide-" + (i+1)),
-      title: s.title || '',
-      subtitle: s.subtitle || '',
-      desc: s.desc || '',
-      img: s.img || '',
-      detailId: s.detailId || ''
-    };
-  });
-  window.SLIDE_CONFIG = newSlides;
-  if(typeof window.updateSlide === 'function') {
-    window.currentSlide = 0;
-    window.updateSlide();
-  }
-}
-
-// --- Update logo text ---
-document.querySelectorAll(".logo-text strong").forEach(function(el){
-  if(c.company.name) el.textContent = c.company.name;
-});
-document.querySelectorAll(".logo-text span").forEach(function(el){
-  if(c.company.slogan) el.textContent = c.company.slogan.toUpperCase();
-});
-
-console.log("[Config Inject] Applied CONFIG to DOM");
+var BS='http://localhost:8081';
+window.submitBook=function(){
+var n=(document.getElementById('bookName')||{}).value;
+var p=(document.getElementById('bookPhone')||{}).value;
+var c=(document.getElementById('bookCountry')||{}).value;
+if(!n||!n.trim()||!p||!p.trim()){alert('\u8bf7\u586b\u5199\u59d3\u540d\u548c\u624b\u673a\u53f7\u7801');return;}
+var x=new XMLHttpRequest();
+x.open('POST',BS+'/api/booking',true);
+x.setRequestHeader('Content-Type','application/json');
+x.onload=function(){
+if(x.status===200){alert('\u2705 \u9884\u7ea6\u63d0\u4ea4\u6210\u529f\uff01\u6211\u4eec\u5c06\u5c3d\u5feb\u4e0e\u60a8\u8054\u7cfb\u3002');
+if(document.getElementById('bookName'))document.getElementById('bookName').value='';
+if(document.getElementById('bookPhone'))document.getElementById('bookPhone').value='';
+if(document.getElementById('bookCountry'))document.getElementById('bookCountry').value='';
+if(typeof closeBook==='function')closeBook();
+}else{alert('\u274c \u63d0\u4ea4\u5931\u8d25\uff0c\u8bf7\u7a0d\u540e\u91cd\u8bd5');}
+};
+x.onerror=function(){alert('\u274c \u7f51\u7edc\u9519\u8bef\uff0c\u8bf7\u786e\u8ba4\u9884\u7ea6\u670d\u52a1\u5df2\u542f\u52a8\uff08\u7aef\u53e38081\uff09');};
+x.send(JSON.stringify({name:n.trim(),phone:p.trim(),country:(c||'').trim()}));
+};
+console.log('[BookingHook] enabled');
 })();
-</script></body>
+</script>
+</body>
 </html>
