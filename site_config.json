@@ -14,18 +14,53 @@
   },
   "slides": [
     {
-      "img": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
-      "title": "乘丝路长风通达全球",
+      "img": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&auto=format",
+      "title": "乘丝路长风<span class=\"gold\">通达全球</span>",
       "subtitle": "一带一路企业出海一站式服务",
       "detailId": "company-advantage",
       "desc": "丝路山海通 — 响应国家一带一路倡议，为企业出海提供公司注册、财税支持、产品准入、本地化运营等一站式落地服务。"
     },
     {
-      "img": "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80",
-      "title": "公司注册资质办理",
+      "img": "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80&auto=format",
+      "title": "公司注册<span class=\"gold\">资质办理</span>",
       "subtitle": "最快7个工作日完成海外公司设立",
       "detailId": "company-reg",
-      "desc": "境内境外公司注册、营业执照激活、行业资质证照办理"
+      "desc": "境内境外公司注册、营业执照激活、行业资质证照办理，让您的企业快速合法落地海外。"
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format",
+      "title": "财税人事<span class=\"gold\">法务合规</span>",
+      "subtitle": "本地化运营全方位保障",
+      "detailId": "tax-legal",
+      "desc": "财税筹划、代理记账、人事雇佣、法务咨询、合规审计，专业团队为您保驾护航。"
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80&auto=format",
+      "title": "产品准入<span class=\"gold\">认证通关</span>",
+      "subtitle": "SNI/BPOM/清真认证一站式办理",
+      "detailId": "certification",
+      "desc": "SNI认证、BPOM注册、清真认证、进出口许可证、海关备案等全套产品合规准入服务。"
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80&auto=format",
+      "title": "本地运营<span class=\"gold\">长期陪伴</span>",
+      "subtitle": "真正扎根海外市场",
+      "detailId": "local-ops",
+      "desc": "行政办公、本地招聘、政府关系、行业资源对接、展会活动策划，让您出海无忧。"
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80&auto=format",
+      "title": "签证考察<span class=\"gold\">商务出行</span>",
+      "subtitle": "签证办理与商务考察一站式",
+      "detailId": "visa",
+      "desc": "商务签证、工作签证、工厂考察、市场调研、政府对接，一站式行程安排，助您轻松出海考察。"
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80&auto=format",
+      "title": "建厂工程<span class=\"gold\">落地投产</span>",
+      "subtitle": "海外建厂与基建全流程服务",
+      "detailId": "factory",
+      "desc": "海外选址建厂、建筑工程许可、环境合规、能源矿产、IT通讯等基建配套，让您的工厂快速落地。"
     }
   ],
   "aboutTitle": "让中国企业出海不难",
