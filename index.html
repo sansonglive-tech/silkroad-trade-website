@@ -1487,34 +1487,57 @@ document.addEventListener('DOMContentLoaded',init);
 </div>
 
 
-<!-- v8动态渲染脚本 - 从CONFIG读取所有数据 -->
+<!-- v8动态渲染脚本 v2 - 修正选择器 -->
 <script>
 (function() {
-    // 等待DOM加载
     function init() {
+        renderProcess();
         renderServices();
         renderPolicies();
-        renderProcess();
         renderCountries();
         renderTestimonials();
         renderCTA();
+        console.log('v8动态渲染完成');
     }
     
-    // 渲染核心服务
+    // 渲染服务流程 - v7使用pstep类
+    function renderProcess() {
+        const process = CONFIG.process || [];
+        const section = document.getElementById('process');
+        if (!section || process.length === 0) return;
+        
+        const steps = section.querySelectorAll('.pstep');
+        console.log('找到process步骤:', steps.length);
+        steps.forEach((step, i) => {
+            if (i >= process.length) return;
+            const p = process[i];
+            const h3 = step.querySelector('h3');
+            const pTag = step.querySelector('p');
+            if (h3 && p.title) {
+                console.log('更新标题:', p.title);
+                h3.textContent = p.title;
+            }
+            if (pTag && p.desc) {
+                pTag.textContent = p.desc;
+            }
+        });
+    }
+    
+    // 渲染核心服务 - v7使用.service-card
     function renderServices() {
         const services = CONFIG.services || [];
-        // 找到services板块，动态更新内容
         const section = document.getElementById('services');
         if (!section || services.length === 0) return;
         
-        const cards = section.querySelectorAll('.service-card, [class*="service"]');
+        const cards = section.querySelectorAll('.service-card');
+        console.log('找到service卡片:', cards.length);
         cards.forEach((card, i) => {
             if (i >= services.length) return;
             const s = services[i];
-            const title = card.querySelector('h3, .title');
-            const desc = card.querySelector('p, .desc');
-            if (title && s.title) title.textContent = s.title;
-            if (desc && s.desc) desc.textContent = s.desc;
+            const h3 = card.querySelector('h3');
+            const p = card.querySelector('p');
+            if (h3 && s.title) h3.textContent = s.title;
+            if (p && s.desc) p.textContent = s.desc;
         });
     }
     
@@ -1524,31 +1547,14 @@ document.addEventListener('DOMContentLoaded',init);
         const section = document.getElementById('policies');
         if (!section || policies.length === 0) return;
         
-        const cards = section.querySelectorAll('.policy-card, [class*="policy"]');
+        const cards = section.querySelectorAll('.policy-card');
         cards.forEach((card, i) => {
             if (i >= policies.length) return;
             const p = policies[i];
-            const title = card.querySelector('h3, .title');
-            const desc = card.querySelector('p, .desc');
-            if (title && p.title) title.textContent = p.title;
-            if (desc && p.desc) desc.textContent = p.desc;
-        });
-    }
-    
-    // 渲染服务流程
-    function renderProcess() {
-        const process = CONFIG.process || [];
-        const section = document.getElementById('process');
-        if (!section || process.length === 0) return;
-        
-        const steps = section.querySelectorAll('.step, [class*="step"]');
-        steps.forEach((step, i) => {
-            if (i >= process.length) return;
-            const p = process[i];
-            const title = step.querySelector('h3, .title');
-            const desc = step.querySelector('p, .desc');
-            if (title && p.title) title.textContent = p.title;
-            if (desc && p.desc) desc.textContent = p.desc;
+            const h3 = card.querySelector('h3');
+            const pTag = card.querySelector('p');
+            if (h3 && p.title) h3.textContent = p.title;
+            if (pTag && p.desc) pTag.textContent = p.desc;
         });
     }
     
@@ -1558,14 +1564,14 @@ document.addEventListener('DOMContentLoaded',init);
         const section = document.getElementById('countries');
         if (!section || countries.length === 0) return;
         
-        const regions = section.querySelectorAll('.region, [class*="region"]');
+        const regions = section.querySelectorAll('.region-card, .region');
         regions.forEach((region, i) => {
             if (i >= countries.length) return;
             const c = countries[i];
-            const title = region.querySelector('h3, .title');
-            const desc = region.querySelector('p, .desc');
-            if (title && c.title) title.textContent = c.title;
-            if (desc && c.desc) desc.textContent = c.desc;
+            const h3 = region.querySelector('h3');
+            const p = region.querySelector('p');
+            if (h3 && c.title) h3.textContent = c.title;
+            if (p && c.desc) p.textContent = c.desc;
         });
     }
     
@@ -1575,13 +1581,13 @@ document.addEventListener('DOMContentLoaded',init);
         const section = document.getElementById('testimonials');
         if (!section || testimonials.length === 0) return;
         
-        const cards = section.querySelectorAll('.testimonial, [class*="testimonial"]');
+        const cards = section.querySelectorAll('.testimonial-card, .testimonial');
         cards.forEach((card, i) => {
             if (i >= testimonials.length) return;
             const t = testimonials[i];
             const quote = card.querySelector('.quote, q');
             const name = card.querySelector('.name');
-            const title = card.querySelector('.title, .position');
+            const title = card.querySelector('.title');
             if (quote && t.quote) quote.textContent = t.quote;
             if (name && t.name) name.textContent = t.name;
             if (title && t.title) title.textContent = t.title;
@@ -1594,10 +1600,10 @@ document.addEventListener('DOMContentLoaded',init);
         const section = document.getElementById('cta');
         if (!section) return;
         
-        const title = section.querySelector('h2, .title');
-        const desc = section.querySelector('p, .desc');
-        if (title && cta.title) title.textContent = cta.title;
-        if (desc && cta.desc) desc.textContent = cta.desc;
+        const h2 = section.querySelector('h2');
+        const p = section.querySelector('p');
+        if (h2 && cta.title) h2.textContent = cta.title;
+        if (p && cta.desc) p.textContent = cta.desc;
     }
     
     if (document.readyState === 'loading') {
