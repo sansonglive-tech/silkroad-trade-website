@@ -134,7 +134,10 @@
   ],
   "detailContent": {
     "policy-research": {
-      "heroImg": ""
+      "heroImg": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format",
+      "title": "政策研究与解读",
+      "subtitle": "POLICY RESEARCH",
+      "content": "<div class=\"dh-intro\">提供专业的政策咨询服务</div>"
     },
     "policy-network": {
       "heroImg": ""
@@ -146,7 +149,7 @@
       "heroImg": ""
     },
     "case-zhang": {
-      "heroImg": "https://images.unsplash.com/photo-TEST-150627?w=800",
+      "heroImg": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80&auto=format",
       "title": "客户案例：张宏伟",
       "subtitle": "新能源汽车 · 印尼工厂负责人",
       "content": "<div class=\"dh-hero\"><img src=\"https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80&auto=format\" alt=\"\"><div class=\"dh-hero-code\">CASE</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">\"帮我们在雅加达完成了公司注册和工厂选址，从考察到落地只用了2个月。当地团队专业靠谱，比我们自己跑效率高太多了。\"</div><div class=\"dh-heading\">客户背景</div><ul><li>新能源汽车行业</li><li>计划在印尼设立工厂</li><li>对当地法规和市场不熟悉</li></ul><div class=\"dh-heading\">服务成果</div><ul><li>2个月完成公司注册和工厂选址</li><li>雅加达、泗水、棉兰三地考察</li><li>顺利完成SNI认证和工厂许可</li><li>本地招聘团队50+人</li></ul><div class=\"dh-heading\">客户评价</div><ul><li>\"当地团队专业靠谱\"</li><li>\"比我们自己跑效率高太多\"</li><li>\"强烈推荐丝路山海通\"</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">咨询印尼出海</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>"
