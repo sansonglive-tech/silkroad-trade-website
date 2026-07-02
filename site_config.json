@@ -23,7 +23,7 @@
     {
       "img": "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80&auto=format",
       "title": "公司注册<span class=\"gold\">资质办理</span>",
-      "subtitle": "[T135722]最快14个工作日完成海外公司设立",
+      "subtitle": "最快14个工作日完成海外公司设立",
       "detailId": "company-reg",
       "desc": "境内境外公司注册、营业执照激活、行业资质证照办理，让您的企业快速合法落地海外。"
     },
@@ -72,7 +72,7 @@
       "icon": "🏠",
       "title": "公司注册与资质",
       "sub": "incorporation & licensing",
-      "desc": "[T135722]海外公司注册、营业执照、行业资质证照"
+      "desc": "境外公司注册、营业执照激活、行业资质证照办理"
     },
     {
       "img": "",
@@ -490,7 +490,7 @@
   "testimonials": [
     {
       "avatarImg": "",
-      "name": "张宏伟",
+      "name": "张伟",
       "role": "新能源汽车 印尼工厂负责人",
       "text": "帮我们在雅加达完成了公司注册和工厂选址，从考察到落地只用了2个月。"
     },
