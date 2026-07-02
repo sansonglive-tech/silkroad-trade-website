@@ -155,12 +155,13 @@ def generate_admin_page(cfg):
             if m:
                 hero_img = m.group(1)
         po_html += '''<div class="ib"><div class="ih"><strong>%s %s</strong><button class="ab" onclick="delPo(%d)">删除</button></div>
-<div class="ug3">%s%s</div>%s<div class="ug2">%s</div></div>''' % (
+<div class="ug3">%s%s</div>%s<div class="ug2">%s%s</div></div>''' % (
             esc(p.get("num","")), esc(p.get("title","")), i,
             txt("编号", "policies[%d].num"%i, p.get("num")),
             txt("标题", "policies[%d].title"%i, p.get("title")),
             ta("描述", "policies[%d].desc"%i, p.get("desc")),
-            img_block("弹窗图片", "detailContent.%s.heroImg" % detail_id, hero_img, 800, 400, "点击政策卡片后弹窗顶部大图"))
+            img_block("弹窗图片", "detailContent.%s.heroImg" % detail_id, hero_img, 800, 400, "点击政策卡片后弹窗顶部大图"),
+            ta("详情页HTML", "detailContent.%s.content" % detail_id, dc.get(detail_id, {}).get("content",""), 6))
     po_html += '</div>'
     sections["po"] = po_html
 
@@ -1074,8 +1075,12 @@ class Handler(BaseHTTPRequestHandler):
         dc = cfg.get("detailContent", {})
         if dc:
             dc_js = json.dumps(dc, ensure_ascii=False, indent=2)
-            dc_marker = "const DETAIL_CONTENT = "
+            # v8 模板中的 marker 格式是 "const DETAIL_CONTENT={" (无空格)
+            dc_marker = "const DETAIL_CONTENT={"
             dc_idx = new_html.find(dc_marker)
+            if dc_idx < 0:
+                dc_marker = "const DETAIL_CONTENT = "
+                dc_idx = new_html.find(dc_marker)
             if dc_idx >= 0:
                 dc_b = new_html.find("{", dc_idx)
                 if dc_b >= 0:
@@ -1176,9 +1181,29 @@ class Handler(BaseHTTPRequestHandler):
             
             dc = cfg.get("detailContent", {})
             if dc:
+                # 自动注入 heroImg 到 content 顶部（如果不重复）
+                for _k, _v in dc.items():
+                    if not isinstance(_v, dict):
+                        continue
+                    _hero = (_v.get("heroImg") or "").strip()
+                    if not _hero:
+                        continue
+                    _content = _v.get("content") or ""
+                    # 检查 content 里是否已有这张图的 src
+                    if _hero in _content:
+                        continue
+                    # 在 content 开头插入 heroImg 图（保留原内容）
+                    _img_html = '<div class="detail-hero"><img src="%s" alt="%s" style="width:100%%;max-height:380px;object-fit:cover;display:block;"></div>' % (
+                        _hero, (_v.get("title") or _k).replace('"', '&quot;')
+                    )
+                    _v["content"] = _img_html + _content
                 dc_js = json.dumps(dc, ensure_ascii=False, indent=2)
-                dc_marker = "const DETAIL_CONTENT = "
+                # v8 模板中的 marker 格式是 "const DETAIL_CONTENT={" (无空格)
+                dc_marker = "const DETAIL_CONTENT={"
                 dc_idx = html.find(dc_marker)
+                if dc_idx < 0:
+                    dc_marker = "const DETAIL_CONTENT = "
+                    dc_idx = html.find(dc_marker)
                 if dc_idx >= 0:
                     dc_b = html.find("{", dc_idx)
                     if dc_b >= 0:
@@ -1204,14 +1229,15 @@ class Handler(BaseHTTPRequestHandler):
             ge = r"E:\腾讯龙虾\QClaw\v0.2.30.594\resources\git\cmd\git.exe"
             if not os.path.isfile(ge): ge="git"
             e=os.environ.copy(); e["GIT_ASKPASS"]="echo"; e["GIT_TERMINAL_PROMPT"]="0"
+            # 工作流：本地 master → fetch远程main → rebase → push master:main（Pages构建）→ push master:master（同步）
             subprocess.run([ge,"add","index.html","site_config.json"],cwd=WORKSPACE,capture_output=True,text=True,encoding="utf-8",env=e)
             subprocess.run([ge,"commit","-m","u-%s"%datetime.now().strftime("%H%M")],cwd=WORKSPACE,capture_output=True,text=True,encoding="utf-8",env=e)
-            subprocess.run([ge,"pull","origin","main","--rebase"],cwd=WORKSPACE,capture_output=True,text=True,encoding="utf-8",env=e)
-            r=subprocess.run([ge,"push","origin","main"],cwd=WORKSPACE,capture_output=True,text=True,encoding="utf-8",env=e)
+            subprocess.run([ge,"fetch","origin"],cwd=WORKSPACE,capture_output=True,text=True,encoding="utf-8",env=e)
+            pr=subprocess.run([ge,"rebase","origin/main"],cwd=WORKSPACE,capture_output=True,text=True,encoding="utf-8",env=e)
+            r=subprocess.run([ge,"push","origin","master:main"],cwd=WORKSPACE,capture_output=True,text=True,encoding="utf-8",env=e)
             if r.returncode!=0:
-                return {"success":False,"message":"push失败: %s"%r.stderr[:200]}
-            # 同步到master分支（raw.githubusercontent.com用）
-            subprocess.run([ge,"push","origin","main:master"],cwd=WORKSPACE,capture_output=True,text=True,encoding="utf-8",env=e)
+                return {"success":False,"message":"push master:main 失败: %s"%r.stderr[:200]}
+            subprocess.run([ge,"push","origin","master:master"],cwd=WORKSPACE,capture_output=True,text=True,encoding="utf-8",env=e)
             return {"success":True,"message":"已发布到 GitHub Pages"}
         except Exception as e: return {"success":False,"message":str(e)}
 
