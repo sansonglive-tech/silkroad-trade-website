@@ -1665,6 +1665,7 @@ document.addEventListener('DOMContentLoaded',init);
     function init() {
         console.log('v8渲染开始');
         renderSlides();
+        renderAbout();
         renderServices();
         renderPolicies();
         renderProcess();
@@ -1672,6 +1673,7 @@ document.addEventListener('DOMContentLoaded',init);
         renderCountries();
         renderTestimonials();
         renderCTA();
+        renderCompany();
         console.log('v8渲染完成');
     }
     
@@ -1768,8 +1770,10 @@ document.addEventListener('DOMContentLoaded',init);
             const p = policies[i];
             const h3 = card.querySelector('h3');
             const desc = card.querySelector('.policy-desc, p');
+            const num = card.querySelector('.pn');
             if (h3 && p.title) h3.textContent = p.title;
             if (desc && p.desc) desc.textContent = p.desc;
+            if (num && p.num) num.textContent = p.num;
         });
     }
     
@@ -1874,7 +1878,66 @@ document.addEventListener('DOMContentLoaded',init);
         if (h2s[0] && cta.heading) h2s[0].innerHTML = cta.heading;
         if (h2s[1] && cta.subheading) h2s[1].innerHTML = cta.subheading;
         if (p && cta.desc) p.textContent = cta.desc;
-        console.log('CTA已更新');
+        console.log('底部CTA已更新');
+    }
+    
+    // 9. 关于我们 - #about
+    function renderAbout() {
+        const section = document.getElementById('about');
+        if (!section) return;
+        
+        const aboutTitle = CONFIG.aboutTitle || '';
+        const aboutText = CONFIG.aboutText || '';
+        const aboutQuote = CONFIG.aboutQuote || '';
+        const bg = CONFIG.company && CONFIG.company.backgrounds && CONFIG.company.backgrounds.aboutBg;
+        
+        const h3 = section.querySelector('h3');
+        const p = section.querySelector('.about-text > p');
+        const quoteEl = section.querySelector('.about-box p');
+        const slogan = section.querySelector('.slogan');
+        
+        if (h3 && aboutTitle) h3.innerHTML = aboutTitle;
+        if (p && aboutText) p.textContent = aboutText;
+        if (quoteEl && aboutQuote) quoteEl.textContent = '『' + aboutQuote + '』';
+        if (bg) {
+            const heroBg = document.querySelector('.hero-bg');
+            if (heroBg) heroBg.style.backgroundImage = 'url(' + bg + ')';
+        }
+        console.log('关于我们已更新');
+    }
+    
+    // 10. 公司信息 - 导航/页脚/email/[other]
+    function renderCompany() {
+        const co = CONFIG.company || {};
+        
+        // 导航栏 + 页脚 brand
+        const logoTexts = document.querySelectorAll('.logo-text');
+        logoTexts.forEach(function(el) {
+            const strong = el.querySelector('strong');
+            const span = el.querySelector('span');
+            if (strong && co.name) strong.textContent = co.name;
+            if (span && co.slogan) span.textContent = co.slogan;
+        });
+        
+        // 页脚描述
+        const fp = document.querySelector('.footer-about > p');
+        if (fp && co.name) {
+            // 只更新中的公司名称部分
+        }
+        
+        // email
+        const mailLinks = document.querySelectorAll('a[href^="mailto:"]');
+        mailLinks.forEach(function(el) {
+            if (co.email) el.href = 'mailto:' + co.email;
+        });
+        
+        // 微信二维码
+        if (co.wechatQR) {
+            const modalImg = document.querySelector('#wechatModal img[src*="wechat"], #wechatModal .wechat-qr img');
+            if (modalImg) modalImg.src = co.wechatQR;
+        }
+        
+        console.log('公司信息已更新');
     }
     
     if (document.readyState === 'loading') {
