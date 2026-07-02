@@ -1705,10 +1705,16 @@ document.addEventListener('DOMContentLoaded',init);
                 titleEl.innerHTML = s.title;
             }
             
-            // 更新副标题
-            const subtitleEl = div.querySelector('.hero-subtitle, h2');
+            // 更新副标题 (hip-tag span)
+            const subtitleEl = div.querySelector('.hip-tag span');
             if (subtitleEl && s.subtitle) {
                 subtitleEl.textContent = s.subtitle;
+            }
+            
+            // 更新图片alt
+            const imgEl2 = div.querySelector('.hero-image-panel img');
+            if (imgEl2 && s.subtitle) {
+                imgEl2.alt = s.subtitle;
             }
             
             // 更新描述
@@ -1740,10 +1746,12 @@ document.addEventListener('DOMContentLoaded',init);
             const s = services[i];
             const h3 = card.querySelector('h3');
             const p = card.querySelector('p');
-            const small = card.querySelector('small');
+            const scsub = card.querySelector('.sc-sub');
+            const iconEl = card.querySelector('.sc-img span, .sc-icon');
             if (h3 && s.title) h3.innerHTML = s.title;
             if (p && s.desc) p.textContent = s.desc;
-            if (small && s.en) small.textContent = s.en;
+            if (scsub && s.sub) scsub.textContent = s.sub;
+            if (iconEl && s.icon) iconEl.innerHTML = s.icon;
         });
     }
     
@@ -1827,9 +1835,9 @@ document.addEventListener('DOMContentLoaded',init);
             if (i >= countries.length) return;
             const c = countries[i];
             const h3 = region.querySelector('h3');
-            const subtitle = region.querySelector('.region-subtitle, .subtitle');
-            if (h3 && c.title) h3.textContent = c.title;
-            if (subtitle && c.subtitle) subtitle.textContent = c.subtitle;
+            const subtitle = region.querySelector('.rsub');
+            if (h3 && c.name) h3.textContent = c.name;
+            if (subtitle && c.enName) subtitle.textContent = c.enName;
         });
     }
     
@@ -1847,9 +1855,11 @@ document.addEventListener('DOMContentLoaded',init);
             const quote = card.querySelector('.t-text');
             const name = card.querySelector('.t-name');
             const role = card.querySelector('.t-role');
-            if (quote && t.quote) quote.textContent = t.quote;
+            const avatar = card.querySelector('.t-av');
+            if (quote && t.text) quote.textContent = t.text;
             if (name && t.name) name.textContent = t.name;
-            if (role && t.title) role.textContent = t.title;
+            if (role && t.role) role.textContent = t.role;
+            if (avatar && t.avatarImg) avatar.innerHTML = '<img src="'+t.avatarImg+'" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" alt="">';
         });
     }
     
@@ -1859,9 +1869,10 @@ document.addEventListener('DOMContentLoaded',init);
         const section = document.getElementById('contact');
         if (!section) return;
         
-        const h2 = section.querySelector('h2');
+        const h2s = section.querySelectorAll('h2');
         const p = section.querySelector('p');
-        if (h2 && cta.title) h2.innerHTML = cta.title;
+        if (h2s[0] && cta.heading) h2s[0].innerHTML = cta.heading;
+        if (h2s[1] && cta.subheading) h2s[1].innerHTML = cta.subheading;
         if (p && cta.desc) p.textContent = cta.desc;
         console.log('CTA已更新');
     }
