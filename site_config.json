@@ -23,7 +23,7 @@
     {
       "img": "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80&auto=format",
       "title": "公司注册<span class=\"gold\">资质办理</span>",
-      "subtitle": "最快14个工作日完成海外公司设立",
+      "subtitle": "最快15个工作日完成海外公司设立",
       "detailId": "company-reg",
       "desc": "境内境外公司注册、营业执照激活、行业资质证照办理，让您的企业快速合法落地海外。"
     },
@@ -134,46 +134,38 @@
   ],
   "detailContent": {
     "policy-research": {
-      "title": "政策研究与解读",
-      "subtitle": "POLICY RESEARCH",
-      "content": "<div class=\"dh-intro\">提供专业的政策咨询服务</div>",
-      "heroImg": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format"
+      "heroImg": "",
+      "content": "<div class=\"dh-intro\">提供专业的政策咨询服务</div>"
     },
     "policy-network": {
-      "title": "政府与商会对接",
-      "subtitle": "government & chamber",
-      "content": "<div class=\"dh-hero\"><div class=\"dh-hero-code\">POL-02</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">深度链接当地政府、中国驻外使领馆、华人商会，为企业建立高层级政商关系网络。</div><div class=\"dh-heading\">对接资源</div><ul><li>目标国政府投资促进机构</li><li>中国驻外使领馆商务处</li><li>当地华人商会与行业协会</li><li>产业园区管委会</li></ul><div class=\"dh-heading\">服务价值</div><ul><li>快速建立本地政商人脉</li><li>获取一手政策信息</li><li>提升企业在当地影响力</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">咨询对接服务</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>",
-      "heroImg": ""
+      "heroImg": "",
+      "content": "<div class=\"dh-hero\"><div class=\"dh-hero-code\">POL-02</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">深度链接当地政府、中国驻外使领馆、华人商会，为企业建立高层级政商关系网络。</div><div class=\"dh-heading\">对接资源</div><ul><li>目标国政府投资促进机构</li><li>中国驻外使领馆商务处</li><li>当地华人商会与行业协会</li><li>产业园区管委会</li></ul><div class=\"dh-heading\">服务价值</div><ul><li>快速建立本地政商人脉</li><li>获取一手政策信息</li><li>提升企业在当地影响力</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">咨询对接服务</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>"
     },
     "policy-park": {
-      "title": "产业园区落地",
-      "subtitle": "industrial park",
-      "content": "<div class=\"dh-hero\"><div class=\"dh-hero-code\">POL-03</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">对接沿线产业园区、经济特区，协助企业享受税收减免、土地优惠等政策红利。</div><div class=\"dh-heading\">园区类型</div><ul><li>出口加工区（EPZ）</li><li>自由贸易区（FTZ）</li><li>经济特区（SEZ）</li><li>高新技术产业园区</li></ul><div class=\"dh-heading\">优惠政策</div><ul><li>企业所得税减免（5-15年免税期）</li><li>进口设备关税豁免</li><li>土地租金优惠</li><li>简化行政审批流程</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">咨询园区入驻</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>",
-      "heroImg": ""
+      "heroImg": "",
+      "content": "<div class=\"dh-hero\"><div class=\"dh-hero-code\">POL-03</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">对接沿线产业园区、经济特区，协助企业享受税收减免、土地优惠等政策红利。</div><div class=\"dh-heading\">园区类型</div><ul><li>出口加工区（EPZ）</li><li>自由贸易区（FTZ）</li><li>经济特区（SEZ）</li><li>高新技术产业园区</li></ul><div class=\"dh-heading\">优惠政策</div><ul><li>企业所得税减免（5-15年免税期）</li><li>进口设备关税豁免</li><li>土地租金优惠</li><li>简化行政审批流程</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">咨询园区入驻</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>"
     },
     "policy-finance": {
-      "title": "投融资对接",
-      "subtitle": "investment & financing",
-      "content": "<div class=\"dh-hero\"><div class=\"dh-hero-code\">POL-04</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">对接丝路基金、亚投行、国开行等金融机构，协助企业获取出海项目资金支持。</div><div class=\"dh-heading\">对接机构</div><ul><li>丝路基金</li><li>亚洲基础设施投资银行（AIIB）</li><li>国家开发银行</li><li>进出口银行</li><li>当地商业银行</li></ul><div class=\"dh-heading\">融资类型</div><ul><li>项目贷款</li><li>股权投资</li><li>出口信贷</li><li>贸易融资</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">咨询融资对接</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>",
-      "heroImg": ""
+      "heroImg": "",
+      "content": "<div class=\"dh-hero\"><div class=\"dh-hero-code\">POL-04</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">对接丝路基金、亚投行、国开行等金融机构，协助企业获取出海项目资金支持。</div><div class=\"dh-heading\">对接机构</div><ul><li>丝路基金</li><li>亚洲基础设施投资银行（AIIB）</li><li>国家开发银行</li><li>进出口银行</li><li>当地商业银行</li></ul><div class=\"dh-heading\">融资类型</div><ul><li>项目贷款</li><li>股权投资</li><li>出口信贷</li><li>贸易融资</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">咨询融资对接</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>"
     },
     "case-zhang": {
+      "heroImg": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80&auto=format",
       "title": "客户案例：张宏伟",
       "subtitle": "新能源汽车 · 印尼工厂负责人",
-      "content": "<div class=\"dh-hero\"><img src=\"https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80&auto=format\" alt=\"\"><div class=\"dh-hero-code\">CASE</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">\"帮我们在雅加达完成了公司注册和工厂选址，从考察到落地只用了2个月。当地团队专业靠谱，比我们自己跑效率高太多了。\"</div><div class=\"dh-heading\">客户背景</div><ul><li>新能源汽车行业</li><li>计划在印尼设立工厂</li><li>对当地法规和市场不熟悉</li></ul><div class=\"dh-heading\">服务成果</div><ul><li>2个月完成公司注册和工厂选址</li><li>雅加达、泗水、棉兰三地考察</li><li>顺利完成SNI认证和工厂许可</li><li>本地招聘团队50+人</li></ul><div class=\"dh-heading\">客户评价</div><ul><li>\"当地团队专业靠谱\"</li><li>\"比我们自己跑效率高太多\"</li><li>\"强烈推荐丝路山海通\"</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">咨询印尼出海</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>",
-      "heroImg": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80&auto=format"
+      "content": "<div class=\"dh-hero\"><img src=\"https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80&auto=format\" alt=\"\"><div class=\"dh-hero-code\">CASE</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">\"帮我们在雅加达完成了公司注册和工厂选址，从考察到落地只用了2个月。当地团队专业靠谱，比我们自己跑效率高太多了。\"</div><div class=\"dh-heading\">客户背景</div><ul><li>新能源汽车行业</li><li>计划在印尼设立工厂</li><li>对当地法规和市场不熟悉</li></ul><div class=\"dh-heading\">服务成果</div><ul><li>2个月完成公司注册和工厂选址</li><li>雅加达、泗水、棉兰三地考察</li><li>顺利完成SNI认证和工厂许可</li><li>本地招聘团队50+人</li></ul><div class=\"dh-heading\">客户评价</div><ul><li>\"当地团队专业靠谱\"</li><li>\"比我们自己跑效率高太多\"</li><li>\"强烈推荐丝路山海通\"</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">咨询印尼出海</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>"
     },
     "case-li": {
+      "heroImg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80&auto=format",
       "title": "客户案例：李雪峰",
       "subtitle": "工程机械 · 中亚事业部总经理",
-      "content": "<div class=\"dh-hero\"><img src=\"https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80&auto=format\" alt=\"\"><div class=\"dh-hero-code\">CASE</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">\"响应一带一路开拓中亚市场，丝路山海通从法律合规到政府关系一路护航，节省了大量试错成本，强烈推荐。\"</div><div class=\"dh-heading\">客户背景</div><ul><li>工程机械行业</li><li>开拓哈萨克斯坦、乌兹别克斯坦市场</li><li>需要EAC认证和本地代理</li></ul><div class=\"dh-heading\">服务成果</div><ul><li>完成哈萨克斯坦公司注册</li><li>EAC认证顺利通过</li><li>对接当地政府和商会资源</li><li>建立本地经销商网络</li></ul><div class=\"dh-heading\">客户评价</div><ul><li>\"从法律合规到政府关系一路护航\"</li><li>\"节省了大量试错成本\"</li><li>\"强烈推荐\"</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">咨询中亚出海</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>",
-      "heroImg": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80&auto=format"
+      "content": "<div class=\"dh-hero\"><img src=\"https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80&auto=format\" alt=\"\"><div class=\"dh-hero-code\">CASE</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">\"响应一带一路开拓中亚市场，丝路山海通从法律合规到政府关系一路护航，节省了大量试错成本，强烈推荐。\"</div><div class=\"dh-heading\">客户背景</div><ul><li>工程机械行业</li><li>开拓哈萨克斯坦、乌兹别克斯坦市场</li><li>需要EAC认证和本地代理</li></ul><div class=\"dh-heading\">服务成果</div><ul><li>完成哈萨克斯坦公司注册</li><li>EAC认证顺利通过</li><li>对接当地政府和商会资源</li><li>建立本地经销商网络</li></ul><div class=\"dh-heading\">客户评价</div><ul><li>\"从法律合规到政府关系一路护航\"</li><li>\"节省了大量试错成本\"</li><li>\"强烈推荐\"</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">咨询中亚出海</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>"
     },
     "case-wang": {
+      "heroImg": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80&auto=format",
       "title": "客户案例：王琳",
       "subtitle": "食品饮料 · 海外拓展总监",
-      "content": "<div class=\"dh-hero\"><img src=\"https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80&auto=format\" alt=\"\"><div class=\"dh-hero-code\">CASE</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">\"印尼的SNI认证和清真认证一度让我们头疼，丝路山海通一站式包办，产品准入周期缩短了60%，效果超出预期。\"</div><div class=\"dh-heading\">客户背景</div><ul><li>食品饮料行业</li><li>计划进入印尼市场</li><li>需要SNI认证和清真认证</li></ul><div class=\"dh-heading\">服务成果</div><ul><li>SNI认证3个月完成（常规需6-8个月）</li><li>清真认证一站式办理</li><li>BPOM注册顺利通过</li><li>产品准入周期缩短60%</li></ul><div class=\"dh-heading\">客户评价</div><ul><li>\"一站式包办，省心省力\"</li><li>\"产品准入周期缩短了60%\"</li><li>\"效果超出预期\"</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">咨询产品认证</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>",
-      "heroImg": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80&auto=format"
+      "content": "<div class=\"dh-hero\"><img src=\"https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80&auto=format\" alt=\"\"><div class=\"dh-hero-code\">CASE</div><div class=\"dh-hero-overlay\"></div></div><div class=\"dh-intro\">\"印尼的SNI认证和清真认证一度让我们头疼，丝路山海通一站式包办，产品准入周期缩短了60%，效果超出预期。\"</div><div class=\"dh-heading\">客户背景</div><ul><li>食品饮料行业</li><li>计划进入印尼市场</li><li>需要SNI认证和清真认证</li></ul><div class=\"dh-heading\">服务成果</div><ul><li>SNI认证3个月完成（常规需6-8个月）</li><li>清真认证一站式办理</li><li>BPOM注册顺利通过</li><li>产品准入周期缩短60%</li></ul><div class=\"dh-heading\">客户评价</div><ul><li>\"一站式包办，省心省力\"</li><li>\"产品准入周期缩短了60%\"</li><li>\"效果超出预期\"</li></ul><div class=\"detail-cta-bar\"><a href=\"#\" class=\"btn-primary\" onclick=\"event.preventDefault();closeDetail();openBook()\">咨询产品认证</a><a href=\"#\" class=\"btn-outline\" onclick=\"event.preventDefault();closeDetail()\">返回</a></div>"
     }
   },
   "countries": [
