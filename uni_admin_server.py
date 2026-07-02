@@ -1073,7 +1073,7 @@ class Handler(BaseHTTPRequestHandler):
 
         # 替换 DETAIL_CONTENT（弹窗详情数据）
         dc = cfg.get("detailContent", {})
-        # 以 v7 源 42 个 key 为基础，site_config 7 个 key 覆盖
+        # 以 v7 源 42 个 key 为基础，site_config 7 个 key 有实际内容才覆盖
         v7_dc_path = os.path.join(WORKSPACE, "_v7_detail_content.json")
         if os.path.isfile(v7_dc_path):
             try:
@@ -1081,7 +1081,16 @@ class Handler(BaseHTTPRequestHandler):
                     v7_dc = json.load(_f)
                 if isinstance(v7_dc, dict) and isinstance(dc, dict):
                     for _k, _v in dc.items():
-                        v7_dc[_k] = _v
+                        if not isinstance(_v, dict):
+                            v7_dc[_k] = _v
+                            continue
+                        _has_content = bool(
+                            (_v.get("title") or "").strip() or
+                            (_v.get("subtitle") or "").strip() or
+                            (_v.get("content") or "").strip()
+                        )
+                        if _has_content:
+                            v7_dc[_k] = _v
                     dc = v7_dc
             except Exception:
                 pass
@@ -1193,18 +1202,29 @@ class Handler(BaseHTTPRequestHandler):
             
             dc = cfg.get("detailContent", {})
             # 以 v7 详估源中的 42 个 key 为基础，再以 site_config 中的 7 个 key 覆盖
-            # （避免丢失 company-reg/process-step1 等用户点击需调用的 key）
+            # 重要：只有当 site_config 中 key 有实际内容（title/subtitle/content 不全为空）才覆盖
+            # （避免后台 key 存在但内容为空时覆盖 v7 完整内容，导致弹窗 title=undefined）
             v7_dc_path = os.path.join(WORKSPACE, "_v7_detail_content.json")
             if os.path.isfile(v7_dc_path):
                 try:
                     with open(v7_dc_path, "r", encoding="utf-8") as _f:
                         v7_dc = json.load(_f)
-                    # 合并：v7 为基础，site_config 中存在则覆盖
                     if not isinstance(v7_dc, dict):
                         v7_dc = {}
                     if isinstance(dc, dict):
                         for _k, _v in dc.items():
-                            v7_dc[_k] = _v
+                            if not isinstance(_v, dict):
+                                v7_dc[_k] = _v
+                                continue
+                            # 判断 site_config 中是否有实际内容
+                            _has_content = bool(
+                                (_v.get("title") or "").strip() or
+                                (_v.get("subtitle") or "").strip() or
+                                (_v.get("content") or "").strip()
+                            )
+                            if _has_content:
+                                v7_dc[_k] = _v  # 覆盖（后台有实际修改）
+                            # else: 保留 v7 原始内容（site_config 仅 heroImg 有效）
                     dc = v7_dc
                 except Exception:
                     pass
